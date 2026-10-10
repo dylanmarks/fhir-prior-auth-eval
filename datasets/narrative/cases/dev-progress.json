@@ -1,0 +1,62 @@
+{
+  "id": "case-narrative-dev-progress",
+  "title": "Dev progress",
+  "description": "Synthetic narrative interpretation challenge.",
+  "scenarioCategory": "pt_extension",
+  "requestedAt": "2026-07-04",
+  "requestedService": {
+    "code": "97110",
+    "description": "PT extension documentation assessment",
+    "diagnosisCodes": []
+  },
+  "policyId": "policy-narrative-pt-v1",
+  "tags": [
+    "narrative",
+    "development"
+  ],
+  "source": "hand-authored-synthetic:narrative-v1",
+  "patientBundle": {
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+      {
+        "resource": {
+          "resourceType": "Patient",
+          "id": "synthetic-narrative-patient"
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "DocumentReference",
+          "id": "note-0",
+          "status": "current",
+          "subject": {
+            "reference": "Patient/synthetic-narrative-patient"
+          },
+          "date": "2026-07-01",
+          "text": {
+            "status": "generated",
+            "div": "<div>Re-evaluation: walking distance increased from 80 to 160 meters. Goal is 250 meters without a rest; continue the current program.</div>"
+          }
+        }
+      }
+    ]
+  },
+  "expectedAssessment": {
+    "disposition": "meets_policy",
+    "requirements": [
+      {
+        "requirementId": "req-narrative-progress",
+        "status": "satisfied",
+        "confidence": 1,
+        "evidence": [
+          {
+            "resourceType": "DocumentReference",
+            "resourceId": "DocumentReference/note-0"
+          }
+        ]
+      }
+    ],
+    "missingInformation": []
+  }
+}

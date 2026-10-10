@@ -1,0 +1,25 @@
+{
+  "name": "@openpa/mcp-server",
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "openpa-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc --noEmit",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.1",
+    "@openpa/core": "*",
+    "@openpa/eval-suite": "*",
+    "@openpa/evaluators": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "policy-pt-extension-v1",
+  "title": "Outpatient Physical Therapy Extension Coverage Policy",
+  "version": "1.0",
+  "source": "Synthetic research fixture; not an authoritative payer policy",
+  "narrative": "Extension of outpatient physical therapy (CPT 97110) beyond initial authorized visits is medically indicated when an objective functional deficit is documented and progress toward measurable functional goals is documented on re-evaluation.",
+  "serviceCodes": [
+    "97110"
+  ],
+  "requirements": [
+    {
+      "id": "req-functional-deficit",
+      "description": "Documented objective mobility or functional deficit (e.g. gait abnormality or muscle weakness)",
+      "rationale": "Physical therapy extension requires clinical documentation of a significant functional impairment.",
+      "required": true,
+      "category": "diagnosis",
+      "acceptableCodeSystems": [
+        "http://hl7.org/fhir/sid/icd-10-cm"
+      ],
+      "acceptableCodes": [
+        "R26.2",
+        "R26.89",
+        "M62.81"
+      ]
+    },
+    {
+      "id": "req-pt-progress",
+      "description": "Physical therapy re-evaluation documenting measurable functional progress within last 60 days",
+      "rationale": "Extension requires active re-evaluation demonstrating documented progress rather than maintenance plateau.",
+      "required": true,
+      "category": "functional_deficit",
+      "acceptableCodeSystems": [
+        "http://www.ama-assn.org/go/cpt"
+      ],
+      "acceptableCodes": [
+        "97164"
+      ],
+      "timeWindowDays": 60
+    }
+  ]
+}

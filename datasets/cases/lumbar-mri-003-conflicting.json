@@ -1,0 +1,98 @@
+{
+  "id": "case-lumbar-003-conflicting",
+  "title": "Lumbar Radiculopathy Code Conflicting with Explicit Negative Narrative",
+  "description": "Patient record contains ICD-10 code M54.41 for lumbago with sciatica, but the physician clinical encounter note explicitly documents that the patient denies radicular symptoms and back pain has resolved.",
+  "scenarioCategory": "lumbar_mri",
+  "source": "hand-authored-synthetic:openpa-benchmark-v1",
+  "requestedService": {
+    "codeSystem": "http://www.ama-assn.org/go/cpt",
+    "code": "72148",
+    "description": "MRI lumbar spine without contrast",
+    "diagnosisCodes": [
+      "M54.41"
+    ]
+  },
+  "policyId": "policy-lumbar-mri-v1",
+  "expectedAssessment": {
+    "disposition": "requires_clinical_review",
+    "missingInformation": [
+      "req-radiculopathy: Documented lumbar radiculopathy or sciatica symptoms"
+    ],
+    "requirements": [
+      {
+        "requirementId": "req-radiculopathy",
+        "status": "insufficient_evidence",
+        "confidence": 0,
+        "evidence": [
+          {
+            "resourceType": "Condition",
+            "resourceId": "Condition/cond-conflicting-radic-03"
+          }
+        ]
+      },
+      {
+        "requirementId": "req-conservative-therapy",
+        "status": "insufficient_evidence",
+        "confidence": 0,
+        "evidence": []
+      }
+    ]
+  },
+  "tags": [
+    "lumbar_mri",
+    "requires_clinical_review",
+    "conflicting_narrative",
+    "clinical_negation"
+  ],
+  "patientBundle": {
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+      {
+        "resource": {
+          "resourceType": "Patient",
+          "id": "pat-005",
+          "gender": "female",
+          "birthDate": "1975-09-12"
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "Condition",
+          "id": "cond-conflicting-radic-03",
+          "subject": {
+            "reference": "Patient/pat-005"
+          },
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                "code": "M54.41",
+                "display": "Lumbago with sciatica, right side"
+              }
+            ]
+          },
+          "onsetDateTime": "2026-06-10",
+          "note": [
+            {
+              "text": "Follow-up visit: Patient denies radiculopathy or persistent radicular pain. Acute symptoms resolved."
+            }
+          ],
+          "text": {
+            "status": "generated",
+            "div": "<div>Patient denies radiculopathy. Examination negative for sciatica or nerve root impingement; back pain resolved.</div>"
+          },
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "code": "active"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "requestedAt": "2026-07-20"
+}

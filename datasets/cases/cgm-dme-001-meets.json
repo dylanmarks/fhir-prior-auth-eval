@@ -1,0 +1,119 @@
+{
+  "id": "case-cgm-001-meets",
+  "title": "Type 1 Diabetes Mellitus on Multiple Daily Insulin Injections",
+  "description": "Patient with established Type 1 diabetes mellitus requiring intensive basal-bolus insulin therapy; meets Medicare LCD coverage criteria for therapeutic continuous glucose monitor.",
+  "scenarioCategory": "dme",
+  "source": "hand-authored-synthetic:openpa-benchmark-v1",
+  "requestedService": {
+    "codeSystem": "https://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets",
+    "code": "E2103",
+    "description": "Non-adjunctive, therapeutic continuous glucose monitor (CGM) receiver/monitor",
+    "diagnosisCodes": [
+      "E10.9"
+    ]
+  },
+  "policyId": "policy-cgm-dme-v1",
+  "expectedAssessment": {
+    "disposition": "meets_policy",
+    "missingInformation": [],
+    "requirements": [
+      {
+        "requirementId": "req-diabetes-diagnosis",
+        "status": "satisfied",
+        "confidence": 1.0,
+        "evidence": [
+          {
+            "resourceType": "Condition",
+            "resourceId": "Condition/cond-t1d-01"
+          }
+        ]
+      },
+      {
+        "requirementId": "req-insulin-treatment",
+        "status": "satisfied",
+        "confidence": 1.0,
+        "evidence": [
+          {
+            "resourceType": "MedicationStatement",
+            "resourceId": "MedicationStatement/med-insulin-aspart-01"
+          }
+        ]
+      }
+    ]
+  },
+  "tags": [
+    "dme",
+    "meets_policy",
+    "insulin_dependent"
+  ],
+  "patientBundle": {
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+      {
+        "resource": {
+          "resourceType": "Patient",
+          "id": "pat-010",
+          "gender": "female",
+          "birthDate": "2001-07-29"
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "Condition",
+          "id": "cond-t1d-01",
+          "subject": {
+            "reference": "Patient/pat-010"
+          },
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                "code": "E10.9",
+                "display": "Type 1 diabetes mellitus without complications"
+              }
+            ]
+          },
+          "onsetDateTime": "2018-09-01",
+          "text": {
+            "status": "generated",
+            "div": "<div>Longstanding Type 1 diabetes mellitus on intensive insulin therapy.</div>"
+          },
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "code": "active"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "MedicationStatement",
+          "id": "med-insulin-aspart-01",
+          "subject": {
+            "reference": "Patient/pat-010"
+          },
+          "status": "active",
+          "medicationCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+                "code": "847207",
+                "display": "Insulin Aspart 100 UNT/ML Injectable Solution"
+              }
+            ]
+          },
+          "effectiveDateTime": "2026-06-01",
+          "text": {
+            "status": "generated",
+            "div": "<div>Active prescription: Insulin Aspart subcutaneous multiple daily injections.</div>"
+          }
+        }
+      }
+    ]
+  },
+  "requestedAt": "2026-07-04"
+}

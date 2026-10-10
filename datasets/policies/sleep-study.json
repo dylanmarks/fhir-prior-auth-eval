@@ -1,0 +1,50 @@
+{
+  "id": "policy-sleep-study-v1",
+  "title": "Polysomnography (Sleep Study) Coverage Policy",
+  "version": "1.0",
+  "source": "Synthetic research fixture; not an authoritative payer policy",
+  "narrative": "This simplified synthetic fixture requires both a diagnosis consistent with suspected sleep apnea and a validated Epworth Sleepiness Scale score >= 10. It does not encode a real payer policy or alternative clinical indications.",
+  "serviceCodes": [
+    "95810"
+  ],
+  "requirements": [
+    {
+      "id": "req-suspected-osa",
+      "description": "Clinical diagnosis of suspected obstructive sleep apnea or habitual loud snoring with nocturnal choking",
+      "rationale": "Clinical evaluation must identify symptoms consistent with sleep-disordered breathing.",
+      "required": true,
+      "category": "diagnosis",
+      "acceptableCodeSystems": [
+        "http://hl7.org/fhir/sid/icd-10-cm"
+      ],
+      "acceptableCodes": [
+        "G47.30",
+        "G47.33",
+        "R06.83"
+      ]
+    },
+    {
+      "id": "req-epworth-score",
+      "narrativeConcepts": [
+        "daytime fatigue",
+        "daytime sleepiness"
+      ],
+      "description": "Validated sleepiness assessment (Epworth Sleepiness Scale score >= 10)",
+      "rationale": "Excessive daytime sleepiness must be quantified using standardized scoring.",
+      "required": true,
+      "category": "functional_deficit",
+      "acceptableCodeSystems": [
+        "http://loinc.org"
+      ],
+      "acceptableCodes": [
+        "85348-1",
+        "71790-0"
+      ],
+      "numericThreshold": {
+        "comparator": ">=",
+        "value": 10,
+        "unit": "{score}"
+      }
+    }
+  ]
+}

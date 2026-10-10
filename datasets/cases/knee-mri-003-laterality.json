@@ -1,0 +1,125 @@
+{
+  "id": "case-knee-003-laterality",
+  "title": "Knee MRI Requested for Right Knee with Radiographs of Left Knee Only",
+  "description": "Patient requested for right knee MRI (CPT 73721) due to right medial meniscal derangement, but the only plain radiograph in the record was performed on the contralateral left knee.",
+  "scenarioCategory": "knee_mri",
+  "source": "hand-authored-synthetic:openpa-benchmark-v1",
+  "requestedService": {
+    "codeSystem": "http://www.ama-assn.org/go/cpt",
+    "code": "73721",
+    "description": "MRI right knee joint without contrast",
+    "laterality": "right",
+    "diagnosisCodes": [
+      "M23.21"
+    ]
+  },
+  "policyId": "policy-knee-mri-v1",
+  "expectedAssessment": {
+    "disposition": "needs_information",
+    "missingInformation": [
+      "req-plain-radiograph: Prior plain radiograph (X-ray) of affected knee completed within last 90 days"
+    ],
+    "requirements": [
+      {
+        "requirementId": "req-knee-condition",
+        "status": "satisfied",
+        "confidence": 1.0,
+        "evidence": [
+          {
+            "resourceType": "Condition",
+            "resourceId": "Condition/cond-meniscal-right-03"
+          }
+        ]
+      },
+      {
+        "requirementId": "req-plain-radiograph",
+        "status": "insufficient_evidence",
+        "confidence": 1.0,
+        "evidence": [
+          {
+            "resourceType": "DiagnosticReport",
+            "resourceId": "DiagnosticReport/diag-contralateral-left-xray"
+          }
+        ]
+      }
+    ]
+  },
+  "tags": [
+    "knee_mri",
+    "needs_information",
+    "laterality_mismatch"
+  ],
+  "patientBundle": {
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+      {
+        "resource": {
+          "resourceType": "Patient",
+          "id": "pat-006",
+          "gender": "male",
+          "birthDate": "1991-03-22"
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "Condition",
+          "id": "cond-meniscal-right-03",
+          "subject": {
+            "reference": "Patient/pat-006"
+          },
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                "code": "M23.21",
+                "display": "Derangement of meniscus due to old tear or injury, right medial meniscus"
+              }
+            ]
+          },
+          "bodySite": "Right knee joint",
+          "onsetDateTime": "2026-06-15",
+          "text": {
+            "status": "generated",
+            "div": "<div>Patient evaluated for right knee twisting trauma and joint instability.</div>"
+          },
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "code": "active"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "DiagnosticReport",
+          "id": "diag-contralateral-left-xray",
+          "subject": {
+            "reference": "Patient/pat-006"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "http://www.ama-assn.org/go/cpt",
+                "code": "73560",
+                "display": "Radiologic examination, knee; 1 or 2 views, left"
+              }
+            ]
+          },
+          "bodySite": "Left knee joint",
+          "effectiveDateTime": "2026-06-25",
+          "conclusion": "Left knee radiograph: Normal left knee views without fracture.",
+          "text": {
+            "status": "generated",
+            "div": "<div>Left knee examination negative for acute bony injury.</div>"
+          }
+        }
+      }
+    ]
+  },
+  "requestedAt": "2026-07-04"
+}

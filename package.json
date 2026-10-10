@@ -1,0 +1,31 @@
+{
+  "name": "fhir-prior-auth-eval",
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=@openpa/core --workspace=@openpa/evaluators --workspace=@openpa/eval-suite --workspace=@openpa/mcp-server --workspace=@openpa/web",
+    "dev": "npm run dev --workspace=@openpa/web",
+    "preview": "npm run preview --workspace=@openpa/web",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "benchmark": "tsx packages/eval-suite/src/cli.ts",
+    "experiment": "node --env-file-if-exists=.env --import tsx packages/eval-suite/src/experiment-cli.ts",
+    "serve": "node --env-file-if-exists=.env --import tsx apps/server/index.ts",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

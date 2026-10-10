@@ -1,0 +1,74 @@
+{
+  "id": "case-narrative-dev-conflict",
+  "title": "Dev conflict",
+  "description": "Synthetic narrative interpretation challenge.",
+  "scenarioCategory": "pt_extension",
+  "requestedAt": "2026-07-04",
+  "requestedService": {
+    "code": "97110",
+    "description": "PT extension documentation assessment",
+    "diagnosisCodes": []
+  },
+  "policyId": "policy-narrative-pt-v1",
+  "tags": [
+    "narrative",
+    "development"
+  ],
+  "source": "hand-authored-synthetic:narrative-v1",
+  "patientBundle": {
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+      {
+        "resource": {
+          "resourceType": "Patient",
+          "id": "synthetic-narrative-patient"
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "DocumentReference",
+          "id": "note-0",
+          "status": "current",
+          "subject": {
+            "reference": "Patient/synthetic-narrative-patient"
+          },
+          "date": "2026-07-01",
+          "text": {
+            "status": "generated",
+            "div": "<div>Re-evaluation: walking distance increased from 80 to 160 meters; goal remains 250 meters.</div>"
+          }
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "DocumentReference",
+          "id": "note-1",
+          "status": "current",
+          "subject": {
+            "reference": "Patient/synthetic-narrative-patient"
+          },
+          "date": "2026-07-01",
+          "text": {
+            "status": "generated",
+            "div": "<div>Same-date signed addendum: prior measurement was a transcription error. Walking distance is still 80 meters; no improvement.</div>"
+          }
+        }
+      }
+    ]
+  },
+  "expectedAssessment": {
+    "disposition": "requires_clinical_review",
+    "requirements": [
+      {
+        "requirementId": "req-narrative-progress",
+        "status": "insufficient_evidence",
+        "confidence": 0,
+        "evidence": []
+      }
+    ],
+    "missingInformation": [
+      "req-narrative-progress: Narrative progress documentation"
+    ]
+  }
+}

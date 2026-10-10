@@ -1,0 +1,3704 @@
+{
+  "schemaVersion": 1,
+  "timestamp": "2026-10-09T19:45:39.396Z",
+  "methodology": "Recorded judgments replayed across thresholds. Routing confidence is not clinical calibration. Adapter latency excludes orchestration overhead. Synthetic labels are hand-authored; challenge is not independently validated.",
+  "acquisition": {
+    "providerCalls": 0,
+    "tokens": 0,
+    "costUsd": 0,
+    "knownCostUsd": 0,
+    "usageVerified": true,
+    "costVerified": true
+  },
+  "recordings": [],
+  "runs": [
+    {
+      "armId": "rules",
+      "label": "Rules only",
+      "configured": true,
+      "threshold": 0.7,
+      "summary": {
+        "totalCases": 22,
+        "dispositionAccuracy": 0.5909090909090909,
+        "automationCoverage": 0.4090909090909091,
+        "safeResolutionCoverage": 0.4090909090909091,
+        "abstentionRate": 0.5909090909090909,
+        "unsafeResolutions": 0,
+        "falseClearances": 0,
+        "unsafeCaseIds": [],
+        "selectiveRisk": 0,
+        "selectiveRisk95Ci": [
+          0,
+          0.2991527535509594
+        ],
+        "safeCoverage95Ci": [
+          0.23255559668820378,
+          0.6126552261710619
+        ],
+        "totalCostUsd": 0,
+        "knownCostUsd": 0,
+        "usageVerified": true,
+        "costVerified": true,
+        "costPerSafeResolution": 0,
+        "p50AdapterLatencyMs": 0,
+        "p95AdapterLatencyMs": 1,
+        "unsupportedCitations": 0,
+        "tierStats": {
+          "1": {
+            "calls": 31,
+            "acceptedRequirements": 18,
+            "costUsd": 0,
+            "tokens": 0
+          }
+        },
+        "reliabilityBins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 18,
+            "meanConfidence": 1,
+            "empiricalSafeCaseRate": 1
+          }
+        ]
+      },
+      "cohorts": {
+        "structured": {
+          "totalCases": 10,
+          "dispositionAccuracy": 1,
+          "automationCoverage": 0.9,
+          "safeResolutionCoverage": 0.9,
+          "abstentionRate": 0.1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": 0,
+          "selectiveRisk95Ci": [
+            0,
+            0.2991527535509594
+          ],
+          "safeCoverage95Ci": [
+            0.5958436145024278,
+            0.9821242504842788
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": 0,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 1,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 19,
+              "acceptedRequirements": 18,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 18,
+              "meanConfidence": 1,
+              "empiricalSafeCaseRate": 1
+            }
+          ]
+        },
+        "development": {
+          "totalCases": 4,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.48990002040399916
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        },
+        "challenge": {
+          "totalCases": 8,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.3244156195108769
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        }
+      },
+      "cases": []
+    },
+    {
+      "armId": "rules",
+      "label": "Rules only",
+      "configured": true,
+      "threshold": 0.9,
+      "summary": {
+        "totalCases": 22,
+        "dispositionAccuracy": 0.5909090909090909,
+        "automationCoverage": 0.4090909090909091,
+        "safeResolutionCoverage": 0.4090909090909091,
+        "abstentionRate": 0.5909090909090909,
+        "unsafeResolutions": 0,
+        "falseClearances": 0,
+        "unsafeCaseIds": [],
+        "selectiveRisk": 0,
+        "selectiveRisk95Ci": [
+          0,
+          0.2991527535509594
+        ],
+        "safeCoverage95Ci": [
+          0.23255559668820378,
+          0.6126552261710619
+        ],
+        "totalCostUsd": 0,
+        "knownCostUsd": 0,
+        "usageVerified": true,
+        "costVerified": true,
+        "costPerSafeResolution": 0,
+        "p50AdapterLatencyMs": 0,
+        "p95AdapterLatencyMs": 1,
+        "unsupportedCitations": 0,
+        "tierStats": {
+          "1": {
+            "calls": 31,
+            "acceptedRequirements": 18,
+            "costUsd": 0,
+            "tokens": 0
+          }
+        },
+        "reliabilityBins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 18,
+            "meanConfidence": 1,
+            "empiricalSafeCaseRate": 1
+          }
+        ]
+      },
+      "cohorts": {
+        "structured": {
+          "totalCases": 10,
+          "dispositionAccuracy": 1,
+          "automationCoverage": 0.9,
+          "safeResolutionCoverage": 0.9,
+          "abstentionRate": 0.1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": 0,
+          "selectiveRisk95Ci": [
+            0,
+            0.2991527535509594
+          ],
+          "safeCoverage95Ci": [
+            0.5958436145024278,
+            0.9821242504842788
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": 0,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 1,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 19,
+              "acceptedRequirements": 18,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 18,
+              "meanConfidence": 1,
+              "empiricalSafeCaseRate": 1
+            }
+          ]
+        },
+        "development": {
+          "totalCases": 4,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.48990002040399916
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        },
+        "challenge": {
+          "totalCases": 8,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.3244156195108769
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        }
+      },
+      "cases": []
+    },
+    {
+      "armId": "rules",
+      "label": "Rules only",
+      "configured": true,
+      "threshold": 0.99,
+      "summary": {
+        "totalCases": 22,
+        "dispositionAccuracy": 0.5909090909090909,
+        "automationCoverage": 0.4090909090909091,
+        "safeResolutionCoverage": 0.4090909090909091,
+        "abstentionRate": 0.5909090909090909,
+        "unsafeResolutions": 0,
+        "falseClearances": 0,
+        "unsafeCaseIds": [],
+        "selectiveRisk": 0,
+        "selectiveRisk95Ci": [
+          0,
+          0.2991527535509594
+        ],
+        "safeCoverage95Ci": [
+          0.23255559668820378,
+          0.6126552261710619
+        ],
+        "totalCostUsd": 0,
+        "knownCostUsd": 0,
+        "usageVerified": true,
+        "costVerified": true,
+        "costPerSafeResolution": 0,
+        "p50AdapterLatencyMs": 0,
+        "p95AdapterLatencyMs": 1,
+        "unsupportedCitations": 0,
+        "tierStats": {
+          "1": {
+            "calls": 31,
+            "acceptedRequirements": 18,
+            "costUsd": 0,
+            "tokens": 0
+          }
+        },
+        "reliabilityBins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 18,
+            "meanConfidence": 1,
+            "empiricalSafeCaseRate": 1
+          }
+        ]
+      },
+      "cohorts": {
+        "structured": {
+          "totalCases": 10,
+          "dispositionAccuracy": 1,
+          "automationCoverage": 0.9,
+          "safeResolutionCoverage": 0.9,
+          "abstentionRate": 0.1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": 0,
+          "selectiveRisk95Ci": [
+            0,
+            0.2991527535509594
+          ],
+          "safeCoverage95Ci": [
+            0.5958436145024278,
+            0.9821242504842788
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": 0,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 1,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 19,
+              "acceptedRequirements": 18,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 18,
+              "meanConfidence": 1,
+              "empiricalSafeCaseRate": 1
+            }
+          ]
+        },
+        "development": {
+          "totalCases": 4,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.48990002040399916
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        },
+        "challenge": {
+          "totalCases": 8,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.3244156195108769
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        }
+      },
+      "cases": []
+    },
+    {
+      "armId": "cheap",
+      "label": "Rules → Jev",
+      "configured": false,
+      "threshold": 0.7,
+      "summary": {
+        "totalCases": 22,
+        "dispositionAccuracy": 0.5909090909090909,
+        "automationCoverage": 0.4090909090909091,
+        "safeResolutionCoverage": 0.4090909090909091,
+        "abstentionRate": 0.5909090909090909,
+        "unsafeResolutions": 0,
+        "falseClearances": 0,
+        "unsafeCaseIds": [],
+        "selectiveRisk": 0,
+        "selectiveRisk95Ci": [
+          0,
+          0.2991527535509594
+        ],
+        "safeCoverage95Ci": [
+          0.23255559668820378,
+          0.6126552261710619
+        ],
+        "totalCostUsd": 0,
+        "knownCostUsd": 0,
+        "usageVerified": true,
+        "costVerified": true,
+        "costPerSafeResolution": 0,
+        "p50AdapterLatencyMs": 0,
+        "p95AdapterLatencyMs": 1,
+        "unsupportedCitations": 0,
+        "tierStats": {
+          "1": {
+            "calls": 31,
+            "acceptedRequirements": 18,
+            "costUsd": 0,
+            "tokens": 0
+          },
+          "2": {
+            "calls": 12,
+            "acceptedRequirements": 0,
+            "costUsd": 0,
+            "tokens": 0
+          }
+        },
+        "reliabilityBins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 18,
+            "meanConfidence": 1,
+            "empiricalSafeCaseRate": 1
+          }
+        ]
+      },
+      "cohorts": {
+        "structured": {
+          "totalCases": 10,
+          "dispositionAccuracy": 1,
+          "automationCoverage": 0.9,
+          "safeResolutionCoverage": 0.9,
+          "abstentionRate": 0.1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": 0,
+          "selectiveRisk95Ci": [
+            0,
+            0.2991527535509594
+          ],
+          "safeCoverage95Ci": [
+            0.5958436145024278,
+            0.9821242504842788
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": 0,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 1,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 19,
+              "acceptedRequirements": 18,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 18,
+              "meanConfidence": 1,
+              "empiricalSafeCaseRate": 1
+            }
+          ]
+        },
+        "development": {
+          "totalCases": 4,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.48990002040399916
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "2": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        },
+        "challenge": {
+          "totalCases": 8,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.3244156195108769
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "2": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        }
+      },
+      "cases": []
+    },
+    {
+      "armId": "cheap",
+      "label": "Rules → Jev",
+      "configured": false,
+      "threshold": 0.9,
+      "summary": {
+        "totalCases": 22,
+        "dispositionAccuracy": 0.5909090909090909,
+        "automationCoverage": 0.4090909090909091,
+        "safeResolutionCoverage": 0.4090909090909091,
+        "abstentionRate": 0.5909090909090909,
+        "unsafeResolutions": 0,
+        "falseClearances": 0,
+        "unsafeCaseIds": [],
+        "selectiveRisk": 0,
+        "selectiveRisk95Ci": [
+          0,
+          0.2991527535509594
+        ],
+        "safeCoverage95Ci": [
+          0.23255559668820378,
+          0.6126552261710619
+        ],
+        "totalCostUsd": 0,
+        "knownCostUsd": 0,
+        "usageVerified": true,
+        "costVerified": true,
+        "costPerSafeResolution": 0,
+        "p50AdapterLatencyMs": 0,
+        "p95AdapterLatencyMs": 1,
+        "unsupportedCitations": 0,
+        "tierStats": {
+          "1": {
+            "calls": 31,
+            "acceptedRequirements": 18,
+            "costUsd": 0,
+            "tokens": 0
+          },
+          "2": {
+            "calls": 12,
+            "acceptedRequirements": 0,
+            "costUsd": 0,
+            "tokens": 0
+          }
+        },
+        "reliabilityBins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 18,
+            "meanConfidence": 1,
+            "empiricalSafeCaseRate": 1
+          }
+        ]
+      },
+      "cohorts": {
+        "structured": {
+          "totalCases": 10,
+          "dispositionAccuracy": 1,
+          "automationCoverage": 0.9,
+          "safeResolutionCoverage": 0.9,
+          "abstentionRate": 0.1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": 0,
+          "selectiveRisk95Ci": [
+            0,
+            0.2991527535509594
+          ],
+          "safeCoverage95Ci": [
+            0.5958436145024278,
+            0.9821242504842788
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": 0,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 1,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 19,
+              "acceptedRequirements": 18,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 18,
+              "meanConfidence": 1,
+              "empiricalSafeCaseRate": 1
+            }
+          ]
+        },
+        "development": {
+          "totalCases": 4,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.48990002040399916
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "2": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        },
+        "challenge": {
+          "totalCases": 8,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.3244156195108769
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "2": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        }
+      },
+      "cases": []
+    },
+    {
+      "armId": "cheap",
+      "label": "Rules → Jev",
+      "configured": false,
+      "threshold": 0.99,
+      "summary": {
+        "totalCases": 22,
+        "dispositionAccuracy": 0.5909090909090909,
+        "automationCoverage": 0.4090909090909091,
+        "safeResolutionCoverage": 0.4090909090909091,
+        "abstentionRate": 0.5909090909090909,
+        "unsafeResolutions": 0,
+        "falseClearances": 0,
+        "unsafeCaseIds": [],
+        "selectiveRisk": 0,
+        "selectiveRisk95Ci": [
+          0,
+          0.2991527535509594
+        ],
+        "safeCoverage95Ci": [
+          0.23255559668820378,
+          0.6126552261710619
+        ],
+        "totalCostUsd": 0,
+        "knownCostUsd": 0,
+        "usageVerified": true,
+        "costVerified": true,
+        "costPerSafeResolution": 0,
+        "p50AdapterLatencyMs": 0,
+        "p95AdapterLatencyMs": 1,
+        "unsupportedCitations": 0,
+        "tierStats": {
+          "1": {
+            "calls": 31,
+            "acceptedRequirements": 18,
+            "costUsd": 0,
+            "tokens": 0
+          },
+          "2": {
+            "calls": 12,
+            "acceptedRequirements": 0,
+            "costUsd": 0,
+            "tokens": 0
+          }
+        },
+        "reliabilityBins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 18,
+            "meanConfidence": 1,
+            "empiricalSafeCaseRate": 1
+          }
+        ]
+      },
+      "cohorts": {
+        "structured": {
+          "totalCases": 10,
+          "dispositionAccuracy": 1,
+          "automationCoverage": 0.9,
+          "safeResolutionCoverage": 0.9,
+          "abstentionRate": 0.1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": 0,
+          "selectiveRisk95Ci": [
+            0,
+            0.2991527535509594
+          ],
+          "safeCoverage95Ci": [
+            0.5958436145024278,
+            0.9821242504842788
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": 0,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 1,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 19,
+              "acceptedRequirements": 18,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 18,
+              "meanConfidence": 1,
+              "empiricalSafeCaseRate": 1
+            }
+          ]
+        },
+        "development": {
+          "totalCases": 4,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.48990002040399916
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "2": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        },
+        "challenge": {
+          "totalCases": 8,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.3244156195108769
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "2": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        }
+      },
+      "cases": []
+    },
+    {
+      "armId": "tiered",
+      "label": "Rules → Jev → small → frontier",
+      "configured": false,
+      "threshold": 0.7,
+      "summary": {
+        "totalCases": 22,
+        "dispositionAccuracy": 0.5909090909090909,
+        "automationCoverage": 0.4090909090909091,
+        "safeResolutionCoverage": 0.4090909090909091,
+        "abstentionRate": 0.5909090909090909,
+        "unsafeResolutions": 0,
+        "falseClearances": 0,
+        "unsafeCaseIds": [],
+        "selectiveRisk": 0,
+        "selectiveRisk95Ci": [
+          0,
+          0.2991527535509594
+        ],
+        "safeCoverage95Ci": [
+          0.23255559668820378,
+          0.6126552261710619
+        ],
+        "totalCostUsd": 0,
+        "knownCostUsd": 0,
+        "usageVerified": true,
+        "costVerified": true,
+        "costPerSafeResolution": 0,
+        "p50AdapterLatencyMs": 0,
+        "p95AdapterLatencyMs": 1,
+        "unsupportedCitations": 0,
+        "tierStats": {
+          "1": {
+            "calls": 31,
+            "acceptedRequirements": 18,
+            "costUsd": 0,
+            "tokens": 0
+          },
+          "2": {
+            "calls": 12,
+            "acceptedRequirements": 0,
+            "costUsd": 0,
+            "tokens": 0
+          },
+          "3": {
+            "calls": 12,
+            "acceptedRequirements": 0,
+            "costUsd": 0,
+            "tokens": 0
+          }
+        },
+        "reliabilityBins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 18,
+            "meanConfidence": 1,
+            "empiricalSafeCaseRate": 1
+          }
+        ]
+      },
+      "cohorts": {
+        "structured": {
+          "totalCases": 10,
+          "dispositionAccuracy": 1,
+          "automationCoverage": 0.9,
+          "safeResolutionCoverage": 0.9,
+          "abstentionRate": 0.1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": 0,
+          "selectiveRisk95Ci": [
+            0,
+            0.2991527535509594
+          ],
+          "safeCoverage95Ci": [
+            0.5958436145024278,
+            0.9821242504842788
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": 0,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 1,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 19,
+              "acceptedRequirements": 18,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 18,
+              "meanConfidence": 1,
+              "empiricalSafeCaseRate": 1
+            }
+          ]
+        },
+        "development": {
+          "totalCases": 4,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.48990002040399916
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "2": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "3": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        },
+        "challenge": {
+          "totalCases": 8,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.3244156195108769
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "2": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "3": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        }
+      },
+      "cases": []
+    },
+    {
+      "armId": "tiered",
+      "label": "Rules → Jev → small → frontier",
+      "configured": false,
+      "threshold": 0.9,
+      "summary": {
+        "totalCases": 22,
+        "dispositionAccuracy": 0.5909090909090909,
+        "automationCoverage": 0.4090909090909091,
+        "safeResolutionCoverage": 0.4090909090909091,
+        "abstentionRate": 0.5909090909090909,
+        "unsafeResolutions": 0,
+        "falseClearances": 0,
+        "unsafeCaseIds": [],
+        "selectiveRisk": 0,
+        "selectiveRisk95Ci": [
+          0,
+          0.2991527535509594
+        ],
+        "safeCoverage95Ci": [
+          0.23255559668820378,
+          0.6126552261710619
+        ],
+        "totalCostUsd": 0,
+        "knownCostUsd": 0,
+        "usageVerified": true,
+        "costVerified": true,
+        "costPerSafeResolution": 0,
+        "p50AdapterLatencyMs": 0,
+        "p95AdapterLatencyMs": 1,
+        "unsupportedCitations": 0,
+        "tierStats": {
+          "1": {
+            "calls": 31,
+            "acceptedRequirements": 18,
+            "costUsd": 0,
+            "tokens": 0
+          },
+          "2": {
+            "calls": 12,
+            "acceptedRequirements": 0,
+            "costUsd": 0,
+            "tokens": 0
+          },
+          "3": {
+            "calls": 12,
+            "acceptedRequirements": 0,
+            "costUsd": 0,
+            "tokens": 0
+          }
+        },
+        "reliabilityBins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 18,
+            "meanConfidence": 1,
+            "empiricalSafeCaseRate": 1
+          }
+        ]
+      },
+      "cohorts": {
+        "structured": {
+          "totalCases": 10,
+          "dispositionAccuracy": 1,
+          "automationCoverage": 0.9,
+          "safeResolutionCoverage": 0.9,
+          "abstentionRate": 0.1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": 0,
+          "selectiveRisk95Ci": [
+            0,
+            0.2991527535509594
+          ],
+          "safeCoverage95Ci": [
+            0.5958436145024278,
+            0.9821242504842788
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": 0,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 1,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 19,
+              "acceptedRequirements": 18,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 18,
+              "meanConfidence": 1,
+              "empiricalSafeCaseRate": 1
+            }
+          ]
+        },
+        "development": {
+          "totalCases": 4,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.48990002040399916
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "2": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "3": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        },
+        "challenge": {
+          "totalCases": 8,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.3244156195108769
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "2": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "3": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        }
+      },
+      "cases": []
+    },
+    {
+      "armId": "tiered",
+      "label": "Rules → Jev → small → frontier",
+      "configured": false,
+      "threshold": 0.99,
+      "summary": {
+        "totalCases": 22,
+        "dispositionAccuracy": 0.5909090909090909,
+        "automationCoverage": 0.4090909090909091,
+        "safeResolutionCoverage": 0.4090909090909091,
+        "abstentionRate": 0.5909090909090909,
+        "unsafeResolutions": 0,
+        "falseClearances": 0,
+        "unsafeCaseIds": [],
+        "selectiveRisk": 0,
+        "selectiveRisk95Ci": [
+          0,
+          0.2991527535509594
+        ],
+        "safeCoverage95Ci": [
+          0.23255559668820378,
+          0.6126552261710619
+        ],
+        "totalCostUsd": 0,
+        "knownCostUsd": 0,
+        "usageVerified": true,
+        "costVerified": true,
+        "costPerSafeResolution": 0,
+        "p50AdapterLatencyMs": 0,
+        "p95AdapterLatencyMs": 1,
+        "unsupportedCitations": 0,
+        "tierStats": {
+          "1": {
+            "calls": 31,
+            "acceptedRequirements": 18,
+            "costUsd": 0,
+            "tokens": 0
+          },
+          "2": {
+            "calls": 12,
+            "acceptedRequirements": 0,
+            "costUsd": 0,
+            "tokens": 0
+          },
+          "3": {
+            "calls": 12,
+            "acceptedRequirements": 0,
+            "costUsd": 0,
+            "tokens": 0
+          }
+        },
+        "reliabilityBins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 18,
+            "meanConfidence": 1,
+            "empiricalSafeCaseRate": 1
+          }
+        ]
+      },
+      "cohorts": {
+        "structured": {
+          "totalCases": 10,
+          "dispositionAccuracy": 1,
+          "automationCoverage": 0.9,
+          "safeResolutionCoverage": 0.9,
+          "abstentionRate": 0.1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": 0,
+          "selectiveRisk95Ci": [
+            0,
+            0.2991527535509594
+          ],
+          "safeCoverage95Ci": [
+            0.5958436145024278,
+            0.9821242504842788
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": 0,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 1,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 19,
+              "acceptedRequirements": 18,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 18,
+              "meanConfidence": 1,
+              "empiricalSafeCaseRate": 1
+            }
+          ]
+        },
+        "development": {
+          "totalCases": 4,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.48990002040399916
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "2": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "3": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        },
+        "challenge": {
+          "totalCases": 8,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.3244156195108769
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "1": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "2": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "3": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        }
+      },
+      "cases": []
+    },
+    {
+      "armId": "llm",
+      "label": "Frontier generative baseline",
+      "configured": false,
+      "threshold": 0.7,
+      "summary": {
+        "totalCases": 22,
+        "dispositionAccuracy": 0.18181818181818182,
+        "automationCoverage": 0,
+        "safeResolutionCoverage": 0,
+        "abstentionRate": 1,
+        "unsafeResolutions": 0,
+        "falseClearances": 0,
+        "unsafeCaseIds": [],
+        "selectiveRisk": null,
+        "selectiveRisk95Ci": null,
+        "safeCoverage95Ci": [
+          1.3877787807814457e-17,
+          0.14865952572596125
+        ],
+        "totalCostUsd": 0,
+        "knownCostUsd": 0,
+        "usageVerified": true,
+        "costVerified": true,
+        "costPerSafeResolution": null,
+        "p50AdapterLatencyMs": 0,
+        "p95AdapterLatencyMs": 0,
+        "unsupportedCitations": 0,
+        "tierStats": {
+          "3": {
+            "calls": 32,
+            "acceptedRequirements": 0,
+            "costUsd": 0,
+            "tokens": 0
+          }
+        },
+        "reliabilityBins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          }
+        ]
+      },
+      "cohorts": {
+        "structured": {
+          "totalCases": 10,
+          "dispositionAccuracy": 0.1,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.2775401687666166
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "3": {
+              "calls": 20,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        },
+        "development": {
+          "totalCases": 4,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.48990002040399916
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "3": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        },
+        "challenge": {
+          "totalCases": 8,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.3244156195108769
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "3": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        }
+      },
+      "cases": []
+    },
+    {
+      "armId": "llm",
+      "label": "Frontier generative baseline",
+      "configured": false,
+      "threshold": 0.9,
+      "summary": {
+        "totalCases": 22,
+        "dispositionAccuracy": 0.18181818181818182,
+        "automationCoverage": 0,
+        "safeResolutionCoverage": 0,
+        "abstentionRate": 1,
+        "unsafeResolutions": 0,
+        "falseClearances": 0,
+        "unsafeCaseIds": [],
+        "selectiveRisk": null,
+        "selectiveRisk95Ci": null,
+        "safeCoverage95Ci": [
+          1.3877787807814457e-17,
+          0.14865952572596125
+        ],
+        "totalCostUsd": 0,
+        "knownCostUsd": 0,
+        "usageVerified": true,
+        "costVerified": true,
+        "costPerSafeResolution": null,
+        "p50AdapterLatencyMs": 0,
+        "p95AdapterLatencyMs": 0,
+        "unsupportedCitations": 0,
+        "tierStats": {
+          "3": {
+            "calls": 32,
+            "acceptedRequirements": 0,
+            "costUsd": 0,
+            "tokens": 0
+          }
+        },
+        "reliabilityBins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          }
+        ]
+      },
+      "cohorts": {
+        "structured": {
+          "totalCases": 10,
+          "dispositionAccuracy": 0.1,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.2775401687666166
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "3": {
+              "calls": 20,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        },
+        "development": {
+          "totalCases": 4,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.48990002040399916
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "3": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        },
+        "challenge": {
+          "totalCases": 8,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.3244156195108769
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "3": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        }
+      },
+      "cases": []
+    },
+    {
+      "armId": "llm",
+      "label": "Frontier generative baseline",
+      "configured": false,
+      "threshold": 0.99,
+      "summary": {
+        "totalCases": 22,
+        "dispositionAccuracy": 0.18181818181818182,
+        "automationCoverage": 0,
+        "safeResolutionCoverage": 0,
+        "abstentionRate": 1,
+        "unsafeResolutions": 0,
+        "falseClearances": 0,
+        "unsafeCaseIds": [],
+        "selectiveRisk": null,
+        "selectiveRisk95Ci": null,
+        "safeCoverage95Ci": [
+          1.3877787807814457e-17,
+          0.14865952572596125
+        ],
+        "totalCostUsd": 0,
+        "knownCostUsd": 0,
+        "usageVerified": true,
+        "costVerified": true,
+        "costPerSafeResolution": null,
+        "p50AdapterLatencyMs": 0,
+        "p95AdapterLatencyMs": 0,
+        "unsupportedCitations": 0,
+        "tierStats": {
+          "3": {
+            "calls": 32,
+            "acceptedRequirements": 0,
+            "costUsd": 0,
+            "tokens": 0
+          }
+        },
+        "reliabilityBins": [
+          {
+            "lower": 0,
+            "upper": 0.2,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.2,
+            "upper": 0.4,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.4,
+            "upper": 0.6,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.6,
+            "upper": 0.8,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          },
+          {
+            "lower": 0.8,
+            "upper": 1,
+            "count": 0,
+            "meanConfidence": null,
+            "empiricalSafeCaseRate": null
+          }
+        ]
+      },
+      "cohorts": {
+        "structured": {
+          "totalCases": 10,
+          "dispositionAccuracy": 0.1,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.2775401687666166
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "3": {
+              "calls": 20,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        },
+        "development": {
+          "totalCases": 4,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.48990002040399916
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "3": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        },
+        "challenge": {
+          "totalCases": 8,
+          "dispositionAccuracy": 0.25,
+          "automationCoverage": 0,
+          "safeResolutionCoverage": 0,
+          "abstentionRate": 1,
+          "unsafeResolutions": 0,
+          "falseClearances": 0,
+          "unsafeCaseIds": [],
+          "selectiveRisk": null,
+          "selectiveRisk95Ci": null,
+          "safeCoverage95Ci": [
+            0,
+            0.3244156195108769
+          ],
+          "totalCostUsd": 0,
+          "knownCostUsd": 0,
+          "usageVerified": true,
+          "costVerified": true,
+          "costPerSafeResolution": null,
+          "p50AdapterLatencyMs": 0,
+          "p95AdapterLatencyMs": 0,
+          "unsupportedCitations": 0,
+          "tierStats": {
+            "3": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            }
+          },
+          "reliabilityBins": [
+            {
+              "lower": 0,
+              "upper": 0.2,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.2,
+              "upper": 0.4,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.4,
+              "upper": 0.6,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.6,
+              "upper": 0.8,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            },
+            {
+              "lower": 0.8,
+              "upper": 1,
+              "count": 0,
+              "meanConfidence": null,
+              "empiricalSafeCaseRate": null
+            }
+          ]
+        }
+      },
+      "cases": []
+    }
+  ],
+  "datasetHash": "88b6270cdf19629bf321e42535a7270cc3efabb41aff8f44e7a4845f5c7a658a",
+  "protocolHash": "92a5fb5c59d73d9dd26853b2ee12d61bfba2adcf392807f6bf7fc211d418885e",
+  "protocol": {
+    "revision": "evidence-v2.0",
+    "thresholds": [
+      0.7,
+      0.9,
+      0.99
+    ],
+    "arms": [
+      "rules",
+      "cheap",
+      "tiered",
+      "llm"
+    ],
+    "billingProvider": "openrouter",
+    "caseBudget": 0.1,
+    "tokenBudget": 100000,
+    "timeoutMs": 120000,
+    "maxCalls": 200,
+    "maxAcquisitionTokens": 1000000,
+    "cohorts": "narrative-v1"
+  },
+  "providers": {
+    "jev": {
+      "configured": false,
+      "model": "typesafe/jev-1.13"
+    },
+    "small": {
+      "configured": false,
+      "model": null
+    },
+    "frontier": {
+      "configured": false,
+      "model": null,
+      "provider": "openrouter",
+      "reasoningEffort": null
+    },
+    "budgetCapUsd": 0.1
+  },
+  "configuration": {
+    "jevOptions": {
+      "model": "typesafe/jev-1.13",
+      "maxInputTokens": 16000,
+      "maxOutputTokens": 2048
+    },
+    "llmOptions": null,
+    "frontierOptions": null
+  },
+  "runMode": "offline",
+  "revision": "ad790ee2c5754b07b468acecd833f50086f8d6aa",
+  "adapterHash": "e2634b40f9dbf86f29934ee5f4d8810ee863ab1b0af3e447ffe2ea9db6bb37fd"
+}

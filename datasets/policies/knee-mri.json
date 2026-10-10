@@ -1,0 +1,53 @@
+{
+  "id": "policy-knee-mri-v1",
+  "title": "Knee MRI Coverage Policy",
+  "version": "1.0",
+  "source": "Synthetic research fixture; not an authoritative payer policy",
+  "narrative": "Magnetic Resonance Imaging (MRI) of the knee is medically indicated when mechanical symptoms (locking, catching) or ligamentous instability are documented following knee injury, and weight-bearing plain radiographs have been completed.",
+  "serviceCodes": [
+    "73721"
+  ],
+  "requirements": [
+    {
+      "id": "req-knee-condition",
+      "narrativeConcepts": [
+        "joint derangement",
+        "mechanical locking",
+        "knee instability"
+      ],
+      "description": "Documented internal derangement, meniscal tear, or ligament injury of knee",
+      "rationale": "Advanced imaging requires clinical documentation of joint derangement or trauma.",
+      "required": true,
+      "category": "diagnosis",
+      "acceptableCodeSystems": [
+        "http://hl7.org/fhir/sid/icd-10-cm"
+      ],
+      "acceptableCodes": [
+        "M23.20",
+        "M23.21",
+        "M23.22",
+        "M23.23",
+        "S83.20",
+        "S83.21",
+        "S83.22",
+        "S83.24"
+      ]
+    },
+    {
+      "id": "req-plain-radiograph",
+      "description": "Prior plain radiograph (X-ray) of affected knee completed within last 90 days",
+      "rationale": "Plain radiographs must rule out fracture, loose bodies, or severe degenerative changes before MRI.",
+      "required": true,
+      "category": "imaging_prerequisite",
+      "acceptableCodeSystems": [
+        "http://www.ama-assn.org/go/cpt"
+      ],
+      "acceptableCodes": [
+        "73560",
+        "73562",
+        "73564"
+      ],
+      "timeWindowDays": 90
+    }
+  ]
+}

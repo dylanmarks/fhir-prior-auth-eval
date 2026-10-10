@@ -1,0 +1,59 @@
+{
+  "id": "case-narrative-challenge-ambiguous",
+  "title": "Challenge ambiguous",
+  "description": "Synthetic narrative interpretation challenge.",
+  "scenarioCategory": "pt_extension",
+  "requestedAt": "2026-07-04",
+  "requestedService": {
+    "code": "97110",
+    "description": "PT extension documentation assessment",
+    "diagnosisCodes": []
+  },
+  "policyId": "policy-narrative-pt-v1",
+  "tags": [
+    "narrative",
+    "challenge"
+  ],
+  "source": "hand-authored-synthetic:narrative-v1",
+  "patientBundle": {
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+      {
+        "resource": {
+          "resourceType": "Patient",
+          "id": "synthetic-narrative-patient"
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "DocumentReference",
+          "id": "note-0",
+          "status": "current",
+          "subject": {
+            "reference": "Patient/synthetic-narrative-patient"
+          },
+          "date": "2026-07-01",
+          "text": {
+            "status": "generated",
+            "div": "<div>Reassessment says mobility may be somewhat better, although performance fluctuates widely. Baseline and current measurements cannot be compared reliably.</div>"
+          }
+        }
+      }
+    ]
+  },
+  "expectedAssessment": {
+    "disposition": "requires_clinical_review",
+    "requirements": [
+      {
+        "requirementId": "req-narrative-progress",
+        "status": "insufficient_evidence",
+        "confidence": 0,
+        "evidence": []
+      }
+    ],
+    "missingInformation": [
+      "req-narrative-progress: Narrative progress documentation"
+    ]
+  }
+}

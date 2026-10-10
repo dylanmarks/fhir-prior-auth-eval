@@ -1,0 +1,121 @@
+{
+  "id": "case-pt-002-plateau",
+  "title": "Physical Therapy Extension with Documented Functional Plateau",
+  "description": "Recent re-evaluation documents a functional plateau without measurable progress.",
+  "scenarioCategory": "pt_extension",
+  "source": "hand-authored-synthetic:openpa-benchmark-v1",
+  "requestedService": {
+    "codeSystem": "http://www.ama-assn.org/go/cpt",
+    "code": "97110",
+    "description": "Therapeutic exercises, 1 or more areas, each 15 minutes",
+    "diagnosisCodes": [
+      "R26.2"
+    ]
+  },
+  "policyId": "policy-pt-extension-v1",
+  "expectedAssessment": {
+    "disposition": "needs_information",
+    "missingInformation": [
+      "req-pt-progress: Physical therapy re-evaluation documenting measurable functional progress within last 60 days"
+    ],
+    "requirements": [
+      {
+        "requirementId": "req-functional-deficit",
+        "status": "satisfied",
+        "confidence": 1.0,
+        "evidence": [
+          {
+            "resourceType": "Condition",
+            "resourceId": "Condition/cond-gait-deficit-02"
+          }
+        ]
+      },
+      {
+        "requirementId": "req-pt-progress",
+        "status": "insufficient_evidence",
+        "confidence": 0,
+        "evidence": []
+      }
+    ]
+  },
+  "tags": [
+    "pt_extension",
+    "needs_information",
+    "reeval_missing"
+  ],
+  "patientBundle": {
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+      {
+        "resource": {
+          "resourceType": "Patient",
+          "id": "pat-008",
+          "gender": "male",
+          "birthDate": "1954-12-03"
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "Condition",
+          "id": "cond-gait-deficit-02",
+          "subject": {
+            "reference": "Patient/pat-008"
+          },
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                "code": "R26.2",
+                "display": "Difficulty in walking, not elsewhere classified"
+              }
+            ]
+          },
+          "onsetDateTime": "2026-03-01",
+          "text": {
+            "status": "generated",
+            "div": "<div>Chronic gait imbalance following cerebrovascular accident.</div>"
+          },
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "code": "active"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "Procedure",
+          "id": "proc-pt-reeval-plateau",
+          "status": "completed",
+          "subject": {
+            "reference": "Patient/pat-008"
+          },
+          "code": {
+            "coding": [
+              {
+                "system": "http://www.ama-assn.org/go/cpt",
+                "code": "97164",
+                "display": "Physical therapy re-evaluation: established plan of care"
+              }
+            ]
+          },
+          "performedDateTime": "2026-06-25",
+          "note": [
+            {
+              "text": "Formal PT re-evaluation conducted. Patient has reached functional plateau. No measurable gains in gait velocity or mobility over past 4 weeks; maintenance level reached."
+            }
+          ],
+          "text": {
+            "status": "generated",
+            "div": "<div>Formal PT re-evaluation: Patient has reached a functional plateau with no objective improvement in mobility. Transition to home exercise program recommended.</div>"
+          }
+        }
+      }
+    ]
+  },
+  "requestedAt": "2026-07-04"
+}

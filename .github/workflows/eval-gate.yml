@@ -1,0 +1,44 @@
+name: PA-Eval CI Gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  evaluate-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build workspaces
+        run: npm run build
+
+      - name: Run unit & harness tests
+        run: npm test
+
+      - name: Typecheck all workspaces
+        run: npm run typecheck
+
+      - name: Run benchmark & CI gate verification
+        run: npm run benchmark
+
+      - name: Compare offline research baseline
+        run: npm run experiment -- --baseline datasets/offline-experiment.json
+
+      - name: Preserve evaluation reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: evaluation-reports
+          path: results/

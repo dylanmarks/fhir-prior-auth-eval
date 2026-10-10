@@ -1,0 +1,92 @@
+{
+  "id": "case-knee-002-deficient",
+  "title": "Suspected Meniscal Tear Missing Required Plain Radiograph",
+  "description": "Patient with knee joint symptoms; physical exam findings suggestive of meniscal injury, but no weight-bearing plain radiographs have been completed.",
+  "scenarioCategory": "knee_mri",
+  "source": "hand-authored-synthetic:demo-v1",
+  "requestedService": {
+    "codeSystem": "http://www.ama-assn.org/go/cpt",
+    "code": "73721",
+    "description": "MRI knee joint without contrast",
+    "diagnosisCodes": [
+      "M23.22"
+    ]
+  },
+  "policyId": "policy-knee-mri-v1",
+  "expectedAssessment": {
+    "disposition": "needs_information",
+    "missingInformation": [
+      "req-plain-radiograph: Prior plain radiograph (X-ray) of affected knee completed within last 90 days"
+    ],
+    "requirements": [
+      {
+        "requirementId": "req-knee-condition",
+        "status": "satisfied",
+        "confidence": 1.0,
+        "evidence": [
+          {
+            "resourceType": "Condition",
+            "resourceId": "Condition/cond-meniscal-tear-02"
+          }
+        ]
+      },
+      {
+        "requirementId": "req-plain-radiograph",
+        "status": "insufficient_evidence",
+        "confidence": 0.95,
+        "evidence": []
+      }
+    ]
+  },
+  "tags": [
+    "knee_mri",
+    "needs_information",
+    "radiograph_missing"
+  ],
+  "patientBundle": {
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+      {
+        "resource": {
+          "resourceType": "Patient",
+          "id": "pat-004",
+          "gender": "female",
+          "birthDate": "1995-02-14"
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "Condition",
+          "id": "cond-meniscal-tear-02",
+          "subject": {
+            "reference": "Patient/pat-004"
+          },
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                "code": "M23.22",
+                "display": "Derangement of meniscus, right medial meniscus"
+              }
+            ]
+          },
+          "onsetDateTime": "2026-07-02",
+          "text": {
+            "status": "generated",
+            "div": "<div>Patient with acute right knee twisting injury and joint effusion.</div>"
+          },
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "code": "active"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "requestedAt": "2026-07-04"
+}

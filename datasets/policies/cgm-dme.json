@@ -1,0 +1,49 @@
+{
+  "id": "policy-cgm-dme-v1",
+  "title": "Continuous Glucose Monitor (CGM) Coverage Policy",
+  "version": "1.0",
+  "source": "Synthetic research fixture; not an authoritative payer policy",
+  "narrative": "Therapeutic continuous glucose monitor (CGM) systems are covered for beneficiaries diagnosed with diabetes mellitus who are treated with insulin and require frequent glucose adjustments.",
+  "serviceCodes": [
+    "E2103"
+  ],
+  "requirements": [
+    {
+      "id": "req-diabetes-diagnosis",
+      "description": "Established diagnosis of diabetes mellitus (Type 1 or Type 2)",
+      "rationale": "CGM systems are covered only for patients with diabetes.",
+      "required": true,
+      "category": "diagnosis",
+      "acceptableCodeSystems": [
+        "http://hl7.org/fhir/sid/icd-10-cm"
+      ],
+      "acceptableCodes": [
+        "E10.9",
+        "E10.65",
+        "E11.9",
+        "E11.65",
+        "E11.69"
+      ]
+    },
+    {
+      "id": "req-insulin-treatment",
+      "narrativeConcepts": [
+        "insulin",
+        "insulin therapy"
+      ],
+      "description": "Active prescription for insulin therapy",
+      "rationale": "Medicare and commercial coverage guidelines require active insulin therapy for CGM coverage.",
+      "required": true,
+      "category": "conservative_therapy",
+      "acceptableCodeSystems": [
+        "http://www.nlm.nih.gov/research/umls/rxnorm"
+      ],
+      "acceptableCodes": [
+        "847207",
+        "847241",
+        "51428",
+        "274783"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@openpa/evaluators",
+  "version": "0.1.0",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {"types": "./dist/index.d.ts", "import": "./dist/index.js"},
+    "./chatgpt-auth": {"types": "./dist/chatgpt/auth.d.ts", "import": "./dist/chatgpt/auth.js"}
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@openpa/core": "*",
+    "jose": "^6.2.12"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

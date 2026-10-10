@@ -1,0 +1,124 @@
+{
+  "id": "case-sleep-001-meets",
+  "title": "Suspected Obstructive Sleep Apnea with Elevated Epworth Score",
+  "description": "Patient presents with habitual loud snoring, witnessed apneas, and documented excessive daytime sleepiness with an Epworth Sleepiness Scale score of 14.",
+  "scenarioCategory": "sleep_study",
+  "source": "hand-authored-synthetic:openpa-benchmark-v1",
+  "requestedService": {
+    "codeSystem": "http://www.ama-assn.org/go/cpt",
+    "code": "95810",
+    "description": "Polysomnography; sleep staging with 4 or more additional parameters of sleep, attended by a technologist",
+    "diagnosisCodes": [
+      "G47.33"
+    ]
+  },
+  "policyId": "policy-sleep-study-v1",
+  "expectedAssessment": {
+    "disposition": "meets_policy",
+    "missingInformation": [],
+    "requirements": [
+      {
+        "requirementId": "req-suspected-osa",
+        "status": "satisfied",
+        "confidence": 1.0,
+        "evidence": [
+          {
+            "resourceType": "Condition",
+            "resourceId": "Condition/cond-suspected-osa-01"
+          }
+        ]
+      },
+      {
+        "requirementId": "req-epworth-score",
+        "status": "satisfied",
+        "confidence": 1.0,
+        "evidence": [
+          {
+            "resourceType": "Observation",
+            "resourceId": "Observation/obs-epworth-scale-01"
+          }
+        ]
+      }
+    ]
+  },
+  "tags": [
+    "sleep_study",
+    "meets_policy",
+    "epworth_elevated"
+  ],
+  "patientBundle": {
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+      {
+        "resource": {
+          "resourceType": "Patient",
+          "id": "pat-009",
+          "gender": "male",
+          "birthDate": "1978-04-15"
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "Condition",
+          "id": "cond-suspected-osa-01",
+          "subject": {
+            "reference": "Patient/pat-009"
+          },
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                "code": "G47.33",
+                "display": "Obstructive sleep apnea (adult) (pediatric)"
+              }
+            ]
+          },
+          "onsetDateTime": "2026-05-20",
+          "text": {
+            "status": "generated",
+            "div": "<div>Patient evaluated for chronic nocturnal choking, unrefreshing sleep, and suspected severe OSA.</div>"
+          },
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "code": "active"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "Observation",
+          "id": "obs-epworth-scale-01",
+          "subject": {
+            "reference": "Patient/pat-009"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "85348-1",
+                "display": "Epworth sleepiness scale [Score]"
+              }
+            ]
+          },
+          "effectiveDateTime": "2026-06-18",
+          "valueQuantity": {
+            "value": 14,
+            "unit": "{score}",
+            "system": "http://unitsofmeasure.org"
+          },
+          "text": {
+            "status": "generated",
+            "div": "<div>Epworth Sleepiness Scale score: 14 (abnormal daytime somnolence, >= 10).</div>"
+          }
+        }
+      }
+    ]
+  },
+  "requestedAt": "2026-07-04"
+}

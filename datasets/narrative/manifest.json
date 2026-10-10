@@ -1,0 +1,20 @@
+{
+  "version": "narrative-v1",
+  "labelProvenance": "hand-authored synthetic; not independently reviewed",
+  "development": [
+    "case-narrative-dev-progress",
+    "case-narrative-dev-missing",
+    "case-narrative-dev-plateau",
+    "case-narrative-dev-conflict"
+  ],
+  "challenge": [
+    "case-narrative-challenge-paraphrase",
+    "case-narrative-challenge-negation-scope",
+    "case-narrative-challenge-historical",
+    "case-narrative-challenge-recommendation",
+    "case-narrative-challenge-conflicting-measures",
+    "case-narrative-challenge-ambiguous",
+    "case-narrative-challenge-injection",
+    "case-narrative-challenge-distractor"
+  ]
+}
