@@ -26,6 +26,7 @@ export interface EvaluatorMetrics {
 export interface EvaluatorResult {
   status: RequirementStatus;
   confidence: number;
+  modelCertainty?: number;
   evidence: EvidenceCitation[];
   notes?: string;
   metrics: EvaluatorMetrics;

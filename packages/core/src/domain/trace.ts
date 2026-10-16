@@ -14,6 +14,7 @@ export const StepTraceSchema = z.object({
   inputSummary: z.string().optional(),
   decision: z.string(),
   confidence: z.number().min(0).max(1),
+  modelCertainty: z.number().min(0).max(1).optional(),
   latencyMs: z.number(),
   inputTokens: z.number().default(0),
   outputTokens: z.number().default(0),

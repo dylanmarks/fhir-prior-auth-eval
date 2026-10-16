@@ -119,7 +119,7 @@ export class TieredOrchestrator {
           halted = true;
           emit({
             ...base,
-            decision: "Execution budget exhausted prior to evaluator dispatch (admission control)",
+            decision: "Execution budget exhausted prior to evaluator dispatch (admission control). Update your configuration to increase case budget (CASE_BUDGET_USD).",
             status: "budget_exceeded",
           });
           break;
@@ -178,7 +178,7 @@ export class TieredOrchestrator {
             emit({
               ...base,
               ...metrics,
-              decision: "Cumulative usage exceeded execution budget cap after call execution",
+              decision: "Cumulative usage exceeded execution budget cap after call execution. Update your configuration to increase case budget (CASE_BUDGET_USD).",
               status: "budget_exceeded",
             });
             break;
@@ -190,6 +190,8 @@ export class TieredOrchestrator {
             emit({
               ...base,
               ...metrics,
+              confidence: parsed.confidence,
+              modelCertainty: res.modelCertainty,
               decision: res.notes ?? `Clinical contradiction or negation detected (${res.escalationReason ?? 'conflict'}); escalating to clinical review`,
               status: "escalated",
             });
@@ -204,6 +206,7 @@ export class TieredOrchestrator {
             emit({
               ...base,
               ...metrics,
+              confidence: 0,
               decision: 'Evaluator asserted a definitive judgment without evidence citations',
               status: "escalated",
             });
@@ -225,6 +228,7 @@ export class TieredOrchestrator {
               emit({
                 ...base,
                 ...metrics,
+                confidence: 0,
                 decision: `Hallucinated or ungrounded citation detected: ${reasons}`,
                 status: "escalated",
               });
@@ -247,6 +251,7 @@ export class TieredOrchestrator {
             ...base,
             ...metrics,
             confidence: parsed.confidence,
+            modelCertainty: res.modelCertainty ?? parsed.confidence,
             decision: parsed.evaluatorNotes ?? `Status: ${parsed.status}`,
             status: accepted ? "success" : "fallback",
           });
@@ -276,10 +281,19 @@ export class TieredOrchestrator {
             decision: error instanceof Error ? error.message : "Evaluator execution error",
             status: "failed",
           });
-          // Evaluator failure or timeout stops cascade safely
-          safetyFailure = true;
-          halted = true;
-          break;
+          // If cancelled by caller, halt execution
+          if (this.options.signal?.aborted) {
+            safetyFailure = true;
+            halted = true;
+            break;
+          }
+          // If execution budget exceeded, halt cascade
+          if (totalCostUsd > this.options.budgetCapUsd || totalTokens > this.options.maxTokensPerRun) {
+            halted = true;
+            break;
+          }
+          // Allow cascade to escalate to downstream tiers (e.g. SLM failure falls through to Frontier LLM)
+          continue;
         } finally {
           if (timer) clearTimeout(timer);
           this.options.signal?.removeEventListener('abort', cancel);

@@ -1,5 +1,5 @@
 import { RequirementEvaluationSchema, type PolicyRequirement } from '@openpa/core';
-import { clinicalContext, inputByteCount } from '../clinical-context.js';
+import { clinicalContext, inputByteCount, cleanJsonOutput } from '../clinical-context.js';
 import type { PolicyEvaluator, EvaluatorContext, EvaluatorResult } from '../types.js';
 
 export const REASONING_EFFORTS = ['none', 'minimal', 'low', 'medium', 'high', 'xhigh', 'max'] as const;
@@ -92,7 +92,7 @@ export class ChatGptPlanEvaluator implements PolicyEvaluator {
       } finally {await reader.cancel().catch(() => {}); reader.releaseLock();}
       if (!completed || !usageVerified) throw new Error('ChatGPT stream ended without completed inference and verified usage');
       if (metrics.inputTokens > (this.options.maxInputTokens ?? 16000) || metrics.outputTokens > (this.options.maxOutputTokens ?? 8192)) throw new Error('ChatGPT usage exceeded the local token reservation; no decision accepted');
-      const parsed = RequirementEvaluationSchema.parse(JSON.parse(content));
+      const parsed = RequirementEvaluationSchema.parse(JSON.parse(cleanJsonOutput(content)));
       if (parsed.requirementId !== requirement.id) throw new Error('ChatGPT returned a mismatched requirement ID');
       return {status: parsed.status, confidence: parsed.confidence, evidence: parsed.evidence, notes: parsed.evaluatorNotes, contradictionDetected: parsed.contradictionDetected, metrics: {...metrics, latencyMs: performance.now() - started}};
     } catch (error) {

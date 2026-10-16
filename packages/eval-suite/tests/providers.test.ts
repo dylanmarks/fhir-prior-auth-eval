@@ -1,7 +1,7 @@
 import { afterEach, describe, it, expect, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { FhirBundleIndexer } from '@openpa/core';
-import { JevDecisionEvaluator, StructuredLlmEvaluator, TieredOrchestrator } from '@openpa/evaluators';
+import { JevDecisionEvaluator, StructuredLlmEvaluator, TieredOrchestrator, cleanJsonOutput } from '@openpa/evaluators';
 
 const c=JSON.parse(readFileSync('datasets/narrative/cases/dev-progress.json','utf8'));
 const p=JSON.parse(readFileSync('datasets/narrative/policy.json','utf8'));
@@ -29,6 +29,10 @@ describe('Provider contract and accounting',()=>{
     vi.stubGlobal('fetch',vi.fn(async()=>new Response(JSON.stringify({answers:{}}))));
     await expect(new JevDecisionEvaluator(opts).evaluateRequirement(p.requirements[0],context())).rejects.toMatchObject({usageVerified:false});
   });
+  it('accepts zero output pricing for Jev decisions',async()=>{
+    const jev=new JevDecisionEvaluator({...opts,outputPricePerMillion:0,inputPricePerMillion:0.042});
+    expect(jev.maxCostUsd).toBe((16000*0.042)/1e6);
+  });
   it('offline Jev abstains without a network request',async()=>{
     const fetch=vi.fn();vi.stubGlobal('fetch',fetch);expect((await new JevDecisionEvaluator().evaluateRequirement(p.requirements[0],context())).confidence).toBe(0);expect(fetch).not.toHaveBeenCalled();
   });
@@ -50,5 +54,19 @@ describe('Provider contract and accounting',()=>{
   it.each([402,413,422])('does not retry HTTP %s',async status=>{
     const fetch=vi.fn(async()=>new Response('',{status}));vi.stubGlobal('fetch',fetch);
     await expect(new StructuredLlmEvaluator(opts).evaluateRequirement(p.requirements[0],context())).rejects.toThrow(`HTTP ${status}`);expect(fetch).toHaveBeenCalledTimes(1);
+  });
+  it('parses structured LLM outputs wrapped in markdown code fences',async()=>{
+    const content = '```json\n{"requirementId":"req-narrative-progress","status":"not_satisfied","confidence":0.85,"evidence":[],"evaluatorNotes":"No progress documented","contradictionDetected":false}\n```';
+    vi.stubGlobal('fetch',vi.fn(async()=>new Response(JSON.stringify({usage:{prompt_tokens:100,completion_tokens:20},choices:[{message:{content}}]}),{status:200})));
+    const res = await new StructuredLlmEvaluator(opts).evaluateRequirement(p.requirements[0],context());
+    expect(res.status).toBe('not_satisfied');
+    expect(res.confidence).toBe(0.85);
+    expect(res.notes).toBe('No progress documented');
+  });
+  it('cleans markdown fences and preamble text from json', ()=>{
+    expect(cleanJsonOutput('```json\n{"a":1}\n```')).toBe('{"a":1}');
+    expect(cleanJsonOutput('```\n{"a":1}\n```')).toBe('{"a":1}');
+    expect(cleanJsonOutput('Here is the JSON:\n```json\n{"a":1}\n```\nHope it helps!')).toBe('{"a":1}');
+    expect(cleanJsonOutput('Analysis:\n{"a":1}\nDone.')).toBe('{"a":1}');
   });
 });

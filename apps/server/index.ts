@@ -60,6 +60,7 @@ const server = createServer(async (req, res) => {
         return send(200, {url: await auth.begin('http://127.0.0.1:8787/auth/callback', profileId, newProfile)});
       }
       if (url.pathname === '/api/chatgpt/select') {const {profileId} = z.object({profileId: z.string()}).strict().parse(body); await auth.select(profileId); authMessage = ''; return send(200, {ok: true});}
+      if (url.pathname === '/api/chatgpt/cancel') {z.object({}).strict().parse(body); auth.cancelPending(); authMessage = ''; return send(200, {ok: true});}
       if (url.pathname === '/api/chatgpt/sign-out') {z.object({}).strict().parse(body); const {revoked} = await auth.signOut(); authMessage = revoked ? 'Signed out of ChatGPT.' : 'Signed out locally. Remote revocation was not confirmed; disconnect this app in ChatGPT settings.'; return send(200, {revoked});}
       if (url.pathname === '/api/frontier') {
         const args = frontierSchema.parse(body);

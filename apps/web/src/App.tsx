@@ -68,10 +68,10 @@ const MUTATION_OPTIONS: Array<{ type: MutationType; label: string; desc: string 
 
 export function App() {
   const [activeTab, setActiveTab] = useState<'research' | 'workbench' | 'benchmark'>('research');
-  const [executionMode, setExecutionMode] = useState<'offline' | 'server'>('offline');
-  const [providerStatus, setProviderStatus] = useState('Offline: rules available; model tiers abstain.');
+  const [executionMode, setExecutionMode] = useState<'offline' | 'server'>('server');
+  const [providerStatus, setProviderStatus] = useState('Connecting to local evaluator...');
   const [selectedCaseId, setSelectedCaseId] = useState<string>(BUNDLED_CASES[0].id);
-  const [strategy, setStrategy] = useState<StrategyName>('rules');
+  const [strategy, setStrategy] = useState<StrategyName>('tiered');
   const [activeMutationType, setActiveMutationType] = useState<MutationType | null>(null);
   const [mutationResult, setMutationResult] = useState<MutationApplicationResult | null>(null);
   const [currentCase, setCurrentCase] = useState<PriorAuthCase>(BUNDLED_CASES[0]);
@@ -86,6 +86,7 @@ export function App() {
   const evalRunIdRef = useRef<number>(0);
   const abortRef = useRef<AbortController | null>(null);
   useEffect(() => {
+    void checkProviders();
     const escape = (event: KeyboardEvent) => {if(event.key === 'Escape') setSelectedResourceId(null);};
     window.addEventListener('keydown', escape);
     return () => {window.removeEventListener('keydown', escape);abortRef.current?.abort();};
@@ -899,7 +900,17 @@ export function App() {
                         </span>
                         {step.tierName}
                       </span>
-                      <span className="text-slate-500 font-mono">{step.latencyMs}ms</span>
+                      <div className="flex items-center gap-2">
+                        <span className={`px-1.5 py-0.5 rounded text-[9px] font-semibold uppercase tracking-wider ${
+                          step.status === 'success' ? 'bg-emerald-950/60 text-emerald-400 border border-emerald-800/40' :
+                          step.status === 'escalated' ? 'bg-purple-950/60 text-purple-300 border border-purple-800/40' :
+                          step.status === 'failed' ? 'bg-rose-950/60 text-rose-300 border border-rose-800/40' :
+                          'bg-slate-800 text-slate-400 border border-slate-700'
+                        }`}>
+                          {step.status}
+                        </span>
+                        <span className="text-slate-500 font-mono">{step.latencyMs}ms</span>
+                      </div>
                     </div>
 
                     <div className="text-[11px] text-slate-300">
@@ -907,7 +918,16 @@ export function App() {
                     </div>
 
                     <div className="flex items-center justify-between text-[10px] text-slate-400 pt-1 border-t border-slate-800">
-                      <span>Confidence: {(step.confidence * 100).toFixed(0)}%</span>
+                      <div className="flex items-center gap-3">
+                        {step.modelCertainty != null && (
+                          <span title="The model's assessment certainty in its finding">
+                            AI Certainty: <strong className="text-slate-200">{(step.modelCertainty * 100).toFixed(0)}%</strong>
+                          </span>
+                        )}
+                        <span title="Autonomous clearance confidence toward satisfying policy criteria">
+                          Policy Clearance: <strong className={step.confidence >= 0.9 ? 'text-emerald-400' : 'text-slate-300'}>{(step.confidence * 100).toFixed(0)}%</strong>
+                        </span>
+                      </div>
                       <span>{step.costVerified === false ? 'ChatGPT plan / credits' : `Cost: $${step.costUsd.toFixed(4)}`}</span>
                     </div>
                   </div>

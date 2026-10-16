@@ -137,6 +137,7 @@ export class ChatGptAuth {
   async select(profileId: string) {
     await this.locked(async () => { const store = await this.load(); if (!store.profiles.some(p => p.clientId === profileId && p.subject)) throw new Error('Unknown ChatGPT account'); store.active = profileId; await this.save(store); });
   }
+  cancelPending() { this.pending = undefined; }
   async frontierSettings() {return this.locked(async () => (await this.load()).frontier);}
   async setFrontier(frontier: NonNullable<Store['frontier']>) {await this.locked(async () => {const store = await this.load(); store.frontier = frontier; await this.save(store);});}
   async accessToken(profileId?: string) {

@@ -54,7 +54,7 @@ export class JevDecisionEvaluator implements PolicyEvaluator {
     const input = options.maxInputTokens ?? 16000;
     const output = options.maxOutputTokens ?? 2048;
     if (![input,output].every(v => Number.isInteger(v) && v > 0)) throw new Error('Jev token limits must be positive integers');
-    if (options.apiKey && ![options.inputPricePerMillion, options.outputPricePerMillion].every(v => typeof v === 'number' && Number.isFinite(v) && v > 0)) throw new Error('Live Jev requires explicit positive input and output pricing');
+    if (options.apiKey && ![options.inputPricePerMillion, options.outputPricePerMillion].every(v => typeof v === 'number' && Number.isFinite(v) && v >= 0)) throw new Error('Live Jev requires explicit non-negative input and output pricing');
     this.maxTokens = options.apiKey ? input + output : 0;
     this.maxCostUsd = options.apiKey ? (input * options.inputPricePerMillion! + output * options.outputPricePerMillion!) / 1e6 : 0;
   }
@@ -99,11 +99,19 @@ export class JevDecisionEvaluator implements PolicyEvaluator {
         }
       }
       const uncertain = outcome.choice === 'ambiguous' || contradiction || ambiguousEvidence;
+      const explanation = contradiction
+        ? `Jev detected a clinical contradiction between records (model certainty: ${(outcome.confidence * 100).toFixed(0)}%). Clinical contradictions escalate immediately to physician review.`
+        : outcome.choice === 'ambiguous'
+        ? `Jev detected ambiguous clinical evidence (model certainty: ${(outcome.confidence * 100).toFixed(0)}%).`
+        : `Jev classified outcome as '${outcome.choice}' (model certainty: ${(outcome.confidence * 100).toFixed(0)}%).`;
+
       return {
         status: uncertain ? 'insufficient_evidence' : outcome.choice as 'satisfied' | 'not_satisfied' | 'insufficient_evidence',
-        confidence: uncertain ? 0 : confidence, evidence,
+        confidence: uncertain ? 0 : confidence,
+        modelCertainty: outcome.confidence,
+        evidence,
         contradictionDetected: contradiction, escalateToClinicalReview: contradiction,
-        notes: `Typed Jev outcome: ${outcome.choice}. Routing confidence is not clinical calibration.`,
+        notes: explanation,
         metrics: {...metrics, latencyMs: performance.now() - started, providerModel: result.model},
       };
     } catch (error) {

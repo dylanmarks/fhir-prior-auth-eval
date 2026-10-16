@@ -23,3 +23,37 @@ export function clinicalContext(context: EvaluatorContext, requirement?: PolicyR
 export function inputByteCount(value: string): number {
   return new TextEncoder().encode(value).length;
 }
+
+/**
+ * Strips markdown code fences and surrounding conversational prose from LLM JSON responses.
+ */
+export function cleanJsonOutput(raw: string): string {
+  if (typeof raw !== 'string') return '';
+  let text = raw.trim();
+
+  const fenceMatch = text.match(/```(?:json)?\s*([\s\S]*?)\s*```/i);
+  if (fenceMatch) {
+    text = fenceMatch[1].trim();
+  } else if (text.startsWith('```')) {
+    text = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/i, '').trim();
+  }
+
+  const firstBrace = text.indexOf('{');
+  const firstBracket = text.indexOf('[');
+  let startIdx = -1;
+  let endIdx = -1;
+
+  if (firstBrace !== -1 && (firstBracket === -1 || firstBrace < firstBracket)) {
+    startIdx = firstBrace;
+    endIdx = text.lastIndexOf('}');
+  } else if (firstBracket !== -1) {
+    startIdx = firstBracket;
+    endIdx = text.lastIndexOf(']');
+  }
+
+  if (startIdx !== -1 && endIdx > startIdx) {
+    text = text.slice(startIdx, endIdx + 1);
+  }
+
+  return text;
+}
