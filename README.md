@@ -6,6 +6,16 @@ A TypeScript evaluation workbench and **Model Context Protocol (MCP) server** fo
 
 > **Status: public research prototype.** Offline fixtures and automated regression checks are included. Live provider behavior and the proposed cost/quality advantage have not been validated. Clinical validation and a recorded walkthrough are still ahead. The default demo runs locally without credentials.
 
+## Screenshots
+
+**Model comparison:** compare safe coverage, risk, abstentions, and cost across strategies using the offline baseline.
+
+![Model comparison showing the offline baseline across four evaluation strategies](docs/screenshots/model-comparison.png)
+
+**Interactive workbench:** inspect synthetic FHIR evidence, policy requirements, and the clinical-review outcome after injecting clinical negation.
+
+![Interactive workbench showing a clinical negation counterfactual routed to clinical review](docs/screenshots/interactive-workbench.png)
+
 ## Why I built this
 
 Prior authorization brings together two very different kinds of work. Some requirements are mechanical: match a diagnosis code, check the date of an examination, or confirm that therapy lasted long enough. Others require interpreting narrative evidence: did function improve, is a finding historical, or do the records contradict each other?
