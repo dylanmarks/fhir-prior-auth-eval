@@ -4,7 +4,9 @@
 
 A TypeScript evaluation workbench and **Model Context Protocol (MCP) server** for exploring that question with synthetic FHIR R4 records. Compare deterministic rules, typed model decisions, and generative models; inspect the evidence behind each result; and measure when the system should defer to a clinician.
 
-> **Status: public research prototype.** Offline fixtures and automated regression checks are included. Live provider behavior and the proposed cost/quality advantage have not been validated. Clinical validation and a recorded walkthrough are still ahead. The default demo runs locally without credentials.
+> **Status: public research prototype.** Offline fixtures and automated regression checks are included. Live provider behavior and the proposed cost/quality advantage have not been validated. Clinical validation is still ahead. The default demo runs locally without credentials.
+
+**[Watch the walkthrough on YouTube](https://youtu.be/Xz5sfbvqN6c)**: what prior authorization is, how the cascade works, and a first live run on 22 synthetic cases.
 
 ## Screenshots
 
@@ -225,7 +227,7 @@ The assessment schema is custom JSON over synthetic FHIR R4. It does not impleme
 
 Next: acquire the live paired baseline, independently review and expand challenge labels, measure model variability across repeated acquisitions, test external datasets, and quantify how risk/coverage changes by clinical scenario. A cheap-first architecture is viable only if those measurements support it.
 
-A recorded walkthrough is planned. In the meantime, the [written walkthrough](docs/WALKTHROUGH.md) describes the evidence and comparison flows.
+A [recorded walkthrough](https://youtu.be/Xz5sfbvqN6c) is on YouTube. The [written walkthrough](docs/WALKTHROUGH.md) describes the evidence and comparison flows.
 
 ## Contributing
 

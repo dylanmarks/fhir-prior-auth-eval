@@ -218,6 +218,24 @@ export class CounterfactualMutator {
               }
             }
           }
+        } else if (cloned.scenarioCategory === 'pt_extension') {
+          for (const entry of entries) {
+            const r = entry.resource;
+            if (r.resourceType === 'Procedure') {
+              const codeObj = r.code as { coding?: Array<{ code?: string }> } | undefined;
+              if (codeObj?.coding?.some(c => c.code === '97164')) {
+                isApplicable = true;
+                expectedFlippedRequirementId = 'req-pt-progress';
+                explanation = 'Injected conflicting clinical progress metrics into PT re-evaluation narrative; contradicts measurable advancement.';
+                const noteText = 'Formal PT re-evaluation: Patient self-reports modest symptom relief, but therapist functional reassessment reveals conflicting clinical metrics with unverified ambulatory endurance and conflicting documentation regarding goal attainment. Contradictory progress indicators noted between patient report and therapist assessment.';
+                r.note = [{ text: noteText }];
+                r.text = {
+                  status: 'generated',
+                  div: `<div>${noteText}</div>`,
+                };
+              }
+            }
+          }
         }
         break;
       }
