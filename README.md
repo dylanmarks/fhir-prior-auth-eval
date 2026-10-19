@@ -32,7 +32,7 @@ The central hypothesis is measurable: **a rules → Jev → small LLM → fronti
 
 - **Model comparison:** paired strategies, confidence thresholds, safe coverage, selective risk, abstentions, false clearances, cost per safe resolution, tier usage, and uncertainty intervals.
 - **Evidence workbench:** inspect a synthetic FHIR timeline, evaluate a policy criterion, follow citations to raw resources, and review every tier's decision.
-- **Counterfactual tests:** shorten therapy, remove an indicated diagnosis, age evidence, inject negation, or flip laterality.
+- **Counterfactual tests:** shorten therapy, change an indicated diagnosis, age evidence, inject negation, flip laterality, or remove the sole supporting resource (`remove_supporting_evidence`).
 - **Regression harness:** preserve labeled cases and model judgments, fingerprint inputs and protocol, and compare a new model snapshot against a baseline.
 
 ```mermaid
@@ -118,7 +118,7 @@ Built with TypeScript, React, Vite, Zod, Vitest, and the MCP SDK. The fixtures u
 
 All cases and policies are hand-authored synthetic research fixtures. The challenge cohort is frozen separately from development, but is not independently validated or a clinically representative test set. The policies simplify coverage logic and are not authoritative payer policies.
 
-The structured baseline matches all ten expected dispositions and nine applicable mutation flips. Across the expanded 22 cases, the offline rules baseline safely resolves **9/22 (40.9%)** and abstains on **13/22 (59.1%)**. It does not resolve the narrative cases. No live Jev or generative performance has been measured. That gap is the experiment's purpose.
+The structured baseline matches all ten expected dispositions and **15/15 applicable mutation flips** across six vectors. The evidence-removal probe applies to **5/22 cases** (the complete CGM, knee MRI, lumbar MRI, PT extension, and sleep-study fixtures); the other 17 have deficient or unresolved rules baselines. Rules preserve uncertainty in **5/5 (100%)**, with a **95% Wilson interval of 56.6–100%**, and zero confident “not met” answers at each threshold. Model tiers remain unconfigured offline; these probes are hand-authored synthetic tests. Across the expanded 22 cases, the offline rules baseline safely resolves **9/22 (40.9%)** and abstains on **13/22 (59.1%)**. It does not resolve the narrative cases. No live Jev or generative performance has been measured. That gap is the experiment's purpose.
 
 Zero observed unsafe resolutions among nine resolutions still gives a roughly **30% upper bound** in a 95% Wilson interval. The workbench shows uncertainty instead of treating a small perfect score as proof of reliability.
 
@@ -145,6 +145,7 @@ Definitions:
 - **Safe resolution coverage:** fraction of all cases resolved with the correct disposition, every requirement correct, grounded satisfied claims, and verified usage.
 - **Selective risk:** unsafe resolutions divided by all resolved cases; undefined if none resolve.
 - **False clearance:** `meets_policy` when the full safe-resolution criterion fails.
+- **Uncertainty preserved:** on applicable evidence-removal probes, the fraction of a tier's targeted judgments that return `insufficient_evidence` or explicitly defer/abstain (including confidence below the threshold). Reported per tier and threshold with 95% Wilson intervals and confident `not_satisfied` counts. Provider failures receive no credit; confident `satisfied` answers fail the evidence safety gate even if a guardrail escalates them.
 - **Cost per safe resolution:** total policy spend divided by safe resolutions; undefined when none resolve or billing is unknown.
 
 Citation authenticity is not semantic entailment. A real citation can still be interpreted incorrectly; labeled requirement accuracy and the false-clearance metric detect that distinction. Reliability bins describe routing score versus case-level safe resolution, not clinically calibrated probabilities.
@@ -181,7 +182,7 @@ Keep the same dataset and protocol, change the configured model IDs, and run:
 npm run experiment -- --live --max-spend 2 --baseline results/live-baseline.json --output results/live-candidate.json
 ```
 
-The comparison rejects mismatched dataset/protocol fingerprints and missing arms. It fails on cohort safety, coverage, accuracy, and >10% cost regressions; false clearances and unsupported citations also trigger an absolute safety gate. CI compares the offline snapshot and runs evidence/provider/threshold regression tests. Live evaluation remains an explicit run to avoid accidental spend.
+The comparison rejects mismatched dataset/protocol fingerprints and missing arms. It fails on cohort safety, coverage, accuracy, uncertainty-preserved, and >10% cost regressions; false clearances, unsupported citations, and confident satisfaction after evidence removal also trigger an absolute safety gate. CI compares the offline snapshot and runs evidence/provider/threshold regression tests. Offline reports default to `results/offline-experiment.json`, preserving the live report. Live evaluation remains an explicit run to avoid accidental spend.
 
 Choose thresholds on development cases, then freeze them before reviewing challenge results. Increasing abstention can hide accuracy problems, so inspect risk and coverage together. Expand and independently review the case labels before drawing healthcare reliability conclusions.
 

@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 1,
-  "timestamp": "2026-10-09T19:45:39.396Z",
+  "schemaVersion": 2,
+  "timestamp": "2026-10-19T18:57:27.706Z",
   "methodology": "Recorded judgments replayed across thresholds. Routing confidence is not clinical calibration. Adapter latency excludes orchestration overhead. Synthetic labels are hand-authored; challenge is not independently validated.",
   "acquisition": {
     "providerCalls": 0,
@@ -11,6 +11,228 @@
     "costVerified": true
   },
   "recordings": [],
+  "evidenceRemoval": [
+    {
+      "caseId": "case-cgm-001-meets",
+      "isApplicable": true,
+      "isNoOp": false,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "req-diabetes-diagnosis",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Removed the sole supporting resource Condition/cond-t1d-01 for req-diabetes-diagnosis; absence is not evidence of failure."
+    },
+    {
+      "caseId": "case-knee-001-meets",
+      "isApplicable": true,
+      "isNoOp": false,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "req-knee-condition",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Removed the sole supporting resource Condition/cond-meniscal-tear-01 for req-knee-condition; absence is not evidence of failure."
+    },
+    {
+      "caseId": "case-knee-002-deficient",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-knee-003-laterality",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-lumbar-001-meets",
+      "isApplicable": true,
+      "isNoOp": false,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "req-radiculopathy",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Removed the sole supporting resource Condition/cond-lumbar-radic-01 for req-radiculopathy; absence is not evidence of failure."
+    },
+    {
+      "caseId": "case-lumbar-002-deficient",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-lumbar-003-conflicting",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-pt-001-meets",
+      "isApplicable": true,
+      "isNoOp": false,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "req-functional-deficit",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Removed the sole supporting resource Condition/cond-gait-deficit-01 for req-functional-deficit; absence is not evidence of failure."
+    },
+    {
+      "caseId": "case-pt-002-plateau",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-sleep-001-meets",
+      "isApplicable": true,
+      "isNoOp": false,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "req-suspected-osa",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Removed the sole supporting resource Condition/cond-suspected-osa-01 for req-suspected-osa; absence is not evidence of failure."
+    },
+    {
+      "caseId": "case-narrative-challenge-ambiguous",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-narrative-challenge-conflicting-measures",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-narrative-challenge-distractor",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-narrative-challenge-historical",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-narrative-challenge-injection",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-narrative-challenge-negation-scope",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-narrative-challenge-paraphrase",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-narrative-challenge-recommendation",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-narrative-dev-conflict",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-narrative-dev-missing",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-narrative-dev-plateau",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    },
+    {
+      "caseId": "case-narrative-dev-progress",
+      "isApplicable": false,
+      "isNoOp": true,
+      "mutationType": "remove_supporting_evidence",
+      "expectedDisposition": "needs_information",
+      "expectedFlippedRequirementId": "",
+      "expectedRequirementStatus": "insufficient_evidence",
+      "explanation": "Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation."
+    }
+  ],
   "runs": [
     {
       "armId": "rules",
@@ -41,7 +263,7 @@
         "costVerified": true,
         "costPerSafeResolution": 0,
         "p50AdapterLatencyMs": 0,
-        "p95AdapterLatencyMs": 1,
+        "p95AdapterLatencyMs": 0,
         "unsupportedCitations": 0,
         "tierStats": {
           "1": {
@@ -89,6 +311,63 @@
           }
         ]
       },
+      "uncertaintyByTier": [
+        {
+          "tierLevel": 1,
+          "evaluatorId": "deterministic-rules",
+          "configured": true,
+          "threshold": 0.7,
+          "summary": {
+            "applicableRuns": 5,
+            "preserved": 5,
+            "uncertaintyPreserved": 1,
+            "uncertaintyPreserved95Ci": [
+              0.5655085052479191,
+              1
+            ],
+            "confidentNotMet": 0,
+            "confidentSatisfied": 0,
+            "errors": 0
+          },
+          "observations": [
+            {
+              "caseId": "case-cgm-001-meets",
+              "requirementId": "req-diabetes-diagnosis",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-knee-001-meets",
+              "requirementId": "req-knee-condition",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-lumbar-001-meets",
+              "requirementId": "req-radiculopathy",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-pt-001-meets",
+              "requirementId": "req-functional-deficit",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-sleep-001-meets",
+              "requirementId": "req-suspected-osa",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            }
+          ]
+        }
+      ],
       "cohorts": {
         "structured": {
           "totalCases": 10,
@@ -114,7 +393,7 @@
           "costVerified": true,
           "costPerSafeResolution": 0,
           "p50AdapterLatencyMs": 0,
-          "p95AdapterLatencyMs": 1,
+          "p95AdapterLatencyMs": 0,
           "unsupportedCitations": 0,
           "tierStats": {
             "1": {
@@ -332,7 +611,7 @@
         "costVerified": true,
         "costPerSafeResolution": 0,
         "p50AdapterLatencyMs": 0,
-        "p95AdapterLatencyMs": 1,
+        "p95AdapterLatencyMs": 0,
         "unsupportedCitations": 0,
         "tierStats": {
           "1": {
@@ -380,6 +659,63 @@
           }
         ]
       },
+      "uncertaintyByTier": [
+        {
+          "tierLevel": 1,
+          "evaluatorId": "deterministic-rules",
+          "configured": true,
+          "threshold": 0.9,
+          "summary": {
+            "applicableRuns": 5,
+            "preserved": 5,
+            "uncertaintyPreserved": 1,
+            "uncertaintyPreserved95Ci": [
+              0.5655085052479191,
+              1
+            ],
+            "confidentNotMet": 0,
+            "confidentSatisfied": 0,
+            "errors": 0
+          },
+          "observations": [
+            {
+              "caseId": "case-cgm-001-meets",
+              "requirementId": "req-diabetes-diagnosis",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-knee-001-meets",
+              "requirementId": "req-knee-condition",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-lumbar-001-meets",
+              "requirementId": "req-radiculopathy",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-pt-001-meets",
+              "requirementId": "req-functional-deficit",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-sleep-001-meets",
+              "requirementId": "req-suspected-osa",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            }
+          ]
+        }
+      ],
       "cohorts": {
         "structured": {
           "totalCases": 10,
@@ -405,7 +741,7 @@
           "costVerified": true,
           "costPerSafeResolution": 0,
           "p50AdapterLatencyMs": 0,
-          "p95AdapterLatencyMs": 1,
+          "p95AdapterLatencyMs": 0,
           "unsupportedCitations": 0,
           "tierStats": {
             "1": {
@@ -623,7 +959,7 @@
         "costVerified": true,
         "costPerSafeResolution": 0,
         "p50AdapterLatencyMs": 0,
-        "p95AdapterLatencyMs": 1,
+        "p95AdapterLatencyMs": 0,
         "unsupportedCitations": 0,
         "tierStats": {
           "1": {
@@ -671,6 +1007,63 @@
           }
         ]
       },
+      "uncertaintyByTier": [
+        {
+          "tierLevel": 1,
+          "evaluatorId": "deterministic-rules",
+          "configured": true,
+          "threshold": 0.99,
+          "summary": {
+            "applicableRuns": 5,
+            "preserved": 5,
+            "uncertaintyPreserved": 1,
+            "uncertaintyPreserved95Ci": [
+              0.5655085052479191,
+              1
+            ],
+            "confidentNotMet": 0,
+            "confidentSatisfied": 0,
+            "errors": 0
+          },
+          "observations": [
+            {
+              "caseId": "case-cgm-001-meets",
+              "requirementId": "req-diabetes-diagnosis",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-knee-001-meets",
+              "requirementId": "req-knee-condition",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-lumbar-001-meets",
+              "requirementId": "req-radiculopathy",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-pt-001-meets",
+              "requirementId": "req-functional-deficit",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-sleep-001-meets",
+              "requirementId": "req-suspected-osa",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            }
+          ]
+        }
+      ],
       "cohorts": {
         "structured": {
           "totalCases": 10,
@@ -696,7 +1089,7 @@
           "costVerified": true,
           "costPerSafeResolution": 0,
           "p50AdapterLatencyMs": 0,
-          "p95AdapterLatencyMs": 1,
+          "p95AdapterLatencyMs": 0,
           "unsupportedCitations": 0,
           "tierStats": {
             "1": {
@@ -914,7 +1307,7 @@
         "costVerified": true,
         "costPerSafeResolution": 0,
         "p50AdapterLatencyMs": 0,
-        "p95AdapterLatencyMs": 1,
+        "p95AdapterLatencyMs": 0,
         "unsupportedCitations": 0,
         "tierStats": {
           "1": {
@@ -968,6 +1361,71 @@
           }
         ]
       },
+      "uncertaintyByTier": [
+        {
+          "tierLevel": 1,
+          "evaluatorId": "deterministic-rules",
+          "configured": true,
+          "threshold": 0.7,
+          "summary": {
+            "applicableRuns": 5,
+            "preserved": 5,
+            "uncertaintyPreserved": 1,
+            "uncertaintyPreserved95Ci": [
+              0.5655085052479191,
+              1
+            ],
+            "confidentNotMet": 0,
+            "confidentSatisfied": 0,
+            "errors": 0
+          },
+          "observations": [
+            {
+              "caseId": "case-cgm-001-meets",
+              "requirementId": "req-diabetes-diagnosis",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-knee-001-meets",
+              "requirementId": "req-knee-condition",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-lumbar-001-meets",
+              "requirementId": "req-radiculopathy",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-pt-001-meets",
+              "requirementId": "req-functional-deficit",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-sleep-001-meets",
+              "requirementId": "req-suspected-osa",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            }
+          ]
+        },
+        {
+          "tierLevel": 2,
+          "evaluatorId": "unconfigured-jev",
+          "configured": false,
+          "threshold": 0.7,
+          "summary": null,
+          "observations": []
+        }
+      ],
       "cohorts": {
         "structured": {
           "totalCases": 10,
@@ -993,7 +1451,7 @@
           "costVerified": true,
           "costPerSafeResolution": 0,
           "p50AdapterLatencyMs": 0,
-          "p95AdapterLatencyMs": 1,
+          "p95AdapterLatencyMs": 0,
           "unsupportedCitations": 0,
           "tierStats": {
             "1": {
@@ -1223,7 +1681,7 @@
         "costVerified": true,
         "costPerSafeResolution": 0,
         "p50AdapterLatencyMs": 0,
-        "p95AdapterLatencyMs": 1,
+        "p95AdapterLatencyMs": 0,
         "unsupportedCitations": 0,
         "tierStats": {
           "1": {
@@ -1277,6 +1735,71 @@
           }
         ]
       },
+      "uncertaintyByTier": [
+        {
+          "tierLevel": 1,
+          "evaluatorId": "deterministic-rules",
+          "configured": true,
+          "threshold": 0.9,
+          "summary": {
+            "applicableRuns": 5,
+            "preserved": 5,
+            "uncertaintyPreserved": 1,
+            "uncertaintyPreserved95Ci": [
+              0.5655085052479191,
+              1
+            ],
+            "confidentNotMet": 0,
+            "confidentSatisfied": 0,
+            "errors": 0
+          },
+          "observations": [
+            {
+              "caseId": "case-cgm-001-meets",
+              "requirementId": "req-diabetes-diagnosis",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-knee-001-meets",
+              "requirementId": "req-knee-condition",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-lumbar-001-meets",
+              "requirementId": "req-radiculopathy",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-pt-001-meets",
+              "requirementId": "req-functional-deficit",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-sleep-001-meets",
+              "requirementId": "req-suspected-osa",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            }
+          ]
+        },
+        {
+          "tierLevel": 2,
+          "evaluatorId": "unconfigured-jev",
+          "configured": false,
+          "threshold": 0.9,
+          "summary": null,
+          "observations": []
+        }
+      ],
       "cohorts": {
         "structured": {
           "totalCases": 10,
@@ -1302,7 +1825,7 @@
           "costVerified": true,
           "costPerSafeResolution": 0,
           "p50AdapterLatencyMs": 0,
-          "p95AdapterLatencyMs": 1,
+          "p95AdapterLatencyMs": 0,
           "unsupportedCitations": 0,
           "tierStats": {
             "1": {
@@ -1532,7 +2055,7 @@
         "costVerified": true,
         "costPerSafeResolution": 0,
         "p50AdapterLatencyMs": 0,
-        "p95AdapterLatencyMs": 1,
+        "p95AdapterLatencyMs": 0,
         "unsupportedCitations": 0,
         "tierStats": {
           "1": {
@@ -1586,6 +2109,71 @@
           }
         ]
       },
+      "uncertaintyByTier": [
+        {
+          "tierLevel": 1,
+          "evaluatorId": "deterministic-rules",
+          "configured": true,
+          "threshold": 0.99,
+          "summary": {
+            "applicableRuns": 5,
+            "preserved": 5,
+            "uncertaintyPreserved": 1,
+            "uncertaintyPreserved95Ci": [
+              0.5655085052479191,
+              1
+            ],
+            "confidentNotMet": 0,
+            "confidentSatisfied": 0,
+            "errors": 0
+          },
+          "observations": [
+            {
+              "caseId": "case-cgm-001-meets",
+              "requirementId": "req-diabetes-diagnosis",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-knee-001-meets",
+              "requirementId": "req-knee-condition",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-lumbar-001-meets",
+              "requirementId": "req-radiculopathy",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-pt-001-meets",
+              "requirementId": "req-functional-deficit",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-sleep-001-meets",
+              "requirementId": "req-suspected-osa",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            }
+          ]
+        },
+        {
+          "tierLevel": 2,
+          "evaluatorId": "unconfigured-jev",
+          "configured": false,
+          "threshold": 0.99,
+          "summary": null,
+          "observations": []
+        }
+      ],
       "cohorts": {
         "structured": {
           "totalCases": 10,
@@ -1611,7 +2199,7 @@
           "costVerified": true,
           "costPerSafeResolution": 0,
           "p50AdapterLatencyMs": 0,
-          "p95AdapterLatencyMs": 1,
+          "p95AdapterLatencyMs": 0,
           "unsupportedCitations": 0,
           "tierStats": {
             "1": {
@@ -1841,7 +2429,7 @@
         "costVerified": true,
         "costPerSafeResolution": 0,
         "p50AdapterLatencyMs": 0,
-        "p95AdapterLatencyMs": 1,
+        "p95AdapterLatencyMs": 0,
         "unsupportedCitations": 0,
         "tierStats": {
           "1": {
@@ -1857,6 +2445,12 @@
             "tokens": 0
           },
           "3": {
+            "calls": 12,
+            "acceptedRequirements": 0,
+            "costUsd": 0,
+            "tokens": 0
+          },
+          "4": {
             "calls": 12,
             "acceptedRequirements": 0,
             "costUsd": 0,
@@ -1901,6 +2495,87 @@
           }
         ]
       },
+      "uncertaintyByTier": [
+        {
+          "tierLevel": 1,
+          "evaluatorId": "deterministic-rules",
+          "configured": true,
+          "threshold": 0.7,
+          "summary": {
+            "applicableRuns": 5,
+            "preserved": 5,
+            "uncertaintyPreserved": 1,
+            "uncertaintyPreserved95Ci": [
+              0.5655085052479191,
+              1
+            ],
+            "confidentNotMet": 0,
+            "confidentSatisfied": 0,
+            "errors": 0
+          },
+          "observations": [
+            {
+              "caseId": "case-cgm-001-meets",
+              "requirementId": "req-diabetes-diagnosis",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-knee-001-meets",
+              "requirementId": "req-knee-condition",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-lumbar-001-meets",
+              "requirementId": "req-radiculopathy",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-pt-001-meets",
+              "requirementId": "req-functional-deficit",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-sleep-001-meets",
+              "requirementId": "req-suspected-osa",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            }
+          ]
+        },
+        {
+          "tierLevel": 2,
+          "evaluatorId": "unconfigured-jev",
+          "configured": false,
+          "threshold": 0.7,
+          "summary": null,
+          "observations": []
+        },
+        {
+          "tierLevel": 3,
+          "evaluatorId": "unconfigured-llm",
+          "configured": false,
+          "threshold": 0.7,
+          "summary": null,
+          "observations": []
+        },
+        {
+          "tierLevel": 4,
+          "evaluatorId": "unconfigured-llm",
+          "configured": false,
+          "threshold": 0.7,
+          "summary": null,
+          "observations": []
+        }
+      ],
       "cohorts": {
         "structured": {
           "totalCases": 10,
@@ -1926,7 +2601,7 @@
           "costVerified": true,
           "costPerSafeResolution": 0,
           "p50AdapterLatencyMs": 0,
-          "p95AdapterLatencyMs": 1,
+          "p95AdapterLatencyMs": 0,
           "unsupportedCitations": 0,
           "tierStats": {
             "1": {
@@ -2015,6 +2690,12 @@
               "acceptedRequirements": 0,
               "costUsd": 0,
               "tokens": 0
+            },
+            "4": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
             }
           },
           "reliabilityBins": [
@@ -2092,6 +2773,12 @@
               "tokens": 0
             },
             "3": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "4": {
               "calls": 8,
               "acceptedRequirements": 0,
               "costUsd": 0,
@@ -2168,7 +2855,7 @@
         "costVerified": true,
         "costPerSafeResolution": 0,
         "p50AdapterLatencyMs": 0,
-        "p95AdapterLatencyMs": 1,
+        "p95AdapterLatencyMs": 0,
         "unsupportedCitations": 0,
         "tierStats": {
           "1": {
@@ -2184,6 +2871,12 @@
             "tokens": 0
           },
           "3": {
+            "calls": 12,
+            "acceptedRequirements": 0,
+            "costUsd": 0,
+            "tokens": 0
+          },
+          "4": {
             "calls": 12,
             "acceptedRequirements": 0,
             "costUsd": 0,
@@ -2228,6 +2921,87 @@
           }
         ]
       },
+      "uncertaintyByTier": [
+        {
+          "tierLevel": 1,
+          "evaluatorId": "deterministic-rules",
+          "configured": true,
+          "threshold": 0.9,
+          "summary": {
+            "applicableRuns": 5,
+            "preserved": 5,
+            "uncertaintyPreserved": 1,
+            "uncertaintyPreserved95Ci": [
+              0.5655085052479191,
+              1
+            ],
+            "confidentNotMet": 0,
+            "confidentSatisfied": 0,
+            "errors": 0
+          },
+          "observations": [
+            {
+              "caseId": "case-cgm-001-meets",
+              "requirementId": "req-diabetes-diagnosis",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-knee-001-meets",
+              "requirementId": "req-knee-condition",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-lumbar-001-meets",
+              "requirementId": "req-radiculopathy",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-pt-001-meets",
+              "requirementId": "req-functional-deficit",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-sleep-001-meets",
+              "requirementId": "req-suspected-osa",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            }
+          ]
+        },
+        {
+          "tierLevel": 2,
+          "evaluatorId": "unconfigured-jev",
+          "configured": false,
+          "threshold": 0.9,
+          "summary": null,
+          "observations": []
+        },
+        {
+          "tierLevel": 3,
+          "evaluatorId": "unconfigured-llm",
+          "configured": false,
+          "threshold": 0.9,
+          "summary": null,
+          "observations": []
+        },
+        {
+          "tierLevel": 4,
+          "evaluatorId": "unconfigured-llm",
+          "configured": false,
+          "threshold": 0.9,
+          "summary": null,
+          "observations": []
+        }
+      ],
       "cohorts": {
         "structured": {
           "totalCases": 10,
@@ -2253,7 +3027,7 @@
           "costVerified": true,
           "costPerSafeResolution": 0,
           "p50AdapterLatencyMs": 0,
-          "p95AdapterLatencyMs": 1,
+          "p95AdapterLatencyMs": 0,
           "unsupportedCitations": 0,
           "tierStats": {
             "1": {
@@ -2342,6 +3116,12 @@
               "acceptedRequirements": 0,
               "costUsd": 0,
               "tokens": 0
+            },
+            "4": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
             }
           },
           "reliabilityBins": [
@@ -2419,6 +3199,12 @@
               "tokens": 0
             },
             "3": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "4": {
               "calls": 8,
               "acceptedRequirements": 0,
               "costUsd": 0,
@@ -2495,7 +3281,7 @@
         "costVerified": true,
         "costPerSafeResolution": 0,
         "p50AdapterLatencyMs": 0,
-        "p95AdapterLatencyMs": 1,
+        "p95AdapterLatencyMs": 0,
         "unsupportedCitations": 0,
         "tierStats": {
           "1": {
@@ -2511,6 +3297,12 @@
             "tokens": 0
           },
           "3": {
+            "calls": 12,
+            "acceptedRequirements": 0,
+            "costUsd": 0,
+            "tokens": 0
+          },
+          "4": {
             "calls": 12,
             "acceptedRequirements": 0,
             "costUsd": 0,
@@ -2555,6 +3347,87 @@
           }
         ]
       },
+      "uncertaintyByTier": [
+        {
+          "tierLevel": 1,
+          "evaluatorId": "deterministic-rules",
+          "configured": true,
+          "threshold": 0.99,
+          "summary": {
+            "applicableRuns": 5,
+            "preserved": 5,
+            "uncertaintyPreserved": 1,
+            "uncertaintyPreserved95Ci": [
+              0.5655085052479191,
+              1
+            ],
+            "confidentNotMet": 0,
+            "confidentSatisfied": 0,
+            "errors": 0
+          },
+          "observations": [
+            {
+              "caseId": "case-cgm-001-meets",
+              "requirementId": "req-diabetes-diagnosis",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-knee-001-meets",
+              "requirementId": "req-knee-condition",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-lumbar-001-meets",
+              "requirementId": "req-radiculopathy",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-pt-001-meets",
+              "requirementId": "req-functional-deficit",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            },
+            {
+              "caseId": "case-sleep-001-meets",
+              "requirementId": "req-suspected-osa",
+              "status": "insufficient_evidence",
+              "confidence": 1,
+              "deferred": false
+            }
+          ]
+        },
+        {
+          "tierLevel": 2,
+          "evaluatorId": "unconfigured-jev",
+          "configured": false,
+          "threshold": 0.99,
+          "summary": null,
+          "observations": []
+        },
+        {
+          "tierLevel": 3,
+          "evaluatorId": "unconfigured-llm",
+          "configured": false,
+          "threshold": 0.99,
+          "summary": null,
+          "observations": []
+        },
+        {
+          "tierLevel": 4,
+          "evaluatorId": "unconfigured-llm",
+          "configured": false,
+          "threshold": 0.99,
+          "summary": null,
+          "observations": []
+        }
+      ],
       "cohorts": {
         "structured": {
           "totalCases": 10,
@@ -2580,7 +3453,7 @@
           "costVerified": true,
           "costPerSafeResolution": 0,
           "p50AdapterLatencyMs": 0,
-          "p95AdapterLatencyMs": 1,
+          "p95AdapterLatencyMs": 0,
           "unsupportedCitations": 0,
           "tierStats": {
             "1": {
@@ -2669,6 +3542,12 @@
               "acceptedRequirements": 0,
               "costUsd": 0,
               "tokens": 0
+            },
+            "4": {
+              "calls": 4,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
             }
           },
           "reliabilityBins": [
@@ -2746,6 +3625,12 @@
               "tokens": 0
             },
             "3": {
+              "calls": 8,
+              "acceptedRequirements": 0,
+              "costUsd": 0,
+              "tokens": 0
+            },
+            "4": {
               "calls": 8,
               "acceptedRequirements": 0,
               "costUsd": 0,
@@ -2867,6 +3752,16 @@
           }
         ]
       },
+      "uncertaintyByTier": [
+        {
+          "tierLevel": 3,
+          "evaluatorId": "unconfigured-llm",
+          "configured": false,
+          "threshold": 0.7,
+          "summary": null,
+          "observations": []
+        }
+      ],
       "cohorts": {
         "structured": {
           "totalCases": 10,
@@ -3152,6 +4047,16 @@
           }
         ]
       },
+      "uncertaintyByTier": [
+        {
+          "tierLevel": 3,
+          "evaluatorId": "unconfigured-llm",
+          "configured": false,
+          "threshold": 0.9,
+          "summary": null,
+          "observations": []
+        }
+      ],
       "cohorts": {
         "structured": {
           "totalCases": 10,
@@ -3437,6 +4342,16 @@
           }
         ]
       },
+      "uncertaintyByTier": [
+        {
+          "tierLevel": 3,
+          "evaluatorId": "unconfigured-llm",
+          "configured": false,
+          "threshold": 0.99,
+          "summary": null,
+          "observations": []
+        }
+      ],
       "cohorts": {
         "structured": {
           "totalCases": 10,
@@ -3650,9 +4565,10 @@
     }
   ],
   "datasetHash": "88b6270cdf19629bf321e42535a7270cc3efabb41aff8f44e7a4845f5c7a658a",
-  "protocolHash": "92a5fb5c59d73d9dd26853b2ee12d61bfba2adcf392807f6bf7fc211d418885e",
+  "protocolHash": "ad54be9899f9192a9abf43963a2b1d0f03230f6ed88768d1e958bbcfb383798a",
   "protocol": {
     "revision": "evidence-v2.0",
+    "counterfactualRevision": "evidence-removal-v1",
     "thresholds": [
       0.7,
       0.9,
@@ -3699,6 +4615,6 @@
     "frontierOptions": null
   },
   "runMode": "offline",
-  "revision": "ad790ee2c5754b07b468acecd833f50086f8d6aa",
-  "adapterHash": "e2634b40f9dbf86f29934ee5f4d8810ee863ab1b0af3e447ffe2ea9db6bb37fd"
+  "revision": "a675c90a8e25f11119b82c54f3e7653f351e900c",
+  "adapterHash": "840741b89671bea1f0f94513a41825bfec46508352f65e9194add977e309b8ed"
 }
