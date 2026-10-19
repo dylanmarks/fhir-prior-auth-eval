@@ -416,7 +416,7 @@ export class DeterministicRulesEvaluator implements PolicyEvaluator {
               );
             } else {
               return makeResult(
-                'insufficient_evidence',
+                'not_satisfied',
                 `Documented score of ${effectiveVal} does not satisfy policy threshold (${threshold.comparator} ${threshold.value}).`,
                 [obs],
                 1.0

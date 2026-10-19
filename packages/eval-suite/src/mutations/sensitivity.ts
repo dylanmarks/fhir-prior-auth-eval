@@ -44,7 +44,7 @@ export class CounterfactualSensitivityTester {
     const isBaselineMeets = baselineAssessment.disposition === 'meets_policy';
 
     // 2. Prepare mutation
-    const mutResult: MutationApplicationResult = CounterfactualMutator.applyMutation(originalCase, mutationType);
+    const mutResult: MutationApplicationResult = CounterfactualMutator.applyMutation(originalCase, mutationType, baselineAssessment);
 
     // If expected baseline was 'meets_policy' but actual baseline did NOT meet policy,
     // this is a baseline accuracy regression and must be flagged as a failure, not silently skipped!
@@ -139,6 +139,7 @@ export class CounterfactualSensitivityTester {
       'temporal_expiry',
       'clinical_negation',
       'laterality_mismatch',
+      'remove_supporting_evidence',
     ]
   ): Promise<SensitivityReport> {
     const policyMap = new Map<string, MedicalPolicy>();

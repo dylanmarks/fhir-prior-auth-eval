@@ -1,10 +1,11 @@
-import type { PriorAuthCase, RequirementStatus } from '@openpa/core';
+import type { AssessmentResult, PriorAuthCase, RequirementStatus } from '@openpa/core';
 
 export type MutationType =
   | 'shorten_therapy_duration'
   | 'diagnosis_non_indicated'
   | 'temporal_expiry'
   | 'clinical_negation'
+  | 'remove_supporting_evidence'
   | 'laterality_mismatch';
 
 export interface MutationApplicationResult {
@@ -21,7 +22,8 @@ export interface MutationApplicationResult {
 export class CounterfactualMutator {
   public static applyMutation(
     originalCase: PriorAuthCase,
-    mutationType: MutationType
+    mutationType: MutationType,
+    baseline?: AssessmentResult
   ): MutationApplicationResult {
     // Deep clone to ensure original input case is never mutated
     const cloned = JSON.parse(JSON.stringify(originalCase)) as PriorAuthCase;
@@ -40,6 +42,25 @@ export class CounterfactualMutator {
     let explanation = '';
 
     switch (mutationType) {
+      case 'remove_supporting_evidence': {
+        cloned.id = originalCase.id;
+        cloned.title = originalCase.title;
+        explanation = 'Inapplicable: baseline must meet policy and a satisfied requirement must have exactly one supporting citation.';
+        // Use observed supporting citations, never infer support from fixture labels.
+        if (originalCase.expectedAssessment.disposition !== 'meets_policy' ||
+            baseline?.caseId !== originalCase.id || baseline.disposition !== 'meets_policy') break;
+        const target = baseline.requirements.find(r => r.status === 'satisfied' && r.evidence.length === 1 &&
+          r.evidence[0].resourceType !== 'Patient' && entries.filter(e =>
+            `${e.resource.resourceType}/${e.resource.id}` === r.evidence[0].resourceId).length === 1);
+        if (!target) break;
+        const pointer = target.evidence[0].resourceId;
+        cloned.patientBundle.entry = entries.filter(e => `${e.resource.resourceType}/${e.resource.id}` !== pointer);
+        // The experimental case differs only by one bundle entry. Mutation metadata stays outside provider inputs.
+        isApplicable = true;
+        expectedFlippedRequirementId = target.requirementId;
+        explanation = `Removed the sole supporting resource ${pointer} for ${target.requirementId}; absence is not evidence of failure.`;
+        break;
+      }
       case 'shorten_therapy_duration': {
         // Applicable only to lumbar_mri conservative physical therapy
         if (cloned.scenarioCategory === 'lumbar_mri') {

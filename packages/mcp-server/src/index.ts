@@ -158,6 +158,7 @@ export function createOpenPaMcpServer(options: McpServerOptions = {}): Server {
                   'temporal_expiry',
                   'clinical_negation',
                   'laterality_mismatch',
+                  'remove_supporting_evidence',
                 ],
                 description: 'The perturbation vector to apply',
               },
@@ -391,6 +392,7 @@ export function createOpenPaMcpServer(options: McpServerOptions = {}): Server {
               'temporal_expiry',
               'clinical_negation',
               'laterality_mismatch',
+              'remove_supporting_evidence',
             ]),
           });
           const parsed = schema.safeParse(args);

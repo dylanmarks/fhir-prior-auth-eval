@@ -83,7 +83,7 @@ describe('Reproduced Failures & Regression Suite', () => {
       // Score 1 does not meet >= 10 threshold, so disposition must be needs_information, NOT meets_policy
       expect(assessment.disposition).toBe('needs_information');
       const scoreReq = assessment.requirements.find(r => r.requirementId === 'req-epworth-score');
-      expect(scoreReq?.status).toBe('insufficient_evidence');
+      expect(scoreReq?.status).toBe('not_satisfied');
     });
 
     it('escalates to clinical review when structured value (1) contradicts high narrative value (14)', async () => {

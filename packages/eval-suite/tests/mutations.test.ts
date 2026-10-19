@@ -11,6 +11,7 @@ import {
   CounterfactualSensitivityTester,
   CiEvalGate,
   BenchmarkHarness,
+  CounterfactualMutator,
 } from '../src/index.js';
 
 describe('Counterfactual Mutation & CI Gate Suite', () => {
@@ -27,6 +28,55 @@ describe('Counterfactual Mutation & CI Gate Suite', () => {
   const caseKneeMeets = PriorAuthCaseSchema.parse(
     JSON.parse(readFileSync(join(rootDir, 'datasets/cases/knee-mri-001-meets.json'), 'utf-8'))
   );
+
+  it('removes exactly the sole cited resource without changing any other case data or inputs', async () => {
+    const engine = new TieredOrchestrator([new DeterministicRulesEvaluator()]);
+    const before = structuredClone(caseLumbarMeets);
+    const baseline = await engine.evaluateCase(caseLumbarMeets, lumbarPolicy);
+    const mutation = CounterfactualMutator.applyMutation(caseLumbarMeets, 'remove_supporting_evidence', baseline);
+    expect(mutation.isApplicable).toBe(true);
+    expect(mutation.isNoOp).toBe(false);
+    expect(mutation.expectedFlippedRequirementId).toBe('req-radiculopathy');
+    expect(caseLumbarMeets).toEqual(before);
+    const entries = before.patientBundle.entry as any[];
+    const expected = structuredClone(before);
+    expected.patientBundle.entry = entries.filter(e => e.resource.id !== 'cond-lumbar-radic-01');
+    expect(mutation.mutatedCase).toEqual(expected);
+    const actual = await engine.evaluateCase(mutation.mutatedCase, lumbarPolicy);
+    expect(actual.disposition).toBe('needs_information');
+    expect(actual.requirements.find(r => r.requirementId === mutation.expectedFlippedRequirementId)?.status).toBe('insufficient_evidence');
+    expect((await new CounterfactualSensitivityTester(engine).testMutation(caseLumbarMeets, lumbarPolicy, 'remove_supporting_evidence')).status).toBe('passed');
+  });
+
+  it('skips removal with a deficient baseline, missing assessment, or only multiply supported requirements', async () => {
+    const engine = new TieredOrchestrator([new DeterministicRulesEvaluator()]);
+    const baseline = await engine.evaluateCase(caseLumbarMeets, lumbarPolicy);
+    expect(CounterfactualMutator.applyMutation(caseLumbarMeets, 'remove_supporting_evidence').isApplicable).toBe(false);
+    const deficient = {...baseline, disposition: 'needs_information' as const};
+    expect(CounterfactualMutator.applyMutation(caseLumbarMeets, 'remove_supporting_evidence', deficient).isApplicable).toBe(false);
+    const multiple = structuredClone(caseLumbarMeets);
+    const entries = multiple.patientBundle.entry as any[];
+    const extra = structuredClone(entries.find(e => e.resource.resourceType === 'Condition'));
+    extra.resource.id = 'second-support';
+    entries.push(extra);
+    const multiBaseline = await engine.evaluateCase(multiple, lumbarPolicy);
+    const result = CounterfactualMutator.applyMutation(multiple, 'remove_supporting_evidence', multiBaseline);
+    expect(result.isApplicable).toBe(false);
+    expect(result.isNoOp).toBe(true);
+    expect(result.mutatedCase.patientBundle).toEqual(multiple.patientBundle);
+  });
+
+  it('keeps documented numeric failure distinct from missing documentation', async () => {
+    const c = PriorAuthCaseSchema.parse(JSON.parse(readFileSync('datasets/cases/sleep-study-001-meets.json', 'utf8')));
+    const p = MedicalPolicySchema.parse(JSON.parse(readFileSync('datasets/policies/sleep-study.json', 'utf8')));
+    const obs = (c.patientBundle.entry as any[]).find(e => e.resource.resourceType === 'Observation').resource;
+    obs.valueQuantity.value = 1;
+    delete obs.text;
+    delete obs.note;
+    const actual = await new TieredOrchestrator([new DeterministicRulesEvaluator()]).evaluateCase(c, p);
+    expect(actual.requirements.find(r => r.evidence.some(e => e.resourceId === `Observation/${obs.id}`))?.status).toBe('not_satisfied');
+    expect(actual.disposition).not.toBe('meets_policy');
+  });
 
   it('mutates conservative therapy duration and appropriately flips disposition', async () => {
     const orchestrator = new TieredOrchestrator([new DeterministicRulesEvaluator()]);
