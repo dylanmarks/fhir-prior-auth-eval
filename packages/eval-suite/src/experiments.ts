@@ -1,6 +1,31 @@
 import type { AssessmentResult, MedicalPolicy, PriorAuthCase } from '@openpa/core';
-import { TieredOrchestrator, type PolicyEvaluator, type EvaluatorResult } from '@openpa/evaluators';
+import { DeterministicRulesEvaluator, TieredOrchestrator, type PolicyEvaluator, type EvaluatorResult } from '@openpa/evaluators';
 import { ScoringEngine } from './metrics/scoring.js';
+import { CounterfactualMutator } from './mutations/mutator.js';
+
+export interface UncertaintyObservation {
+  caseId: string;
+  requirementId: string;
+  status: string;
+  confidence: number;
+  deferred: boolean;
+  error?: string;
+}
+
+/** Score raw tier judgments before guardrails can replace an unsupported definitive answer. */
+export function summarizeUncertainty(rows: UncertaintyObservation[], threshold: number) {
+  const preserved = rows.filter(r => !r.error && (r.status === 'insufficient_evidence' || r.deferred ||
+    r.confidence < threshold)).length;
+  return {
+    applicableRuns: rows.length,
+    preserved,
+    uncertaintyPreserved: rows.length ? preserved / rows.length : null,
+    uncertaintyPreserved95Ci: wilsonInterval(preserved, rows.length),
+    confidentNotMet: rows.filter(r => r.status === 'not_satisfied' && r.confidence >= threshold).length,
+    confidentSatisfied: rows.filter(r => r.status === 'satisfied' && r.confidence >= threshold).length,
+    errors: rows.filter(r => r.error).length,
+  };
+}
 
 export interface ExperimentArm {id: string; label: string; configured: boolean; evaluators: PolicyEvaluator[]}
 export interface ExperimentCase {caseData: PriorAuthCase; cohort: 'structured' | 'development' | 'challenge'}
@@ -67,9 +92,9 @@ export async function runExperiment(cases: ExperimentCase[], policies: MedicalPo
   const callCap=options.maxProviderCalls??200, tokenCap=options.maxAcquisitionTokens??1_000_000;
   if(!Number.isInteger(callCap)||callCap<=0||!Number.isInteger(tokenCap)||tokenCap<=0) throw new Error('Invalid acquisition call/token budget');
   const cache=new Map<string,Promise<EvaluatorResult>>();
-  const recordings: Array<{model:string;caseId:string;requirementId:string;result?:EvaluatorResult;error?:string}>=[];
+  const recordings: Array<{model:string;caseId:string;requirementId:string;inputKind:'case'|'evidence_removal';result?:EvaluatorResult;error?:string}>=[];
   let acquisitionCostUsd=0, acquisitionUsageVerified=true, acquisitionCostVerified=true, providerCalls=0, acquisitionTokens=0;
-  const wrap=(e:PolicyEvaluator):PolicyEvaluator=>({
+  const wrap=(e:PolicyEvaluator,inputKind:'case'|'evidence_removal'='case'):PolicyEvaluator=>({
     id:e.id,name:e.name,tierLevel:e.tierLevel,maxCostUsd:e.maxCostUsd,maxTokens:e.maxTokens,billingSource:e.billingSource,
     evaluateRequirement:async(req,ctx)=>{
       const key=JSON.stringify([e.id,e.maxCostUsd,e.maxTokens,req,ctx.caseData.patientBundle,ctx.caseData.requestedService,ctx.caseData.requestedAt]);
@@ -82,8 +107,8 @@ export async function runExperiment(cases: ExperimentCase[], policies: MedicalPo
         if(provider&&(providerCalls>=callCap||acquisitionTokens+(e.maxTokens??0)>tokenCap)) throw new Error('Experiment acquisition call/token budget exhausted');
         result=(async()=>{
           if(provider) providerCalls++;
-          try {const r=await e.evaluateRequirement(req,ctx);acquisitionCostUsd+=r.metrics.costUsd;acquisitionTokens+=r.metrics.inputTokens+r.metrics.outputTokens;if(r.metrics.costVerified===false) acquisitionCostVerified=false;recordings.push({model:e.id,caseId:ctx.caseData.id,requirementId:req.id,result:r});return r;}
-          catch(error){const m=(error as any).metrics;acquisitionCostUsd+=m?.costUsd??0;acquisitionTokens+=(m?.inputTokens??0)+(m?.outputTokens??0);if(m?.costVerified===false) acquisitionCostVerified=false;if((error as any).usageVerified===false||ctx.signal?.aborted) acquisitionUsageVerified=false;recordings.push({model:e.id,caseId:ctx.caseData.id,requirementId:req.id,error:error instanceof Error?error.message:'Provider failure'});throw error;}
+          try {const r=await e.evaluateRequirement(req,ctx);acquisitionCostUsd+=r.metrics.costUsd;acquisitionTokens+=r.metrics.inputTokens+r.metrics.outputTokens;if(r.metrics.costVerified===false) acquisitionCostVerified=false;recordings.push({model:e.id,caseId:ctx.caseData.id,requirementId:req.id,inputKind,result:r});return r;}
+          catch(error){const m=(error as any).metrics;acquisitionCostUsd+=m?.costUsd??0;acquisitionTokens+=(m?.inputTokens??0)+(m?.outputTokens??0);if(m?.costVerified===false) acquisitionCostVerified=false;if((error as any).usageVerified===false||ctx.signal?.aborted) acquisitionUsageVerified=false;recordings.push({model:e.id,caseId:ctx.caseData.id,requirementId:req.id,inputKind,error:error instanceof Error?error.message:'Provider failure'});throw error;}
         })();
         cache.set(key,result);
       }
@@ -91,9 +116,18 @@ export async function runExperiment(cases: ExperimentCase[], policies: MedicalPo
     },
   });
   const policyMap=new Map(policies.map(p=>[p.id,p]));
+  // Fix applicability once with the offline rules baseline, independent of the tier under test.
+  const probeBaseline = new TieredOrchestrator([new DeterministicRulesEvaluator()]);
+  const evidenceRemoval = [];
+  for (const c of cases) {
+    const policy = policyMap.get(c.caseData.policyId);
+    if (!policy) throw new Error(`Missing policy ${c.caseData.policyId}`);
+    const baseline = await probeBaseline.evaluateCase(c.caseData, policy);
+    evidenceRemoval.push({caseId: c.caseData.id, ...CounterfactualMutator.applyMutation(c.caseData, 'remove_supporting_evidence', baseline)});
+  }
   const runs=[];
   for(const arm of arms) for(const threshold of thresholds) {
-    const orchestrator=new TieredOrchestrator(arm.evaluators.map(wrap),{
+    const orchestrator=new TieredOrchestrator(arm.evaluators.map(e=>wrap(e)),{
       minConfidenceThreshold:.9, tierConfidenceThresholds:{2:threshold,3:threshold,4:threshold},
       budgetCapUsd:options.budgetCapUsd??.1,maxTokensPerRun:options.maxTokensPerRun??100000,timeoutMs:options.timeoutMs??30000,
     });
@@ -103,13 +137,44 @@ export async function runExperiment(cases: ExperimentCase[], policies: MedicalPo
       const assessment=await orchestrator.evaluateCase(c.caseData,p);
       rows.push({caseId:c.caseData.id,cohort:c.cohort,assessment,score:ScoringEngine.scoreCase(c.caseData,assessment)});
     }
-    runs.push({armId:arm.id,label:arm.label,configured:arm.configured,threshold,summary:summarize(rows),cohorts:Object.fromEntries(['structured','development','challenge'].map(cohort=>[cohort,summarize(rows.filter(r=>r.cohort===cohort))])),cases:rows});
+    const uncertaintyByTier = [];
+    for (const evaluator of arm.evaluators) {
+      const configured = evaluator.tierLevel === 1 || arm.configured;
+      const observations: UncertaintyObservation[] = [];
+      if (configured) for (const probe of evidenceRemoval.filter(p => p.isApplicable)) {
+        const policy = policyMap.get(probe.mutatedCase.policyId)!;
+        const requirement = policy.requirements.find(r => r.id === probe.expectedFlippedRequirementId)!;
+        let raw: EvaluatorResult | undefined;
+        let error: string | undefined;
+        const cached = wrap(evaluator, 'evidence_removal');
+        const isolated: PolicyEvaluator = {...cached, evaluateRequirement: async (req, ctx) => {
+          try { raw = await cached.evaluateRequirement(req, ctx); return raw; }
+          catch (failure) { error = failure instanceof Error ? failure.message : 'Evaluator failure'; throw failure; }
+        }};
+        // Test each tier directly: early rules acceptance must not hide later-tier uncertainty loss.
+        const assessment = await new TieredOrchestrator([isolated], {
+          minConfidenceThreshold: threshold, budgetCapUsd: options.budgetCapUsd ?? .1,
+          maxTokensPerRun: options.maxTokensPerRun ?? 100000, timeoutMs: options.timeoutMs ?? 30000,
+        }).evaluateCase(probe.mutatedCase, {...policy, requirements: [requirement]});
+        const failure = assessment.executionTrace.find(s => s.status === 'failed' || s.status === 'budget_exceeded');
+        observations.push({caseId: probe.caseId, requirementId: requirement.id,
+          status: raw?.status ?? 'unavailable', confidence: raw?.confidence ?? 0,
+          // A provider error or guardrail repair is not a successful abstention.
+          deferred: !!raw && !error && (raw.escalateToClinicalReview === true || raw.contradictionDetected === true || raw.status === 'not_applicable'),
+          error: error ?? (failure ? failure.decision : undefined),
+        });
+      }
+      uncertaintyByTier.push({tierLevel: evaluator.tierLevel, evaluatorId: evaluator.id, configured,
+        threshold, summary: configured ? summarizeUncertainty(observations, threshold) : null, observations});
+    }
+    runs.push({armId:arm.id,label:arm.label,configured:arm.configured,threshold,summary:summarize(rows),uncertaintyByTier,cohorts:Object.fromEntries(['structured','development','challenge'].map(cohort=>[cohort,summarize(rows.filter(r=>r.cohort===cohort))])),cases:rows});
   }
   return {
-    schemaVersion:1, timestamp:new Date().toISOString(),
+    schemaVersion:2, timestamp:new Date().toISOString(),
     methodology:'Recorded judgments replayed across thresholds. Routing confidence is not clinical calibration. Adapter latency excludes orchestration overhead. Synthetic labels are hand-authored; challenge is not independently validated.',
     acquisition:{providerCalls,tokens:acquisitionTokens,costUsd:acquisitionUsageVerified&&acquisitionCostVerified?acquisitionCostUsd:null,knownCostUsd:acquisitionCostUsd,usageVerified:acquisitionUsageVerified,costVerified:acquisitionCostVerified},
     recordings,
+    evidenceRemoval: evidenceRemoval.map(({mutatedCase, ...probe}) => probe),
     runs,
   };
 }
@@ -128,6 +193,18 @@ export function compareExperiments(baseline: ExperimentReport & {datasetHash?:st
     if(c.configured!==b.configured) failures.push(`${b.armId}: provider availability changed`);
     if(!c.summary.usageVerified) failures.push(`${b.armId}: unverified usage`);
     if(c.summary.falseClearances>0||c.summary.unsupportedCitations>0) failures.push(`${b.armId}: absolute evidence safety gate failed`);
+    for (const tier of c.uncertaintyByTier ?? []) {
+      if (tier.summary?.confidentSatisfied) failures.push(`${b.armId}/${b.threshold}/tier-${tier.tierLevel}: absolute evidence safety gate failed (confident satisfied after evidence removal)`);
+    }
+    for (const old of b.uncertaintyByTier ?? []) {
+      const next = c.uncertaintyByTier?.find(t => t.tierLevel === old.tierLevel);
+      if (!next || next.configured !== old.configured || next.summary?.applicableRuns !== old.summary?.applicableRuns) {
+        failures.push(`${b.armId}/${b.threshold}/tier-${old.tierLevel}: uncertainty probe availability changed`);
+      } else if (old.summary?.uncertaintyPreserved != null &&
+        (next.summary?.uncertaintyPreserved == null || next.summary.uncertaintyPreserved < old.summary.uncertaintyPreserved)) {
+        failures.push(`${b.armId}/${b.threshold}/tier-${old.tierLevel}: uncertainty preserved regression`);
+      }
+    }
     for(const cohort of ['structured','development','challenge']){
       const old=b.cohorts[cohort],next=c.cohorts[cohort];
       if(next.unsafeResolutions>old.unsafeResolutions||next.falseClearances>old.falseClearances||next.unsupportedCitations>old.unsupportedCitations) failures.push(`${b.armId}/${b.threshold}/${cohort}: safety regression`);

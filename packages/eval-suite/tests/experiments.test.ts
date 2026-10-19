@@ -1,7 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { DeterministicRulesEvaluator, type PolicyEvaluator } from '@openpa/evaluators';
-import { runExperiment, compareExperiments, wilsonInterval } from '../src/experiments.js';
+import { runExperiment, compareExperiments, wilsonInterval, summarizeUncertainty } from '../src/experiments.js';
+import { loadDataset } from '../src/dataset.js';
+import { clinicalContext } from '../../evaluators/src/clinical-context.js';
 
 const positive=JSON.parse(readFileSync('datasets/narrative/cases/dev-progress.json','utf8'));
 const missing=JSON.parse(readFileSync('datasets/narrative/cases/dev-missing.json','utf8'));
@@ -12,6 +14,64 @@ const evaluator=(id:string,tierLevel:number,confidence:number,onCall:()=>void):P
 });
 
 describe('Selective routing experiments',()=>{
+  it('measures uncertainty and confident errors at each threshold without crediting provider failures', () => {
+    const row = {caseId:'probe',requirementId:'target',deferred:false};
+    const rows = [
+      {...row,status:'insufficient_evidence',confidence:1},
+      {...row,status:'not_satisfied',confidence:.95},
+      {...row,status:'satisfied',confidence:.8},
+      {...row,status:'not_applicable',confidence:0,deferred:true},
+      {...row,status:'unavailable',confidence:0,error:'Provider failed'},
+    ];
+    expect(summarizeUncertainty(rows,.9)).toMatchObject({applicableRuns:5,preserved:3,uncertaintyPreserved:.6,confidentNotMet:1,confidentSatisfied:0,errors:1});
+    expect(summarizeUncertainty(rows,.7)).toMatchObject({preserved:2,confidentSatisfied:1});
+    expect(summarizeUncertainty(rows,.99)).toMatchObject({preserved:4,confidentNotMet:0});
+    expect(summarizeUncertainty(rows,.9).uncertaintyPreserved95Ci).toEqual(wilsonInterval(3,5));
+    expect(summarizeUncertainty([],.9).uncertaintyPreserved).toBeNull();
+  });
+
+  it('reports the fixed evidence-removal applicability across all 22 fixtures and leaves model tiers unconfigured', async () => {
+    const dataset = loadDataset(process.cwd());
+    const report = await runExperiment(dataset.cases,dataset.policies,[
+      {id:'rules',label:'Rules',configured:true,evaluators:[new DeterministicRulesEvaluator()]},
+      {id:'unconfigured',label:'Unconfigured',configured:false,evaluators:[evaluator('unconfigured',2,1,()=>{throw new Error('must not acquire probes');})]},
+    ],{thresholds:[.7,.9,.99],maxAcquisitionCostUsd:0});
+    expect(report.evidenceRemoval).toHaveLength(22);
+    expect(report.evidenceRemoval.filter(p=>p.isApplicable).map(p=>p.caseId)).toEqual([
+      'case-cgm-001-meets','case-knee-001-meets','case-lumbar-001-meets','case-pt-001-meets','case-sleep-001-meets',
+    ]);
+    for (const run of report.runs.filter(r=>r.armId==='rules')) {
+      expect(run.uncertaintyByTier[0].summary).toMatchObject({applicableRuns:5,uncertaintyPreserved:1,confidentNotMet:0,confidentSatisfied:0});
+    }
+    for (const run of report.runs.filter(r=>r.armId==='unconfigured')) expect(run.uncertaintyByTier[0].summary).toBeNull();
+    expect(report.acquisition.providerCalls).toBe(0);
+  });
+
+  it('tests later tiers directly and gates uncertainty loss and confident satisfaction before guardrail repair', async () => {
+    const c = JSON.parse(readFileSync('datasets/cases/lumbar-mri-001-meets.json','utf8'));
+    const p = JSON.parse(readFileSync('datasets/policies/lumbar-mri.json','utf8'));
+    const fixture = (status:'insufficient_evidence'|'not_satisfied'|'satisfied'):PolicyEvaluator => ({
+      id:'probe-tier',name:'Probe tier',tierLevel:2,
+      evaluateRequirement:async(req,ctx)=>{
+        const providerInput = JSON.stringify({requirement:req,records:clinicalContext(ctx,req)});
+        expect(providerInput).not.toContain('remove_supporting_evidence');
+        expect(ctx.caseData).not.toHaveProperty('expectedAssessment');
+        return {status,confidence:1,evidence:[],metrics:{costUsd:0,inputTokens:0,outputTokens:0,latencyMs:0}};
+      },
+    });
+    const run = async(status:'insufficient_evidence'|'not_satisfied'|'satisfied') => ({
+      ...await runExperiment([{caseData:c,cohort:'structured'}],[p],[{id:'cascade',label:'Cascade',configured:true,evaluators:[new DeterministicRulesEvaluator(),fixture(status)]}],{thresholds:[.9]}),
+      datasetHash:'same',protocolHash:'same',
+    });
+    const baseline = await run('insufficient_evidence');
+    const negative = await run('not_satisfied');
+    expect(negative.runs[0].uncertaintyByTier[1].summary).toMatchObject({uncertaintyPreserved:0,confidentNotMet:1});
+    expect(compareExperiments(baseline,negative).failures).toContain('cascade/0.9/tier-2: uncertainty preserved regression');
+    const satisfied = await run('satisfied');
+    expect(satisfied.runs[0].uncertaintyByTier[1].summary?.confidentSatisfied).toBe(1);
+    expect(compareExperiments(satisfied,satisfied).failures.some(f=>f.includes('absolute evidence safety gate failed'))).toBe(true);
+    expect(compareExperiments(baseline,baseline).passed).toBe(true);
+  });
   it('replays one cheap judgment per case while escalating only below the chosen threshold',async()=>{
     let cheap=0,expensive=0;
     const report=await runExperiment([{caseData:positive,cohort:'challenge'}],[policy],[{id:'cascade',label:'Cascade',configured:true,evaluators:[new DeterministicRulesEvaluator(),evaluator('cheap',2,.8,()=>cheap++),evaluator('expensive',3,.99,()=>expensive++)]}],{thresholds:[.7,.9]});
