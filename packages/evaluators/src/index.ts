@@ -9,3 +9,7 @@ export * from './llm/chatgpt-plan-evaluator.js';
 export * from './strategies.js';
 export * from './provider-config.js';
 export * from './clinical-context.js';
+export * from './retrieval/source.js';
+export * from './retrieval/retriever.js';
+export * from './handoff/build-review-packet.js';
+export * from './workflow/workflow-runner.js';

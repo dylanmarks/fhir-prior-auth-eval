@@ -1,6 +1,6 @@
 # OpenPA Eval Benchmark Report
 
-**Execution Timestamp:** `2026-10-19T18:55:35.620Z`  
+**Execution Timestamp:** `2026-10-21T16:10:45.628Z`  
 **Dataset Version:** `openpa-benchmark-v1.0`  
 **Evaluation Mode:** `offline_deterministic`  
 **Evaluator Configuration:** `Deterministic Rules Engine (Tier 1)`  

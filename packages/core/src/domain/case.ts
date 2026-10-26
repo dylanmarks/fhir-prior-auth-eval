@@ -48,3 +48,5 @@ export const PriorAuthCaseSchema = z.object({
 });
 
 export type PriorAuthCase = z.infer<typeof PriorAuthCaseSchema>;
+
+export type UnlabeledPriorAuthCase = Omit<PriorAuthCase, 'expectedAssessment'>;

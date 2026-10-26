@@ -1,0 +1,214 @@
+{
+  "scenarioId": "scn-705",
+  "patientId": "pat-lmb-01",
+  "policyId": "policy-lumbar-mri-v1",
+  "requestedAt": "2026-07-20",
+  "requestedService": {
+    "codeSystem": "http://www.ama-assn.org/go/cpt",
+    "code": "72148",
+    "description": "MRI lumbar spine without contrast",
+    "diagnosisCodes": [
+      "M54.41"
+    ],
+    "bodySite": "Lumbar spine"
+  },
+  "sources": [
+    {
+      "id": "src-lmb-primary",
+      "name": "Metro Health Primary Care",
+      "supportedResourceTypes": [
+        "Condition",
+        "Procedure",
+        "Observation"
+      ],
+      "availability": "available"
+    },
+    {
+      "id": "src-lmb-therapy",
+      "name": "Apex Physical Therapy & Rehab",
+      "supportedResourceTypes": [
+        "Procedure",
+        "Observation",
+        "DocumentReference"
+      ],
+      "availability": "unavailable"
+    }
+  ],
+  "initialBundle": {
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+      {
+        "resource": {
+          "resourceType": "Patient",
+          "id": "pat-lmb-01",
+          "gender": "female",
+          "birthDate": "1980-04-12"
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "Condition",
+          "id": "cond-lmb-radic-01",
+          "subject": {
+            "reference": "Patient/pat-lmb-01"
+          },
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                "code": "M54.41",
+                "display": "Lumbago with sciatica, right side"
+              }
+            ]
+          },
+          "onsetDateTime": "2026-05-10",
+          "text": {
+            "status": "generated",
+            "div": "<div>Patient diagnosed with right-sided lumbago with sciatica.</div>"
+          },
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "code": "active"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "Observation",
+          "id": "obs-lmb-bp-01",
+          "subject": {
+            "reference": "Patient/pat-lmb-01"
+          },
+          "status": "final",
+          "code": {
+            "coding": [
+              {
+                "system": "http://loinc.org",
+                "code": "85354-9",
+                "display": "Blood pressure panel"
+              }
+            ]
+          },
+          "effectiveDateTime": "2026-06-01",
+          "text": {
+            "status": "generated",
+            "div": "<div>Routine blood pressure 120/80 mmHg.</div>"
+          }
+        }
+      }
+    ]
+  },
+  "sourceCorpus": {
+    "src-lmb-therapy": [
+      {
+        "resourceType": "Procedure",
+        "id": "proc-lmb-pt-start",
+        "subject": {
+          "reference": "Patient/pat-lmb-01"
+        },
+        "status": "completed",
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.ama-assn.org/go/cpt",
+              "code": "97110",
+              "display": "Therapeutic exercises"
+            }
+          ]
+        },
+        "performedPeriod": {
+          "start": "2026-05-15",
+          "end": "2026-05-15"
+        },
+        "note": [
+          {
+            "text": "Initial physical therapy evaluation and lumbar stabilization exercise."
+          }
+        ]
+      },
+      {
+        "resourceType": "Procedure",
+        "id": "proc-lmb-pt-end",
+        "subject": {
+          "reference": "Patient/pat-lmb-01"
+        },
+        "status": "completed",
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.ama-assn.org/go/cpt",
+              "code": "97110",
+              "display": "Therapeutic exercises"
+            }
+          ]
+        },
+        "performedPeriod": {
+          "start": "2026-07-15",
+          "end": "2026-07-15"
+        },
+        "note": [
+          {
+            "text": "Week 8 PT session: Documented continuous weekly physical therapy throughout the course with prescribed home exercises. Patient continues to have persistent radicular pain."
+          }
+        ]
+      },
+      {
+        "resourceType": "Procedure",
+        "id": "proc-lmb-older-pt",
+        "subject": {
+          "reference": "Patient/pat-lmb-01"
+        },
+        "status": "completed",
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.ama-assn.org/go/cpt",
+              "code": "97110",
+              "display": "Therapeutic exercises"
+            }
+          ]
+        },
+        "performedPeriod": {
+          "start": "2023-01-10",
+          "end": "2023-01-10"
+        },
+        "note": [
+          {
+            "text": "Historical physical therapy session 3 years prior."
+          }
+        ]
+      },
+      {
+        "resourceType": "Procedure",
+        "id": "proc-lmb-wrong-pt",
+        "subject": {
+          "reference": "Patient/pat-wrong-999"
+        },
+        "status": "completed",
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.ama-assn.org/go/cpt",
+              "code": "97110",
+              "display": "Therapeutic exercises"
+            }
+          ]
+        },
+        "performedPeriod": {
+          "start": "2026-06-15",
+          "end": "2026-06-15"
+        },
+        "note": [
+          {
+            "text": "Therapeutic exercises for unrelated patient."
+          }
+        ]
+      }
+    ]
+  }
+}

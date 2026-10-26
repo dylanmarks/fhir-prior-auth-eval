@@ -20,3 +20,7 @@ The current implementation and measured scope are documented in the [README](../
 6. Evaluate external representative data and interoperability conformance separately before claiming healthcare workflow reliability.
 
 Real PHI integration, clinical validation, and Da Vinci PAS transactions are outside the current implementation.
+
+## Proposed next phase
+
+[Phase 6: evidence retrieval and review handoff](phase-6-retrieval-and-handoff.md) scopes a separate offline experiment for scattered, missing, conflicting, and inaccessible evidence, with a scored review packet. It is an implementation brief, not completed work. The [follow-up video brief](../docs/PHASE_6_VIDEO_BRIEF.md) defines the demonstration and the claims its results could support.

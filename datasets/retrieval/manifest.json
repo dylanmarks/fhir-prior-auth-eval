@@ -1,0 +1,122 @@
+[
+  {
+    "scenarioId": "scn-701",
+    "family": "lumbar_mri",
+    "familyLabel": "Lumbar Spine MRI (72148)",
+    "variant": "complete",
+    "variantLabel": "Complete submission",
+    "title": "Lumbar Radiculopathy — Complete Initial Bundle",
+    "description": "Initial bundle includes radiculopathy diagnosis and complete 8-week physical therapy course.",
+    "expectedBehavior": "Rules meet policy; packet cites initial submission records."
+  },
+  {
+    "scenarioId": "scn-702",
+    "family": "lumbar_mri",
+    "familyLabel": "Lumbar Spine MRI (72148)",
+    "variant": "scattered",
+    "variantLabel": "Scattered evidence",
+    "title": "Lumbar Radiculopathy — Scattered Records",
+    "description": "Radiculopathy diagnosis in submission; physical therapy course stored at outside physical therapy clinic.",
+    "expectedBehavior": "Submitted-only is deficient; retrieval recovers therapy evidence and matches complete outcome."
+  },
+  {
+    "scenarioId": "scn-703",
+    "family": "lumbar_mri",
+    "familyLabel": "Lumbar Spine MRI (72148)",
+    "variant": "missing",
+    "variantLabel": "Truly missing",
+    "title": "Lumbar Radiculopathy — Missing Therapy Course",
+    "description": "Patient received no 6-week conservative therapy completion; absent from all sources.",
+    "expectedBehavior": "Search completes; packet identifies documented gap and requests therapy records."
+  },
+  {
+    "scenarioId": "scn-704",
+    "family": "lumbar_mri",
+    "familyLabel": "Lumbar Spine MRI (72148)",
+    "variant": "contradictory",
+    "variantLabel": "Contradictory evidence",
+    "title": "Lumbar Radiculopathy — Conflicting Re-evaluation",
+    "description": "Initial diagnosis present, but outside specialist encounter note documents absence of radicular symptoms.",
+    "expectedBehavior": "Retrieval includes both records; clinical escalation preserves conflict and questions reviewer."
+  },
+  {
+    "scenarioId": "scn-705",
+    "family": "lumbar_mri",
+    "familyLabel": "Lumbar Spine MRI (72148)",
+    "variant": "unavailable",
+    "variantLabel": "Source unavailable",
+    "title": "Lumbar Radiculopathy — Unavailable Outside Source",
+    "description": "Scattered therapy records exist at Apex Physical Therapy, but the clinic source is unavailable.",
+    "expectedBehavior": "Search incomplete; clinical escalation; system never claims documentation is absent."
+  },
+  {
+    "scenarioId": "scn-706",
+    "family": "lumbar_mri",
+    "familyLabel": "Lumbar Spine MRI (72148)",
+    "variant": "budget_exhausted",
+    "variantLabel": "Search budget exhausted",
+    "title": "Lumbar Radiculopathy — Budget Limit Reached",
+    "description": "Scattered therapy records exist, but query budget ceiling prevents completing all reads.",
+    "expectedBehavior": "Search incomplete with explicit stopping reason; clinical review without definitive clearance."
+  },
+  {
+    "scenarioId": "scn-707",
+    "family": "knee_mri",
+    "familyLabel": "Knee MRI (73721)",
+    "variant": "complete",
+    "variantLabel": "Complete submission",
+    "title": "Knee Meniscal Derangement — Complete Initial Bundle",
+    "description": "Initial bundle includes meniscal tear diagnosis and recent 3-view knee radiograph.",
+    "expectedBehavior": "Rules meet policy; packet cites initial submission records."
+  },
+  {
+    "scenarioId": "scn-708",
+    "family": "knee_mri",
+    "familyLabel": "Knee MRI (73721)",
+    "variant": "scattered",
+    "variantLabel": "Scattered evidence",
+    "title": "Knee Meniscal Derangement — Scattered Radiograph",
+    "description": "Meniscal tear diagnosis in submission; recent radiograph stored at outside imaging center.",
+    "expectedBehavior": "Submitted-only is deficient; retrieval recovers X-ray and matches complete outcome."
+  },
+  {
+    "scenarioId": "scn-709",
+    "family": "knee_mri",
+    "familyLabel": "Knee MRI (73721)",
+    "variant": "missing",
+    "variantLabel": "Truly missing",
+    "title": "Knee Meniscal Derangement — Missing Radiograph",
+    "description": "No plain radiograph completed within 90 days across submission or outside imaging source.",
+    "expectedBehavior": "Search completes; packet identifies documented gap and requests radiograph."
+  },
+  {
+    "scenarioId": "scn-710",
+    "family": "knee_mri",
+    "familyLabel": "Knee MRI (73721)",
+    "variant": "contradictory",
+    "variantLabel": "Contradictory evidence",
+    "title": "Knee Meniscal Derangement — Conflicting Orthopedic Note",
+    "description": "Initial diagnosis present, but outside note documents patient denies knee instability or locking.",
+    "expectedBehavior": "Retrieval includes both records; clinical escalation preserves conflict for review."
+  },
+  {
+    "scenarioId": "scn-711",
+    "family": "knee_mri",
+    "familyLabel": "Knee MRI (73721)",
+    "variant": "unavailable",
+    "variantLabel": "Source unavailable",
+    "title": "Knee Meniscal Derangement — Unavailable Imaging Center",
+    "description": "Scattered radiograph exists at Valley Advanced Imaging, but the imaging source is offline.",
+    "expectedBehavior": "Search incomplete; clinical escalation; system never claims radiograph is absent."
+  },
+  {
+    "scenarioId": "scn-712",
+    "family": "knee_mri",
+    "familyLabel": "Knee MRI (73721)",
+    "variant": "budget_exhausted",
+    "variantLabel": "Search budget exhausted",
+    "title": "Knee Meniscal Derangement — Budget Limit Reached",
+    "description": "Scattered radiograph exists, but query read limit halts search before completion.",
+    "expectedBehavior": "Search incomplete with explicit stopping reason; clinical review without definitive clearance."
+  }
+]

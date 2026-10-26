@@ -1,0 +1,184 @@
+{
+  "scenarioId": "scn-710",
+  "patientId": "pat-kne-01",
+  "policyId": "policy-knee-mri-v1",
+  "requestedAt": "2026-07-04",
+  "requestedService": {
+    "codeSystem": "http://www.ama-assn.org/go/cpt",
+    "code": "73721",
+    "description": "MRI knee joint without contrast",
+    "diagnosisCodes": [
+      "M23.21"
+    ],
+    "laterality": "right",
+    "bodySite": "Right knee joint"
+  },
+  "sources": [
+    {
+      "id": "src-kne-primary",
+      "name": "Metro Orthopedic Associates",
+      "supportedResourceTypes": [
+        "Condition",
+        "DiagnosticReport",
+        "Observation"
+      ],
+      "availability": "available"
+    },
+    {
+      "id": "src-kne-imaging",
+      "name": "Valley Advanced Imaging Center",
+      "supportedResourceTypes": [
+        "DiagnosticReport",
+        "Observation",
+        "DocumentReference"
+      ],
+      "availability": "available"
+    }
+  ],
+  "initialBundle": {
+    "resourceType": "Bundle",
+    "type": "collection",
+    "entry": [
+      {
+        "resource": {
+          "resourceType": "Patient",
+          "id": "pat-kne-01",
+          "gender": "male",
+          "birthDate": "1988-11-05"
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "Condition",
+          "id": "cond-kne-tear-01",
+          "subject": {
+            "reference": "Patient/pat-kne-01"
+          },
+          "bodySite": "Right knee joint",
+          "code": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                "code": "M23.21",
+                "display": "Derangement of meniscus due to old tear or injury, right medial meniscus"
+              }
+            ]
+          },
+          "onsetDateTime": "2026-06-01",
+          "text": {
+            "status": "generated",
+            "div": "<div>Patient diagnosed with right knee medial meniscal derangement.</div>"
+          },
+          "clinicalStatus": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                "code": "active"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "resource": {
+          "resourceType": "DiagnosticReport",
+          "id": "diag-kne-xray-01",
+          "subject": {
+            "reference": "Patient/pat-kne-01"
+          },
+          "status": "final",
+          "bodySite": "Right knee joint",
+          "code": {
+            "coding": [
+              {
+                "system": "http://www.ama-assn.org/go/cpt",
+                "code": "73562",
+                "display": "Radiologic examination, knee; 3 views"
+              }
+            ]
+          },
+          "effectiveDateTime": "2026-06-20",
+          "conclusion": "3-view right knee radiographs demonstrate preserved joint spaces without fracture or radiopaque loose bodies.",
+          "text": {
+            "status": "generated",
+            "div": "<div>Normal 3-view knee radiograph. No acute fracture.</div>"
+          }
+        }
+      }
+    ]
+  },
+  "sourceCorpus": {
+    "src-kne-imaging": [
+      {
+        "resourceType": "DocumentReference",
+        "id": "doc-kne-contradict-01",
+        "subject": {
+          "reference": "Patient/pat-kne-01"
+        },
+        "status": "current",
+        "docStatus": "final",
+        "type": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "11506-3",
+              "display": "Progress note"
+            }
+          ]
+        },
+        "date": "2026-06-25",
+        "text": {
+          "status": "generated",
+          "div": "<div>Orthopedic exam note: Patient denies knee instability and denies mechanical locking; examination demonstrates normal stability and joint derangement is absent.</div>"
+        }
+      },
+      {
+        "resourceType": "DiagnosticReport",
+        "id": "diag-kne-older-xray",
+        "subject": {
+          "reference": "Patient/pat-kne-01"
+        },
+        "status": "final",
+        "bodySite": "Right knee joint",
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.ama-assn.org/go/cpt",
+              "code": "73562",
+              "display": "Radiologic examination, knee; 3 views"
+            }
+          ]
+        },
+        "effectiveDateTime": "2024-01-10",
+        "conclusion": "Historical right knee radiograph from 2024.",
+        "text": {
+          "status": "generated",
+          "div": "<div>Historical 3-view knee radiograph.</div>"
+        }
+      },
+      {
+        "resourceType": "DiagnosticReport",
+        "id": "diag-kne-wrong-pt",
+        "subject": {
+          "reference": "Patient/pat-wrong-888"
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://www.ama-assn.org/go/cpt",
+              "code": "73562",
+              "display": "Radiologic examination, knee; 3 views"
+            }
+          ]
+        },
+        "effectiveDateTime": "2026-06-22",
+        "conclusion": "X-ray for different patient.",
+        "text": {
+          "status": "generated",
+          "div": "<div>Knee radiograph for wrong patient.</div>"
+        }
+      }
+    ]
+  }
+}

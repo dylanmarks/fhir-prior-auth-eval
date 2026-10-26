@@ -1,0 +1,47 @@
+{
+  "scenarioId": "scn-703",
+  "family": "lumbar_mri",
+  "variant": "missing",
+  "derivationSource": "case-lumbar-001-meets",
+  "syntheticProvenance": "openpa-phase6-v1:authored",
+  "goldReviewStatus": "author_only",
+  "expectedDispositions": {
+    "submittedOnly": "needs_information",
+    "retrieval": "needs_information",
+    "fullCorpus": "needs_information"
+  },
+  "expectedSearchCompleteness": {
+    "submittedOnly": true,
+    "retrieval": true,
+    "fullCorpus": true
+  },
+  "expectedStoppingReason": {
+    "submittedOnly": "completed",
+    "retrieval": "completed",
+    "fullCorpus": "completed"
+  },
+  "criteria": {
+    "req-radiculopathy": {
+      "expectedStatusSubmitted": "satisfied",
+      "expectedStatusRetrieval": "satisfied",
+      "expectedStatusFullCorpus": "satisfied",
+      "relevantResourceIds": [
+        "Condition/cond-lmb-radic-01"
+      ],
+      "expectedGapKindSubmitted": "none",
+      "expectedGapKindRetrieval": "none",
+      "expectedNextActionTypeSubmitted": "none",
+      "expectedNextActionTypeRetrieval": "none"
+    },
+    "req-conservative-therapy": {
+      "expectedStatusSubmitted": "insufficient_evidence",
+      "expectedStatusRetrieval": "insufficient_evidence",
+      "expectedStatusFullCorpus": "insufficient_evidence",
+      "relevantResourceIds": [],
+      "expectedGapKindSubmitted": "not_found_in_searched_sources",
+      "expectedGapKindRetrieval": "not_found_in_searched_sources",
+      "expectedNextActionTypeSubmitted": "request_documentation",
+      "expectedNextActionTypeRetrieval": "request_documentation"
+    }
+  }
+}

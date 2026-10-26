@@ -1,4 +1,4 @@
-import type { PriorAuthCase, MedicalPolicy, AssessmentResult, RequirementEvaluation, StepTrace } from "@openpa/core";
+import type { PriorAuthCase, UnlabeledPriorAuthCase, MedicalPolicy, AssessmentResult, RequirementEvaluation, StepTrace } from "@openpa/core";
 import { FhirBundleIndexer, RequirementEvaluationSchema, sanitizeFhirBundle } from "@openpa/core";
 import type { PolicyEvaluator, EvaluatorContext, EvaluatorResult } from "../types.js";
 import { GroundingGuardrail } from "../guardrails/grounding-guard.js";
@@ -41,7 +41,7 @@ export class TieredOrchestrator {
     }
   }
 
-  async evaluateCase(priorAuthCase: PriorAuthCase, policy: MedicalPolicy): Promise<AssessmentResult> {
+  async evaluateCase(priorAuthCase: PriorAuthCase | UnlabeledPriorAuthCase, policy: MedicalPolicy): Promise<AssessmentResult> {
     if (priorAuthCase.policyId !== policy.id || !policy.serviceCodes.includes(priorAuthCase.requestedService.code)) {
       throw new Error(
         `Case policy (${priorAuthCase.policyId}) or service code (${priorAuthCase.requestedService.code}) does not match policy ${policy.id}`
@@ -53,7 +53,7 @@ export class TieredOrchestrator {
     }
 
     const started = performance.now();
-    const { expectedAssessment: _gold, ...inputCase } = priorAuthCase;
+    const { expectedAssessment: _gold, ...inputCase } = priorAuthCase as Partial<PriorAuthCase> & UnlabeledPriorAuthCase;
     const safeCase = {
       ...inputCase,
       patientBundle: sanitizeFhirBundle(inputCase.patientBundle),

@@ -1,0 +1,56 @@
+{
+  "scenarioId": "scn-701",
+  "family": "lumbar_mri",
+  "variant": "complete",
+  "derivationSource": "case-lumbar-001-meets",
+  "syntheticProvenance": "openpa-phase6-v1:authored",
+  "goldReviewStatus": "author_only",
+  "expectedDispositions": {
+    "submittedOnly": "meets_policy",
+    "retrieval": "meets_policy",
+    "fullCorpus": "meets_policy"
+  },
+  "expectedSearchCompleteness": {
+    "submittedOnly": true,
+    "retrieval": true,
+    "fullCorpus": true
+  },
+  "expectedStoppingReason": {
+    "submittedOnly": "completed",
+    "retrieval": "completed",
+    "fullCorpus": "completed"
+  },
+  "criteria": {
+    "req-radiculopathy": {
+      "expectedStatusSubmitted": "satisfied",
+      "expectedStatusRetrieval": "satisfied",
+      "expectedStatusFullCorpus": "satisfied",
+      "relevantResourceIds": [
+        "Condition/cond-lmb-radic-01"
+      ],
+      "expectedGapKindSubmitted": "none",
+      "expectedGapKindRetrieval": "none",
+      "expectedNextActionTypeSubmitted": "none",
+      "expectedNextActionTypeRetrieval": "none",
+      "requiredPacketFacts": [
+        {
+          "field": "onsetDateTime",
+          "expectedValue": "2026-05-10"
+        }
+      ]
+    },
+    "req-conservative-therapy": {
+      "expectedStatusSubmitted": "satisfied",
+      "expectedStatusRetrieval": "satisfied",
+      "expectedStatusFullCorpus": "satisfied",
+      "relevantResourceIds": [
+        "Procedure/proc-lmb-pt-start",
+        "Procedure/proc-lmb-pt-end"
+      ],
+      "expectedGapKindSubmitted": "none",
+      "expectedGapKindRetrieval": "none",
+      "expectedNextActionTypeSubmitted": "none",
+      "expectedNextActionTypeRetrieval": "none"
+    }
+  }
+}
