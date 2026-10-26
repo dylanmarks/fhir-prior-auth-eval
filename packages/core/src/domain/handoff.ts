@@ -94,7 +94,7 @@ export type ReviewPacketScope = z.infer<typeof ReviewPacketScopeSchema>;
 export const ReviewPacketSchema = z.object({
   schemaVersion: z.string().default('1.0.0'),
   generatedAt: z.string(),
-  contentFingerprint: z.string(),
+  contentFingerprint: z.string().regex(/^[a-f0-9]{64}$/),
   scenarioId: z.string(),
   patientId: z.string(),
   policyId: z.string(),
@@ -106,6 +106,12 @@ export const ReviewPacketSchema = z.object({
   criteria: z.array(CriterionReviewRowSchema),
   unresolvedItems: z.array(z.string()),
   integrityIssues: z.array(z.string()),
+}).superRefine((packet, ctx) => {
+  const ids = packet.criteria.map(row => row.requirementId);
+  if (new Set(ids).size !== ids.length) ctx.addIssue({code: 'custom', message: 'Duplicate criterion rows'});
+  for (const row of packet.criteria) {
+    if (row.nextAction.targetRequirementId && row.nextAction.targetRequirementId !== row.requirementId) ctx.addIssue({code: 'custom', message: 'Unknown action criterion reference'});
+  }
 });
 export type ReviewPacket = z.infer<typeof ReviewPacketSchema>;
 
@@ -124,5 +130,16 @@ export const EvidenceWorkflowResultSchema = z.object({
   retrieval: RetrievalResultSchema,
   reviewPacket: ReviewPacketSchema,
   timings: WorkflowTimingsSchema,
+}).superRefine((result, ctx) => {
+  const assessmentIds = new Set(result.assessment.requirements.map(r => r.requirementId));
+  for (const row of result.reviewPacket.criteria) {
+    if (!assessmentIds.has(row.requirementId)) ctx.addIssue({code: 'custom', message: 'Unknown packet criterion reference'});
+    for (const citation of [...row.citations, ...row.conflictCitations ?? []]) {
+      const refs = result.retrieval.provenance[citation.resourceId] ?? [];
+      if (!refs.some(ref => ref.sourceId === citation.sourceId) || !citation.provenance.length || citation.provenance.some(ref => !refs.some(p => p.sourceId === ref.sourceId && p.resourceId === ref.resourceId && p.contentHash === ref.contentHash))) {
+        ctx.addIssue({code: 'custom', message: 'Unknown packet source or provenance reference'});
+      }
+    }
+  }
 });
 export type EvidenceWorkflowResult = z.infer<typeof EvidenceWorkflowResultSchema>;

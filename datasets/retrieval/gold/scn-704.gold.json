@@ -34,7 +34,17 @@
       "expectedGapKindSubmitted": "none",
       "expectedGapKindRetrieval": "conflicting_evidence",
       "expectedNextActionTypeSubmitted": "none",
-      "expectedNextActionTypeRetrieval": "reconcile_conflict"
+      "expectedNextActionTypeRetrieval": "reconcile_conflict",
+      "requiredPacketFacts": [
+        {
+          "resourceId": "Condition/cond-lmb-radic-01",
+          "field": "onsetDateTime",
+          "expectedValue": "2026-05-10",
+          "appliesTo": [
+            "submitted_only"
+          ]
+        }
+      ]
     },
     "req-conservative-therapy": {
       "expectedStatusSubmitted": "satisfied",
@@ -45,9 +55,31 @@
         "Procedure/proc-lmb-pt-end"
       ],
       "expectedGapKindSubmitted": "none",
-      "expectedGapKindRetrieval": "none",
+      "expectedGapKindRetrieval": "not_evaluated",
       "expectedNextActionTypeSubmitted": "none",
-      "expectedNextActionTypeRetrieval": "none"
+      "expectedNextActionTypeRetrieval": "clinical_interpretation",
+      "requiredPacketFacts": [
+        {
+          "resourceId": "Procedure/proc-lmb-pt-start",
+          "field": "performedPeriod.start",
+          "expectedValue": "2026-05-15",
+          "appliesTo": [
+            "submitted_only"
+          ]
+        },
+        {
+          "resourceId": "Procedure/proc-lmb-pt-end",
+          "field": "performedPeriod.end",
+          "expectedValue": "2026-07-15",
+          "appliesTo": [
+            "submitted_only"
+          ]
+        }
+      ],
+      "allowedCitationResourceIds": [
+        "Procedure/proc-lmb-older-pt"
+      ],
+      "expectedEvaluationStateRetrieval": "not_evaluated"
     }
   }
 }

@@ -1,0 +1,3983 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-10-26T19:33:05.813Z",
+  "synthetic": true,
+  "limitations": [
+    "Twelve authored paired regression fixtures across two families; labels are author-only. No clinical validation or reviewer-time measurement.",
+    "Local simulated sources only. The full-corpus arm uses harness assembly, bypassing retrieval limits but retaining availability and identity checks.",
+    "The fixed lumbar policy has no lookback/episode rule. Historical matching therapy is retained and can inflate reported elapsed duration; elapsed span does not establish continuous therapy.",
+    "Partial lumbar therapy without completion/adherence documentation remains uncertain and routes to clinical review under the fixed orchestrator."
+  ],
+  "fingerprints": {
+    "sourceRevision": "8d969b4b63b51bff5597fbda64c2f08f270a25c1",
+    "workingTreeDirty": true,
+    "implementation": "901f75d6a3ea8689bf056bb726a5f03fd85262081e807835da8558cdce257e61",
+    "publicInputs": "3705b75d71d839b0135157946efb0384cf01bf18fa73d9445b72c0e77b3cbebe",
+    "gold": "ed7cda15f15b30faf31dc0e404fb093c558c7fc78116c38da41ae12bcb003d1b",
+    "policies": "29349197510bf10fdd522ee539cb7a359f422276324def79eac655838bdcbc34",
+    "dependencies": "8de852a32be1a5b22eed50008e3a033aa1dea49cbcac103d671d406b9666b60c",
+    "protocol": "383837dd06e2f0f5d2db15e8326db669837a2bf40e6b70cb325ae341e263454b",
+    "assessment": "fixed-rules-only",
+    "packetSchema": "1.0.0"
+  },
+  "contentFingerprint": "cad411f99dcf1519be9a36330462563b03756a15464b7e63b185c34c142fa774",
+  "runs": [
+    {
+      "arm": "submitted_only",
+      "score": {
+        "scenarioId": "scn-701",
+        "family": "lumbar_mri",
+        "variant": "complete",
+        "arm": "submitted_only",
+        "expectedDisposition": "meets_policy",
+        "actualDisposition": "meets_policy",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 3,
+            "denominator": 3
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 3,
+            "denominator": 3
+          },
+          "mappingAccuracy": {
+            "numerator": 3,
+            "denominator": 3
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 2,
+            "recoveredRelevantCount": 2,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 10.331958999999983,
+          "packetLatencyMs": 1.314875000000029,
+          "totalLatencyMs": 18.83045800000002
+        }
+      },
+      "evidenceFingerprint": "971da05b63439bc2c851a938bbb1b1c02ae67159658003c4eb4b010242f2ceb2"
+    },
+    {
+      "arm": "retrieval",
+      "score": {
+        "scenarioId": "scn-701",
+        "family": "lumbar_mri",
+        "variant": "complete",
+        "arm": "retrieval",
+        "expectedDisposition": "meets_policy",
+        "actualDisposition": "meets_policy",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 3,
+            "denominator": 3
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 4,
+            "denominator": 4
+          },
+          "mappingAccuracy": {
+            "numerator": 4,
+            "denominator": 4
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 2,
+            "recoveredRelevantCount": 2,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 6,
+          "pages": 6,
+          "reads": 1,
+          "uniqueEligibleRecords": 1,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 60.51020799999998,
+          "packetLatencyMs": 0.6747909999999706,
+          "totalLatencyMs": 63.52641699999998
+        }
+      },
+      "evidenceFingerprint": "78f2cefb745ca604ec35c76edeefac2c82a82af3755f06c78078d9a9d52e3744"
+    },
+    {
+      "arm": "full_corpus",
+      "score": {
+        "scenarioId": "scn-701",
+        "family": "lumbar_mri",
+        "variant": "complete",
+        "arm": "full_corpus",
+        "expectedDisposition": "meets_policy",
+        "actualDisposition": "meets_policy",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 3,
+            "denominator": 3
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 4,
+            "denominator": 4
+          },
+          "mappingAccuracy": {
+            "numerator": 4,
+            "denominator": 4
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 2,
+            "recoveredRelevantCount": 2,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 1,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 0.9347080000000005,
+          "packetLatencyMs": 0.7668339999999603,
+          "totalLatencyMs": 2.474958000000015
+        }
+      },
+      "evidenceFingerprint": "78f2cefb745ca604ec35c76edeefac2c82a82af3755f06c78078d9a9d52e3744"
+    },
+    {
+      "arm": "submitted_only",
+      "score": {
+        "scenarioId": "scn-702",
+        "family": "lumbar_mri",
+        "variant": "scattered",
+        "arm": "submitted_only",
+        "expectedDisposition": "needs_information",
+        "actualDisposition": "needs_information",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 0.3333333333333333,
+        "incrementalSourceRecall": 0,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 0.5,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 3
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 2
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_found_in_searched_sources",
+            "actualGapKind": "not_found_in_searched_sources",
+            "gapKindMatch": true,
+            "expectedNextActionType": "request_documentation",
+            "actualNextActionType": "request_documentation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 2,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 0.25499999999999545,
+          "packetLatencyMs": 0.90625,
+          "totalLatencyMs": 2.524667000000022
+        }
+      },
+      "evidenceFingerprint": "313c759dbcaab6d2b1fdc32727cb69686390a54c95cfe744f5261bc486f5a977"
+    },
+    {
+      "arm": "retrieval",
+      "score": {
+        "scenarioId": "scn-702",
+        "family": "lumbar_mri",
+        "variant": "scattered",
+        "arm": "retrieval",
+        "expectedDisposition": "meets_policy",
+        "actualDisposition": "meets_policy",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": 1,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 3,
+            "denominator": 3
+          },
+          "incrementalSourceRecall": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 4,
+            "denominator": 4
+          },
+          "mappingAccuracy": {
+            "numerator": 4,
+            "denominator": 4
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 2,
+            "recoveredRelevantCount": 2,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 6,
+          "pages": 6,
+          "reads": 3,
+          "uniqueEligibleRecords": 3,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 17.109916,
+          "packetLatencyMs": 0.3292919999999526,
+          "totalLatencyMs": 18.577624999999955
+        }
+      },
+      "evidenceFingerprint": "de7de4bca733e9480d969ec57750935dfb5a360948668dd7c7b51f7605cf1082"
+    },
+    {
+      "arm": "full_corpus",
+      "score": {
+        "scenarioId": "scn-702",
+        "family": "lumbar_mri",
+        "variant": "scattered",
+        "arm": "full_corpus",
+        "expectedDisposition": "meets_policy",
+        "actualDisposition": "meets_policy",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": 1,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 3,
+            "denominator": 3
+          },
+          "incrementalSourceRecall": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 4,
+            "denominator": 4
+          },
+          "mappingAccuracy": {
+            "numerator": 4,
+            "denominator": 4
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 2,
+            "recoveredRelevantCount": 2,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 3,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 0.3518329999999992,
+          "packetLatencyMs": 0.25841700000000856,
+          "totalLatencyMs": 1.00812499999995
+        }
+      },
+      "evidenceFingerprint": "0a46a93dd227738fab066ccaa0f40d25734f5fabbb200f2c1f728468c6f305ab"
+    },
+    {
+      "arm": "submitted_only",
+      "score": {
+        "scenarioId": "scn-703",
+        "family": "lumbar_mri",
+        "variant": "missing",
+        "arm": "submitted_only",
+        "expectedDisposition": "needs_information",
+        "actualDisposition": "needs_information",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_found_in_searched_sources",
+            "actualGapKind": "not_found_in_searched_sources",
+            "gapKindMatch": true,
+            "expectedNextActionType": "request_documentation",
+            "actualNextActionType": "request_documentation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 0,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 0.11766700000003993,
+          "packetLatencyMs": 0.15183400000000802,
+          "totalLatencyMs": 0.4324589999999944
+        }
+      },
+      "evidenceFingerprint": "3dfa3ebfda9bc7518c814148a36b8c565b3cab655f78d7a077808d0d5630cac8"
+    },
+    {
+      "arm": "retrieval",
+      "score": {
+        "scenarioId": "scn-703",
+        "family": "lumbar_mri",
+        "variant": "missing",
+        "arm": "retrieval",
+        "expectedDisposition": "requires_clinical_review",
+        "actualDisposition": "requires_clinical_review",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_found_in_searched_sources",
+            "actualGapKind": "not_found_in_searched_sources",
+            "gapKindMatch": true,
+            "expectedNextActionType": "request_documentation",
+            "actualNextActionType": "request_documentation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 0,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 6,
+          "pages": 6,
+          "reads": 2,
+          "uniqueEligibleRecords": 2,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 12.589832999999999,
+          "packetLatencyMs": 0.39562499999999545,
+          "totalLatencyMs": 13.306375000000003
+        }
+      },
+      "evidenceFingerprint": "f19e9eb721d7b331614ee1880edaa827545b59c606e5da10218ad49f1cc79bf1"
+    },
+    {
+      "arm": "full_corpus",
+      "score": {
+        "scenarioId": "scn-703",
+        "family": "lumbar_mri",
+        "variant": "missing",
+        "arm": "full_corpus",
+        "expectedDisposition": "requires_clinical_review",
+        "actualDisposition": "requires_clinical_review",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_found_in_searched_sources",
+            "actualGapKind": "not_found_in_searched_sources",
+            "gapKindMatch": true,
+            "expectedNextActionType": "request_documentation",
+            "actualNextActionType": "request_documentation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 0,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 2,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 0.32791700000001356,
+          "packetLatencyMs": 0.2702499999999759,
+          "totalLatencyMs": 0.9642079999999851
+        }
+      },
+      "evidenceFingerprint": "97f7fa7b10255eb0c529e3822fc2c4e49f88b81dfbf9665172fe6ff9750ffcea"
+    },
+    {
+      "arm": "submitted_only",
+      "score": {
+        "scenarioId": "scn-704",
+        "family": "lumbar_mri",
+        "variant": "contradictory",
+        "arm": "submitted_only",
+        "expectedDisposition": "meets_policy",
+        "actualDisposition": "meets_policy",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 3,
+            "denominator": 3
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 3,
+            "denominator": 3
+          },
+          "mappingAccuracy": {
+            "numerator": 3,
+            "denominator": 3
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 2,
+            "recoveredRelevantCount": 2,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 0.5487919999999917,
+          "packetLatencyMs": 0.22441700000001674,
+          "totalLatencyMs": 1.2924580000000105
+        }
+      },
+      "evidenceFingerprint": "a051ee6ba418539cb23e952befb163220ba0b54081b5b8a1b40408e326c36566"
+    },
+    {
+      "arm": "retrieval",
+      "score": {
+        "scenarioId": "scn-704",
+        "family": "lumbar_mri",
+        "variant": "contradictory",
+        "arm": "retrieval",
+        "expectedDisposition": "requires_clinical_review",
+        "actualDisposition": "requires_clinical_review",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": 1,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 3,
+            "denominator": 3
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "mappingAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "conflicting_evidence",
+            "actualGapKind": "conflicting_evidence",
+            "gapKindMatch": true,
+            "expectedNextActionType": "reconcile_conflict",
+            "actualNextActionType": "reconcile_conflict",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_evaluated",
+            "actualGapKind": "not_evaluated",
+            "gapKindMatch": true,
+            "expectedNextActionType": "clinical_interpretation",
+            "actualNextActionType": "clinical_interpretation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 2,
+            "recoveredRelevantCount": 2,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 6,
+          "pages": 6,
+          "reads": 2,
+          "uniqueEligibleRecords": 2,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 9.779332999999951,
+          "packetLatencyMs": 0.16504199999997127,
+          "totalLatencyMs": 10.541917000000012
+        }
+      },
+      "evidenceFingerprint": "e25284bafa89f38da4304904bf62714a7d3d325ebc9fbc2e87fb76bace4a407f"
+    },
+    {
+      "arm": "full_corpus",
+      "score": {
+        "scenarioId": "scn-704",
+        "family": "lumbar_mri",
+        "variant": "contradictory",
+        "arm": "full_corpus",
+        "expectedDisposition": "requires_clinical_review",
+        "actualDisposition": "requires_clinical_review",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": 1,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 3,
+            "denominator": 3
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "mappingAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "conflicting_evidence",
+            "actualGapKind": "conflicting_evidence",
+            "gapKindMatch": true,
+            "expectedNextActionType": "reconcile_conflict",
+            "actualNextActionType": "reconcile_conflict",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_evaluated",
+            "actualGapKind": "not_evaluated",
+            "gapKindMatch": true,
+            "expectedNextActionType": "clinical_interpretation",
+            "actualNextActionType": "clinical_interpretation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 2,
+            "recoveredRelevantCount": 2,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 2,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 0.48258300000003373,
+          "packetLatencyMs": 0.25337500000000546,
+          "totalLatencyMs": 1.215249999999969
+        }
+      },
+      "evidenceFingerprint": "e25284bafa89f38da4304904bf62714a7d3d325ebc9fbc2e87fb76bace4a407f"
+    },
+    {
+      "arm": "submitted_only",
+      "score": {
+        "scenarioId": "scn-705",
+        "family": "lumbar_mri",
+        "variant": "unavailable",
+        "arm": "submitted_only",
+        "expectedDisposition": "needs_information",
+        "actualDisposition": "needs_information",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 2,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_found_in_searched_sources",
+            "actualGapKind": "not_found_in_searched_sources",
+            "gapKindMatch": true,
+            "expectedNextActionType": "request_documentation",
+            "actualNextActionType": "request_documentation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 0,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 0.210125000000005,
+          "packetLatencyMs": 0.09945900000002439,
+          "totalLatencyMs": 0.4371669999999881
+        }
+      },
+      "evidenceFingerprint": "313c759dbcaab6d2b1fdc32727cb69686390a54c95cfe744f5261bc486f5a977"
+    },
+    {
+      "arm": "retrieval",
+      "score": {
+        "scenarioId": "scn-705",
+        "family": "lumbar_mri",
+        "variant": "unavailable",
+        "arm": "retrieval",
+        "expectedDisposition": "requires_clinical_review",
+        "actualDisposition": "requires_clinical_review",
+        "dispositionMatch": true,
+        "expectedCompleteness": false,
+        "actualCompleteness": false,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 2,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "source_unavailable",
+            "actualGapKind": "source_unavailable",
+            "gapKindMatch": true,
+            "expectedNextActionType": "restore_source_access",
+            "actualNextActionType": "restore_source_access",
+            "nextActionMatch": true,
+            "goldRelevantCount": 0,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 3,
+          "pages": 3,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 3.3837499999999636,
+          "packetLatencyMs": 0.13700000000000045,
+          "totalLatencyMs": 3.7913750000000164
+        }
+      },
+      "evidenceFingerprint": "313c759dbcaab6d2b1fdc32727cb69686390a54c95cfe744f5261bc486f5a977"
+    },
+    {
+      "arm": "full_corpus",
+      "score": {
+        "scenarioId": "scn-705",
+        "family": "lumbar_mri",
+        "variant": "unavailable",
+        "arm": "full_corpus",
+        "expectedDisposition": "requires_clinical_review",
+        "actualDisposition": "requires_clinical_review",
+        "dispositionMatch": true,
+        "expectedCompleteness": false,
+        "actualCompleteness": false,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 2,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "source_unavailable",
+            "actualGapKind": "source_unavailable",
+            "gapKindMatch": true,
+            "expectedNextActionType": "restore_source_access",
+            "actualNextActionType": "restore_source_access",
+            "nextActionMatch": true,
+            "goldRelevantCount": 0,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 0.0963329999999587,
+          "packetLatencyMs": 0.31370800000001964,
+          "totalLatencyMs": 0.5239579999999933
+        }
+      },
+      "evidenceFingerprint": "313c759dbcaab6d2b1fdc32727cb69686390a54c95cfe744f5261bc486f5a977"
+    },
+    {
+      "arm": "submitted_only",
+      "score": {
+        "scenarioId": "scn-706",
+        "family": "lumbar_mri",
+        "variant": "budget_exhausted",
+        "arm": "submitted_only",
+        "expectedDisposition": "needs_information",
+        "actualDisposition": "needs_information",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 0.3333333333333333,
+        "incrementalSourceRecall": 0,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 0.5,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 3
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 2
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_found_in_searched_sources",
+            "actualGapKind": "not_found_in_searched_sources",
+            "gapKindMatch": true,
+            "expectedNextActionType": "request_documentation",
+            "actualNextActionType": "request_documentation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 2,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 0.1871250000000373,
+          "packetLatencyMs": 0.10495800000001054,
+          "totalLatencyMs": 0.5121660000000361
+        }
+      },
+      "evidenceFingerprint": "313c759dbcaab6d2b1fdc32727cb69686390a54c95cfe744f5261bc486f5a977"
+    },
+    {
+      "arm": "retrieval",
+      "score": {
+        "scenarioId": "scn-706",
+        "family": "lumbar_mri",
+        "variant": "budget_exhausted",
+        "arm": "retrieval",
+        "expectedDisposition": "requires_clinical_review",
+        "actualDisposition": "requires_clinical_review",
+        "dispositionMatch": true,
+        "expectedCompleteness": false,
+        "actualCompleteness": false,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 0.3333333333333333,
+        "incrementalSourceRecall": 0,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 0.5,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 3
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 2
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "mappingAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "search_incomplete",
+            "actualGapKind": "search_incomplete",
+            "gapKindMatch": true,
+            "expectedNextActionType": "continue_search",
+            "actualNextActionType": "continue_search",
+            "nextActionMatch": true,
+            "goldRelevantCount": 2,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 6,
+          "pages": 6,
+          "reads": 1,
+          "uniqueEligibleRecords": 1,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 9.503833999999983,
+          "packetLatencyMs": 0.17870800000002873,
+          "totalLatencyMs": 10.11591599999997
+        }
+      },
+      "evidenceFingerprint": "533b34b45a716ac5d7aa37dae7dfd9dbc1fe24dccbae5f7742063420b54ec913"
+    },
+    {
+      "arm": "full_corpus",
+      "score": {
+        "scenarioId": "scn-706",
+        "family": "lumbar_mri",
+        "variant": "budget_exhausted",
+        "arm": "full_corpus",
+        "expectedDisposition": "meets_policy",
+        "actualDisposition": "meets_policy",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": 1,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 3,
+            "denominator": 3
+          },
+          "incrementalSourceRecall": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 4,
+            "denominator": 4
+          },
+          "mappingAccuracy": {
+            "numerator": 4,
+            "denominator": 4
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-radiculopathy": {
+            "requirementId": "req-radiculopathy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-conservative-therapy": {
+            "requirementId": "req-conservative-therapy",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 2,
+            "recoveredRelevantCount": 2,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 3,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 0.212791999999979,
+          "packetLatencyMs": 0.1570419999999899,
+          "totalLatencyMs": 0.7691669999999817
+        }
+      },
+      "evidenceFingerprint": "633282bada2c4538ea438bc08a366b72c12b2a7534f0e25c119cb67734d7777f"
+    },
+    {
+      "arm": "submitted_only",
+      "score": {
+        "scenarioId": "scn-707",
+        "family": "knee_mri",
+        "variant": "complete",
+        "arm": "submitted_only",
+        "expectedDisposition": "meets_policy",
+        "actualDisposition": "meets_policy",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "mappingAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 0.20974999999998545,
+          "packetLatencyMs": 0.1791249999999991,
+          "totalLatencyMs": 1.4995419999999626
+        }
+      },
+      "evidenceFingerprint": "a14309414a24a03dbfe521592122909d1e3795472d9d7bd40ffc40b580b97ed2"
+    },
+    {
+      "arm": "retrieval",
+      "score": {
+        "scenarioId": "scn-707",
+        "family": "knee_mri",
+        "variant": "complete",
+        "arm": "retrieval",
+        "expectedDisposition": "meets_policy",
+        "actualDisposition": "meets_policy",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "mappingAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 6,
+          "pages": 6,
+          "reads": 1,
+          "uniqueEligibleRecords": 1,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 9.951542000000018,
+          "packetLatencyMs": 0.08187499999996817,
+          "totalLatencyMs": 10.259208000000001
+        }
+      },
+      "evidenceFingerprint": "c3010d0271d5cc8611869d7a73f04621a197ccd0e2c8382aaea24d6b6fd1628c"
+    },
+    {
+      "arm": "full_corpus",
+      "score": {
+        "scenarioId": "scn-707",
+        "family": "knee_mri",
+        "variant": "complete",
+        "arm": "full_corpus",
+        "expectedDisposition": "meets_policy",
+        "actualDisposition": "meets_policy",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "mappingAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 1,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 0.22366700000003448,
+          "packetLatencyMs": 0.05808300000001054,
+          "totalLatencyMs": 0.40424999999999045
+        }
+      },
+      "evidenceFingerprint": "c3010d0271d5cc8611869d7a73f04621a197ccd0e2c8382aaea24d6b6fd1628c"
+    },
+    {
+      "arm": "submitted_only",
+      "score": {
+        "scenarioId": "scn-708",
+        "family": "knee_mri",
+        "variant": "scattered",
+        "arm": "submitted_only",
+        "expectedDisposition": "needs_information",
+        "actualDisposition": "needs_information",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 0.5,
+        "incrementalSourceRecall": 0,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 0.5,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 2
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 1
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_found_in_searched_sources",
+            "actualGapKind": "not_found_in_searched_sources",
+            "gapKindMatch": true,
+            "expectedNextActionType": "request_documentation",
+            "actualNextActionType": "request_documentation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 0.06945799999999736,
+          "packetLatencyMs": 0.05525000000000091,
+          "totalLatencyMs": 0.23091700000003357
+        }
+      },
+      "evidenceFingerprint": "9f590728e2ed6d0363ac8d2117e10f0a65203fbcb39c6377d5b54ee0ffec443c"
+    },
+    {
+      "arm": "retrieval",
+      "score": {
+        "scenarioId": "scn-708",
+        "family": "knee_mri",
+        "variant": "scattered",
+        "arm": "retrieval",
+        "expectedDisposition": "meets_policy",
+        "actualDisposition": "meets_policy",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": 1,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "incrementalSourceRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "mappingAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 6,
+          "pages": 6,
+          "reads": 2,
+          "uniqueEligibleRecords": 2,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 30.843792000000008,
+          "packetLatencyMs": 0.23033299999997325,
+          "totalLatencyMs": 31.536917000000017
+        }
+      },
+      "evidenceFingerprint": "4a49a168b7cab41fccc0b4c480b3b40b3cee8438852ea726d279a1e2fd38e6fb"
+    },
+    {
+      "arm": "full_corpus",
+      "score": {
+        "scenarioId": "scn-708",
+        "family": "knee_mri",
+        "variant": "scattered",
+        "arm": "full_corpus",
+        "expectedDisposition": "meets_policy",
+        "actualDisposition": "meets_policy",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": 1,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "incrementalSourceRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "mappingAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 2,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 0.11904200000003584,
+          "packetLatencyMs": 0.06620799999996052,
+          "totalLatencyMs": 0.3630420000000072
+        }
+      },
+      "evidenceFingerprint": "74227e7c0a220c5ffa3fc2405123d1bcef62f88f790615668e32388925a16594"
+    },
+    {
+      "arm": "submitted_only",
+      "score": {
+        "scenarioId": "scn-709",
+        "family": "knee_mri",
+        "variant": "missing",
+        "arm": "submitted_only",
+        "expectedDisposition": "needs_information",
+        "actualDisposition": "needs_information",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_found_in_searched_sources",
+            "actualGapKind": "not_found_in_searched_sources",
+            "gapKindMatch": true,
+            "expectedNextActionType": "request_documentation",
+            "actualNextActionType": "request_documentation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 0,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 0.08070800000001555,
+          "packetLatencyMs": 1.0914999999999964,
+          "totalLatencyMs": 1.3607079999999883
+        }
+      },
+      "evidenceFingerprint": "742e9c37d80e0c8b14244607eeab4258117f5335877a1330c80d1090580b1bdd"
+    },
+    {
+      "arm": "retrieval",
+      "score": {
+        "scenarioId": "scn-709",
+        "family": "knee_mri",
+        "variant": "missing",
+        "arm": "retrieval",
+        "expectedDisposition": "needs_information",
+        "actualDisposition": "needs_information",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_found_in_searched_sources",
+            "actualGapKind": "not_found_in_searched_sources",
+            "gapKindMatch": true,
+            "expectedNextActionType": "request_documentation",
+            "actualNextActionType": "request_documentation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 0,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 6,
+          "pages": 6,
+          "reads": 1,
+          "uniqueEligibleRecords": 1,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 37.590957999999944,
+          "packetLatencyMs": 0.1190000000000282,
+          "totalLatencyMs": 38.14420899999993
+        }
+      },
+      "evidenceFingerprint": "78576bcc3e8a1693d1e5a11b678254dc7ec07ae06776d6fdfe4a0d8f82c6518f"
+    },
+    {
+      "arm": "full_corpus",
+      "score": {
+        "scenarioId": "scn-709",
+        "family": "knee_mri",
+        "variant": "missing",
+        "arm": "full_corpus",
+        "expectedDisposition": "needs_information",
+        "actualDisposition": "needs_information",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_found_in_searched_sources",
+            "actualGapKind": "not_found_in_searched_sources",
+            "gapKindMatch": true,
+            "expectedNextActionType": "request_documentation",
+            "actualNextActionType": "request_documentation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 0,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 1,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 0.09462499999995089,
+          "packetLatencyMs": 0.13045899999997346,
+          "totalLatencyMs": 0.5127079999999751
+        }
+      },
+      "evidenceFingerprint": "78576bcc3e8a1693d1e5a11b678254dc7ec07ae06776d6fdfe4a0d8f82c6518f"
+    },
+    {
+      "arm": "submitted_only",
+      "score": {
+        "scenarioId": "scn-710",
+        "family": "knee_mri",
+        "variant": "contradictory",
+        "arm": "submitted_only",
+        "expectedDisposition": "meets_policy",
+        "actualDisposition": "meets_policy",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "mappingAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 0.1304169999999658,
+          "packetLatencyMs": 0.11824999999998909,
+          "totalLatencyMs": 0.4619580000000951
+        }
+      },
+      "evidenceFingerprint": "e4a65bb2734e739283658e59b1cf79588bf453b577b51496bf9fabdcea493559"
+    },
+    {
+      "arm": "retrieval",
+      "score": {
+        "scenarioId": "scn-710",
+        "family": "knee_mri",
+        "variant": "contradictory",
+        "arm": "retrieval",
+        "expectedDisposition": "requires_clinical_review",
+        "actualDisposition": "requires_clinical_review",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": 1,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "mappingAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "conflicting_evidence",
+            "actualGapKind": "conflicting_evidence",
+            "gapKindMatch": true,
+            "expectedNextActionType": "reconcile_conflict",
+            "actualNextActionType": "reconcile_conflict",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_evaluated",
+            "actualGapKind": "not_evaluated",
+            "gapKindMatch": true,
+            "expectedNextActionType": "clinical_interpretation",
+            "actualNextActionType": "clinical_interpretation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 6,
+          "pages": 6,
+          "reads": 2,
+          "uniqueEligibleRecords": 2,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 11.841167000000041,
+          "packetLatencyMs": 0.38341700000000856,
+          "totalLatencyMs": 12.903584000000023
+        }
+      },
+      "evidenceFingerprint": "646f5aca3bcba3afe87d388739ab037a9ad46366c846b6ad2d69142f2d981a04"
+    },
+    {
+      "arm": "full_corpus",
+      "score": {
+        "scenarioId": "scn-710",
+        "family": "knee_mri",
+        "variant": "contradictory",
+        "arm": "full_corpus",
+        "expectedDisposition": "requires_clinical_review",
+        "actualDisposition": "requires_clinical_review",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": 1,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "mappingAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "conflicting_evidence",
+            "actualGapKind": "conflicting_evidence",
+            "gapKindMatch": true,
+            "expectedNextActionType": "reconcile_conflict",
+            "actualNextActionType": "reconcile_conflict",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_evaluated",
+            "actualGapKind": "not_evaluated",
+            "gapKindMatch": true,
+            "expectedNextActionType": "clinical_interpretation",
+            "actualNextActionType": "clinical_interpretation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 2,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 0.6164999999999736,
+          "packetLatencyMs": 0.18062499999996362,
+          "totalLatencyMs": 1.4337500000000318
+        }
+      },
+      "evidenceFingerprint": "be3fddbd99aa1b072fcdb3320bcbeb453a5b3c2d8eeb351a43f45fecb9b1b0ab"
+    },
+    {
+      "arm": "submitted_only",
+      "score": {
+        "scenarioId": "scn-711",
+        "family": "knee_mri",
+        "variant": "unavailable",
+        "arm": "submitted_only",
+        "expectedDisposition": "needs_information",
+        "actualDisposition": "needs_information",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 1,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_found_in_searched_sources",
+            "actualGapKind": "not_found_in_searched_sources",
+            "gapKindMatch": true,
+            "expectedNextActionType": "request_documentation",
+            "actualNextActionType": "request_documentation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 0,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 0.15179200000000037,
+          "packetLatencyMs": 0.12491699999998218,
+          "totalLatencyMs": 0.5504590000000462
+        }
+      },
+      "evidenceFingerprint": "9f590728e2ed6d0363ac8d2117e10f0a65203fbcb39c6377d5b54ee0ffec443c"
+    },
+    {
+      "arm": "retrieval",
+      "score": {
+        "scenarioId": "scn-711",
+        "family": "knee_mri",
+        "variant": "unavailable",
+        "arm": "retrieval",
+        "expectedDisposition": "requires_clinical_review",
+        "actualDisposition": "requires_clinical_review",
+        "dispositionMatch": true,
+        "expectedCompleteness": false,
+        "actualCompleteness": false,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 1,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "source_unavailable",
+            "actualGapKind": "source_unavailable",
+            "gapKindMatch": true,
+            "expectedNextActionType": "restore_source_access",
+            "actualNextActionType": "restore_source_access",
+            "nextActionMatch": true,
+            "goldRelevantCount": 0,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 3,
+          "pages": 3,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 9.074749999999995,
+          "packetLatencyMs": 0.16650000000004184,
+          "totalLatencyMs": 9.597459000000072
+        }
+      },
+      "evidenceFingerprint": "9f590728e2ed6d0363ac8d2117e10f0a65203fbcb39c6377d5b54ee0ffec443c"
+    },
+    {
+      "arm": "full_corpus",
+      "score": {
+        "scenarioId": "scn-711",
+        "family": "knee_mri",
+        "variant": "unavailable",
+        "arm": "full_corpus",
+        "expectedDisposition": "requires_clinical_review",
+        "actualDisposition": "requires_clinical_review",
+        "dispositionMatch": true,
+        "expectedCompleteness": false,
+        "actualCompleteness": false,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": null,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 1,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "source_unavailable",
+            "actualGapKind": "source_unavailable",
+            "gapKindMatch": true,
+            "expectedNextActionType": "restore_source_access",
+            "actualNextActionType": "restore_source_access",
+            "nextActionMatch": true,
+            "goldRelevantCount": 0,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 0.5277089999999589,
+          "packetLatencyMs": 0.3030830000000151,
+          "totalLatencyMs": 4.270416000000068
+        }
+      },
+      "evidenceFingerprint": "9f590728e2ed6d0363ac8d2117e10f0a65203fbcb39c6377d5b54ee0ffec443c"
+    },
+    {
+      "arm": "submitted_only",
+      "score": {
+        "scenarioId": "scn-712",
+        "family": "knee_mri",
+        "variant": "budget_exhausted",
+        "arm": "submitted_only",
+        "expectedDisposition": "needs_information",
+        "actualDisposition": "needs_information",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 0.5,
+        "incrementalSourceRecall": 0,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 0.5,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 2
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 1
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "not_found_in_searched_sources",
+            "actualGapKind": "not_found_in_searched_sources",
+            "gapKindMatch": true,
+            "expectedNextActionType": "request_documentation",
+            "actualNextActionType": "request_documentation",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 0,
+          "duplicateRecords": 0,
+          "rejectedRecords": 0,
+          "retrievalLatencyMs": 0.7814579999999296,
+          "packetLatencyMs": 0.14916699999992034,
+          "totalLatencyMs": 2.70575000000008
+        }
+      },
+      "evidenceFingerprint": "9f590728e2ed6d0363ac8d2117e10f0a65203fbcb39c6377d5b54ee0ffec443c"
+    },
+    {
+      "arm": "retrieval",
+      "score": {
+        "scenarioId": "scn-712",
+        "family": "knee_mri",
+        "variant": "budget_exhausted",
+        "arm": "retrieval",
+        "expectedDisposition": "requires_clinical_review",
+        "actualDisposition": "requires_clinical_review",
+        "dispositionMatch": true,
+        "expectedCompleteness": false,
+        "actualCompleteness": false,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 0.5,
+        "incrementalSourceRecall": 0,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 0.5,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 1,
+            "denominator": 2
+          },
+          "incrementalSourceRecall": {
+            "numerator": 0,
+            "denominator": 1
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 1,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "mappingAccuracy": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "insufficient_evidence",
+            "actualStatus": "insufficient_evidence",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "search_incomplete",
+            "actualGapKind": "search_incomplete",
+            "gapKindMatch": true,
+            "expectedNextActionType": "continue_search",
+            "actualNextActionType": "continue_search",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 0,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 1,
+          "pages": 1,
+          "reads": 1,
+          "uniqueEligibleRecords": 1,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 3.493582999999944,
+          "packetLatencyMs": 0.21479100000010476,
+          "totalLatencyMs": 4.210249999999974
+        }
+      },
+      "evidenceFingerprint": "6c5b5854568bbb334bb87de93e14146c932151ca433f416ff0b3a6dd5e19e9a0"
+    },
+    {
+      "arm": "full_corpus",
+      "score": {
+        "scenarioId": "scn-712",
+        "family": "knee_mri",
+        "variant": "budget_exhausted",
+        "arm": "full_corpus",
+        "expectedDisposition": "meets_policy",
+        "actualDisposition": "meets_policy",
+        "dispositionMatch": true,
+        "expectedCompleteness": true,
+        "actualCompleteness": true,
+        "completenessMatch": true,
+        "stoppingReasonMatch": true,
+        "relevantRecall": 1,
+        "incrementalSourceRecall": 1,
+        "conflictRecall": null,
+        "evidenceSetCompleteness": 1,
+        "citationAuthenticity": 1,
+        "mappingAccuracy": 1,
+        "criticalOmissions": 0,
+        "gapActionAccuracy": 1,
+        "unsupportedDefinitiveClaims": 0,
+        "endToEndPassed": true,
+        "wrongPatientLeakageCount": 0,
+        "requiredButInaccessibleCount": 0,
+        "metricCounts": {
+          "relevantRecall": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "incrementalSourceRecall": {
+            "numerator": 1,
+            "denominator": 1
+          },
+          "conflictRecall": {
+            "numerator": 0,
+            "denominator": 0
+          },
+          "evidenceSetCompleteness": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "citationAuthenticity": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "mappingAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          },
+          "gapActionAccuracy": {
+            "numerator": 2,
+            "denominator": 2
+          }
+        },
+        "criteriaDetails": {
+          "req-knee-condition": {
+            "requirementId": "req-knee-condition",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          },
+          "req-plain-radiograph": {
+            "requirementId": "req-plain-radiograph",
+            "expectedStatus": "satisfied",
+            "actualStatus": "satisfied",
+            "statusMatch": true,
+            "evaluationStateMatch": true,
+            "expectedGapKind": "none",
+            "actualGapKind": "none",
+            "gapKindMatch": true,
+            "expectedNextActionType": "none",
+            "actualNextActionType": "none",
+            "nextActionMatch": true,
+            "goldRelevantCount": 1,
+            "recoveredRelevantCount": 1,
+            "mappingCorrect": true,
+            "missingConflictItems": [],
+            "missingFactItems": []
+          }
+        },
+        "effort": {
+          "queries": 0,
+          "pages": 0,
+          "reads": 0,
+          "uniqueEligibleRecords": 2,
+          "duplicateRecords": 0,
+          "rejectedRecords": 1,
+          "retrievalLatencyMs": 0.22620800000004238,
+          "packetLatencyMs": 1.1652920000000222,
+          "totalLatencyMs": 3.5459170000000313
+        }
+      },
+      "evidenceFingerprint": "4a49a168b7cab41fccc0b4c480b3b40b3cee8438852ea726d279a1e2fd38e6fb"
+    }
+  ],
+  "aggregates": [
+    {
+      "arm": "submitted_only",
+      "caseCount": 12,
+      "dispositionAccuracy": 1,
+      "meanRelevantRecall": 0.8055555555555555,
+      "meanIncrementalSourceRecall": 0,
+      "meanConflictRecall": null,
+      "evidenceSetCompleteness": 0.8333333333333334,
+      "meanCitationAuthenticity": 1,
+      "meanMappingAccuracy": 1,
+      "totalCriticalOmissions": 0,
+      "gapActionAccuracy": 1,
+      "totalUnsupportedDefinitiveClaims": 0,
+      "endToEndCorrectnessRate": 1,
+      "totalQueries": 0,
+      "totalPages": 0,
+      "totalReads": 0,
+      "totalUniqueRecords": 0,
+      "totalDuplicates": 0,
+      "totalRejectedRecords": 0,
+      "meanTotalLatencyMs": 3
+    },
+    {
+      "arm": "retrieval",
+      "caseCount": 12,
+      "dispositionAccuracy": 1,
+      "meanRelevantRecall": 0.9027777777777777,
+      "meanIncrementalSourceRecall": 0.5,
+      "meanConflictRecall": 1,
+      "evidenceSetCompleteness": 0.9166666666666666,
+      "meanCitationAuthenticity": 1,
+      "meanMappingAccuracy": 1,
+      "totalCriticalOmissions": 0,
+      "gapActionAccuracy": 1,
+      "totalUnsupportedDefinitiveClaims": 0,
+      "endToEndCorrectnessRate": 1,
+      "totalQueries": 61,
+      "totalPages": 61,
+      "totalReads": 16,
+      "totalUniqueRecords": 16,
+      "totalDuplicates": 0,
+      "totalRejectedRecords": 10,
+      "meanTotalLatencyMs": 19
+    },
+    {
+      "arm": "full_corpus",
+      "caseCount": 12,
+      "dispositionAccuracy": 1,
+      "meanRelevantRecall": 1,
+      "meanIncrementalSourceRecall": 1,
+      "meanConflictRecall": 1,
+      "evidenceSetCompleteness": 1,
+      "meanCitationAuthenticity": 1,
+      "meanMappingAccuracy": 1,
+      "totalCriticalOmissions": 0,
+      "gapActionAccuracy": 1,
+      "totalUnsupportedDefinitiveClaims": 0,
+      "endToEndCorrectnessRate": 1,
+      "totalQueries": 0,
+      "totalPages": 0,
+      "totalReads": 0,
+      "totalUniqueRecords": 19,
+      "totalDuplicates": 0,
+      "totalRejectedRecords": 10,
+      "meanTotalLatencyMs": 1
+    }
+  ],
+  "passed": true
+}

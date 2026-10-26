@@ -1,4 +1,4 @@
-import type { EvidenceWorkflowResult, FhirBundleIndexer } from '@openpa/core';
+import { hashCanonicalJson, type EvidenceWorkflowResult, type FhirBundleIndexer } from '@openpa/core';
 import type { GoldSidecar, GoldPacketFactAssertion } from './types.js';
 
 export interface CriterionScoringDetail {
@@ -6,6 +6,7 @@ export interface CriterionScoringDetail {
   expectedStatus: string;
   actualStatus?: string;
   statusMatch: boolean;
+  evaluationStateMatch: boolean;
   expectedGapKind: string;
   actualGapKind: string;
   gapKindMatch: boolean;
@@ -31,16 +32,19 @@ export interface CaseScoreReport {
   actualCompleteness: boolean;
   completenessMatch: boolean;
   stoppingReasonMatch: boolean;
-  relevantRecall: number;
-  incrementalSourceRecall: number;
+  relevantRecall: number | null;
+  incrementalSourceRecall: number | null;
   conflictRecall: number | null;
-  evidenceSetCompleteness: number;
-  citationAuthenticity: number;
-  mappingAccuracy: number;
+  evidenceSetCompleteness: number | null;
+  citationAuthenticity: number | null;
+  mappingAccuracy: number | null;
   criticalOmissions: number;
   gapActionAccuracy: number;
   unsupportedDefinitiveClaims: number;
+  wrongPatientLeakageCount: number;
+  requiredButInaccessibleCount: number;
   endToEndPassed: boolean;
+  metricCounts: Record<string, {numerator: number; denominator: number}>;
   criteriaDetails: Record<string, CriterionScoringDetail>;
   effort: {
     queries: number;
@@ -59,12 +63,12 @@ export interface ArmAggregateScore {
   arm: string;
   caseCount: number;
   dispositionAccuracy: number;
-  meanRelevantRecall: number;
-  meanIncrementalSourceRecall: number;
+  meanRelevantRecall: number | null;
+  meanIncrementalSourceRecall: number | null;
   meanConflictRecall: number | null;
-  evidenceSetCompleteness: number;
-  meanCitationAuthenticity: number;
-  meanMappingAccuracy: number;
+  evidenceSetCompleteness: number | null;
+  meanCitationAuthenticity: number | null;
+  meanMappingAccuracy: number | null;
   totalCriticalOmissions: number;
   gapActionAccuracy: number;
   totalUnsupportedDefinitiveClaims: number;
@@ -118,7 +122,8 @@ export class RetrievalScorer {
     let totalEmittedCitations = 0;
     let totalAuthenticCitations = 0;
     let totalCorrectlyMappedCitations = 0;
-    let criticalOmissionsCount = 0;
+    const ids = result.reviewPacket.criteria.map(row => row.requirementId);
+    let criticalOmissionsCount = ids.length - new Set(ids).size + ids.filter(id => !gold.criteria[id]).length;
     let totalGapActionChecks = 0;
     let correctGapActionChecks = 0;
     let unsupportedDefinitiveClaims = 0;
@@ -139,21 +144,24 @@ export class RetrievalScorer {
     }
 
     const allIndexedIds = new Set(indexer.getAllResources().map(r => `${r.resourceType}/${r.id}`));
+    const wrongPatientLeakageCount = indexer.getAllResources().filter(r => r.resourceType !== 'Patient' && r.subjectId !== result.reviewPacket.patientId).length;
 
     for (const [reqId, exp] of Object.entries(gold.criteria)) {
-      applicableCriteriaCount++;
       const packetRow = result.reviewPacket.criteria.find(c => c.requirementId === reqId);
+      const assessed = result.assessment.requirements.find(r => r.requirementId === reqId);
+      if (packetRow && ['satisfied', 'not_satisfied'].includes(packetRow.status ?? '') &&
+        (packetRow.status !== assessed?.status || packetRow.evaluationState !== 'evaluated')) unsupportedDefinitiveClaims++;
       const expectedStatus = isSubmittedArm
         ? exp.expectedStatusSubmitted
         : arm === 'full_corpus'
         ? exp.expectedStatusFullCorpus ?? exp.expectedStatusRetrieval
         : exp.expectedStatusRetrieval;
 
-      const expectedGap = isSubmittedArm
+      const expectedGap = arm === 'full_corpus' && exp.expectedGapKindFullCorpus ? exp.expectedGapKindFullCorpus : isSubmittedArm
         ? exp.expectedGapKindSubmitted
         : exp.expectedGapKindRetrieval;
 
-      const expectedAction = isSubmittedArm
+      const expectedAction = arm === 'full_corpus' && exp.expectedNextActionTypeFullCorpus ? exp.expectedNextActionTypeFullCorpus : isSubmittedArm
         ? exp.expectedNextActionTypeSubmitted
         : exp.expectedNextActionTypeRetrieval;
 
@@ -162,15 +170,19 @@ export class RetrievalScorer {
       const actualAction = packetRow?.nextAction.type ?? 'none';
 
       const statusMatch = actualStatus === expectedStatus;
+      const expectedState = isSubmittedArm ? 'evaluated' : exp.expectedEvaluationStateRetrieval ?? 'evaluated';
+      const evaluationStateMatch = packetRow?.evaluationState === expectedState;
+      if (!packetRow) criticalOmissionsCount++;
       const gapMatch = actualGap === expectedGap;
       const actionMatch = actualAction === expectedAction;
 
-      totalGapActionChecks += 2;
-      if (gapMatch) correctGapActionChecks++;
-      if (actionMatch) correctGapActionChecks++;
+      totalGapActionChecks++;
+      if (gapMatch && actionMatch) correctGapActionChecks++;
 
       const relevantGoldIds = exp.relevantResourceIds;
-      const conflictGoldIds = exp.mandatoryConflictResourceIds ?? [];
+      const conflictGoldIds = isSubmittedArm ? [] : exp.mandatoryConflictResourceIds ?? [];
+      const evidenceSetApplicable = relevantGoldIds.length > 0 || conflictGoldIds.length > 0 || !!exp.alternativeEvidenceSets?.some(set => set.length > 0);
+      if (evidenceSetApplicable) applicableCriteriaCount++;
 
       totalGoldRelevant += relevantGoldIds.length;
       totalGoldConflict += conflictGoldIds.length;
@@ -188,13 +200,17 @@ export class RetrievalScorer {
         // Check authenticity: is it in the indexer and in provenance?
         const isIndexed = allIndexedIds.has(cite.resourceId);
         const hasProvenance = Array.isArray(result.retrieval.provenance[cite.resourceId]);
-        const isAuthentic = isIndexed && hasProvenance;
+        const actual = indexer.getResourceById(cite.resourceId);
+        if (cite.excerpt && !actual?.textSnippet?.includes(cite.excerpt)) unsupportedDefinitiveClaims++;
+        const isAuthentic = isIndexed && hasProvenance && !!actual && cite.provenance.length > 0 &&
+          result.retrieval.provenance[cite.resourceId].some(ref => ref.sourceId === cite.sourceId) && cite.provenance.every(ref =>
+          ref.contentHash === hashCanonicalJson(actual.raw) && result.retrieval.provenance[cite.resourceId].some(p => hashCanonicalJson(p) === hashCanonicalJson(ref)));
         if (isAuthentic) {
           totalAuthenticCitations++;
         }
 
         // Check criterion mapping: does this citation belong to relevantGoldIds or conflictGoldIds?
-        const isRelevant = relevantGoldIds.includes(cite.resourceId);
+        const isRelevant = relevantGoldIds.includes(cite.resourceId) || !!exp.allowedCitationResourceIds?.includes(cite.resourceId);
         const isConflict = conflictGoldIds.includes(cite.resourceId);
         if (isRelevant || isConflict) {
           totalCorrectlyMappedCitations++;
@@ -210,7 +226,7 @@ export class RetrievalScorer {
         if (isPresent) {
           recoveredRelevantForCriterion++;
           totalRecoveredRelevant++;
-          if (isSubmittedArm) totalInitialRelevant++;
+          if (result.retrieval.provenance[goldId]?.some(ref => ref.sourceId === 'initial_submission')) totalInitialRelevant++;
         }
       }
 
@@ -218,9 +234,8 @@ export class RetrievalScorer {
       const missingConflictItems: string[] = [];
       for (const cId of conflictGoldIds) {
         const isPresent = allIndexedIds.has(cId);
-        if (isPresent) {
-          totalRecoveredConflict++;
-        } else {
+        if (isPresent) totalRecoveredConflict++;
+        if (!isPresent || !conflictCitations.some(c => c.resourceId === cId)) {
           missingConflictItems.push(cId);
           criticalOmissionsCount++;
         }
@@ -237,7 +252,7 @@ export class RetrievalScorer {
       }
 
       const allConflictRecovered = conflictGoldIds.every(id => allIndexedIds.has(id));
-      if (evidenceSetSatisfied && allConflictRecovered) {
+      if (evidenceSetApplicable && evidenceSetSatisfied && allConflictRecovered) {
         completeCriteriaCount++;
       }
 
@@ -245,8 +260,14 @@ export class RetrievalScorer {
       const missingFactItems: GoldPacketFactAssertion[] = [];
       if (exp.requiredPacketFacts && exp.requiredPacketFacts.length > 0) {
         for (const fact of exp.requiredPacketFacts) {
-          const excerpt = allRowCitations.map(c => c.excerpt ?? '').join(' ');
-          if (!excerpt.includes(fact.expectedValue)) {
+          if (fact.appliesTo && !fact.appliesTo.includes(arm)) continue;
+          const citedFacts = allRowCitations.filter(c => !fact.resourceId || c.resourceId === fact.resourceId);
+          const faithfulFact = citedFacts.some(c => {
+            const raw = indexer.getResourceById(c.resourceId)?.raw;
+            const value = fact.field.replace(/^\//, '').split(/[./]/).reduce<unknown>((current, key) => current && typeof current === 'object' ? (current as Record<string, unknown>)[key] : undefined, raw);
+            return typeof value === 'string' && value.includes(fact.expectedValue) && `${c.date ?? ''} ${c.excerpt ?? ''}`.includes(fact.expectedValue);
+          });
+          if (!faithfulFact) {
             missingFactItems.push(fact);
             criticalOmissionsCount++;
           }
@@ -258,6 +279,7 @@ export class RetrievalScorer {
         expectedStatus,
         actualStatus,
         statusMatch,
+        evaluationStateMatch,
         expectedGapKind: expectedGap,
         actualGapKind: actualGap,
         gapKindMatch: gapMatch,
@@ -272,21 +294,21 @@ export class RetrievalScorer {
       };
     }
 
-    const relevantRecall = totalGoldRelevant > 0 ? totalRecoveredRelevant / totalGoldRelevant : 1.0;
+    const relevantRecall = totalGoldRelevant > 0 ? totalRecoveredRelevant / totalGoldRelevant : null;
     const incrementalSourceRecall =
-      totalGoldRelevant > 0 ? Math.max(0, totalRecoveredRelevant - totalInitialRelevant) / totalGoldRelevant : 0.0;
+      totalGoldRelevant > totalInitialRelevant ? Math.max(0, totalRecoveredRelevant - totalInitialRelevant) / (totalGoldRelevant - totalInitialRelevant) : null;
     const conflictRecall = totalGoldConflict > 0 ? totalRecoveredConflict / totalGoldConflict : null;
     const evidenceSetCompleteness =
-      applicableCriteriaCount > 0 ? completeCriteriaCount / applicableCriteriaCount : 1.0;
+      applicableCriteriaCount > 0 ? completeCriteriaCount / applicableCriteriaCount : null;
     const citationAuthenticity =
-      totalEmittedCitations > 0 ? totalAuthenticCitations / totalEmittedCitations : 1.0;
+      totalEmittedCitations > 0 ? totalAuthenticCitations / totalEmittedCitations : null;
     const mappingAccuracy =
-      totalEmittedCitations > 0 ? totalCorrectlyMappedCitations / totalEmittedCitations : 1.0;
+      totalEmittedCitations > 0 ? totalCorrectlyMappedCitations / totalEmittedCitations : null;
     const gapActionAccuracy =
       totalGapActionChecks > 0 ? correctGapActionChecks / totalGapActionChecks : 1.0;
 
     const allCriteriaMatch = Object.values(criteriaDetails).every(
-      c => c.statusMatch && c.gapKindMatch && c.nextActionMatch && c.mappingCorrect
+      c => c.statusMatch && c.evaluationStateMatch && c.gapKindMatch && c.nextActionMatch && c.mappingCorrect
     );
 
     const endToEndPassed =
@@ -295,7 +317,9 @@ export class RetrievalScorer {
       stoppingReasonMatch &&
       allCriteriaMatch &&
       criticalOmissionsCount === 0 &&
+      (citationAuthenticity === null || citationAuthenticity === 1) &&
       unsupportedDefinitiveClaims === 0;
+    const safeEndToEndPassed = endToEndPassed && wrongPatientLeakageCount === 0;
 
     return {
       scenarioId: gold.scenarioId,
@@ -318,7 +342,18 @@ export class RetrievalScorer {
       criticalOmissions: criticalOmissionsCount,
       gapActionAccuracy,
       unsupportedDefinitiveClaims,
-      endToEndPassed,
+      endToEndPassed: safeEndToEndPassed,
+      wrongPatientLeakageCount,
+      requiredButInaccessibleCount: gold.requiredButInaccessibleResourceIds?.length ?? 0,
+      metricCounts: {
+        relevantRecall: {numerator: totalRecoveredRelevant, denominator: totalGoldRelevant},
+        incrementalSourceRecall: {numerator: Math.max(0, totalRecoveredRelevant - totalInitialRelevant), denominator: totalGoldRelevant - totalInitialRelevant},
+        conflictRecall: {numerator: totalRecoveredConflict, denominator: totalGoldConflict},
+        evidenceSetCompleteness: {numerator: completeCriteriaCount, denominator: applicableCriteriaCount},
+        citationAuthenticity: {numerator: totalAuthenticCitations, denominator: totalEmittedCitations},
+        mappingAccuracy: {numerator: totalCorrectlyMappedCitations, denominator: totalEmittedCitations},
+        gapActionAccuracy: {numerator: correctGapActionChecks, denominator: totalGapActionChecks},
+      },
       criteriaDetails,
       effort: {
         queries: result.retrieval.counts.queries,
@@ -340,13 +375,14 @@ export class RetrievalScorer {
       throw new Error('Cannot aggregate zero scores');
     }
 
+    const mean = (values: Array<number | null>) => {const applicable = values.filter((v): v is number => v !== null); return applicable.length ? applicable.reduce((a,b) => a+b, 0) / applicable.length : null;};
     const arm = scores[0].arm;
     const dispositionAccuracy =
       scores.filter(s => s.dispositionMatch).length / caseCount;
     const meanRelevantRecall =
-      scores.reduce((acc, s) => acc + s.relevantRecall, 0) / caseCount;
+      mean(scores.map(s => s.relevantRecall));
     const meanIncrementalSourceRecall =
-      scores.reduce((acc, s) => acc + s.incrementalSourceRecall, 0) / caseCount;
+      mean(scores.map(s => s.incrementalSourceRecall));
 
     const conflictScores = scores.filter(s => s.conflictRecall !== null);
     const meanConflictRecall =
@@ -355,11 +391,11 @@ export class RetrievalScorer {
         : null;
 
     const evidenceSetCompleteness =
-      scores.reduce((acc, s) => acc + s.evidenceSetCompleteness, 0) / caseCount;
+      mean(scores.map(s => s.evidenceSetCompleteness));
     const meanCitationAuthenticity =
-      scores.reduce((acc, s) => acc + s.citationAuthenticity, 0) / caseCount;
+      mean(scores.map(s => s.citationAuthenticity));
     const meanMappingAccuracy =
-      scores.reduce((acc, s) => acc + s.mappingAccuracy, 0) / caseCount;
+      mean(scores.map(s => s.mappingAccuracy));
     const totalCriticalOmissions =
       scores.reduce((acc, s) => acc + s.criticalOmissions, 0);
     const gapActionAccuracy =

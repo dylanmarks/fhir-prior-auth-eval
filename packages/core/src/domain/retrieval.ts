@@ -16,7 +16,7 @@ export const SourceRecordRefSchema = z.object({
   sourceId: z.string(),
   resourceType: z.string(),
   resourceId: z.string(),
-  contentHash: z.string(),
+  contentHash: z.string().regex(/^[a-f0-9]{64}$/, 'Expected SHA-256 hash'),
 });
 export type SourceRecordRef = z.infer<typeof SourceRecordRefSchema>;
 
@@ -29,7 +29,8 @@ export type SourceRecord = z.infer<typeof SourceRecordSchema>;
 
 export const SearchPageSchema = z.object({
   references: z.array(SourceRecordRefSchema),
-  nextCursor: z.string().optional(),
+  rejectedCount: z.number().int().nonnegative().optional(),
+  nextCursor: z.string().min(1).optional(),
   totalCount: z.number().int().nonnegative().optional(),
 });
 export type SearchPage = z.infer<typeof SearchPageSchema>;

@@ -7,8 +7,8 @@
   "goldReviewStatus": "author_only",
   "expectedDispositions": {
     "submittedOnly": "needs_information",
-    "retrieval": "needs_information",
-    "fullCorpus": "needs_information"
+    "retrieval": "requires_clinical_review",
+    "fullCorpus": "requires_clinical_review"
   },
   "expectedSearchCompleteness": {
     "submittedOnly": true,
@@ -31,7 +31,19 @@
       "expectedGapKindSubmitted": "none",
       "expectedGapKindRetrieval": "none",
       "expectedNextActionTypeSubmitted": "none",
-      "expectedNextActionTypeRetrieval": "none"
+      "expectedNextActionTypeRetrieval": "none",
+      "requiredPacketFacts": [
+        {
+          "resourceId": "Condition/cond-lmb-radic-01",
+          "field": "onsetDateTime",
+          "expectedValue": "2026-05-10",
+          "appliesTo": [
+            "submitted_only",
+            "retrieval",
+            "full_corpus"
+          ]
+        }
+      ]
     },
     "req-conservative-therapy": {
       "expectedStatusSubmitted": "insufficient_evidence",
@@ -41,7 +53,24 @@
       "expectedGapKindSubmitted": "not_found_in_searched_sources",
       "expectedGapKindRetrieval": "not_found_in_searched_sources",
       "expectedNextActionTypeSubmitted": "request_documentation",
-      "expectedNextActionTypeRetrieval": "request_documentation"
+      "expectedNextActionTypeRetrieval": "request_documentation",
+      "requiredPacketFacts": [
+        {
+          "resourceId": "Procedure/proc-lmb-pt-start",
+          "field": "performedPeriod.start",
+          "expectedValue": "2026-05-15",
+          "appliesTo": []
+        },
+        {
+          "resourceId": "Procedure/proc-lmb-pt-end",
+          "field": "performedPeriod.end",
+          "expectedValue": "2026-07-15",
+          "appliesTo": []
+        }
+      ],
+      "allowedCitationResourceIds": [
+        "Procedure/proc-lmb-older-pt"
+      ]
     }
   }
 }

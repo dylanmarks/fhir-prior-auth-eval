@@ -7,7 +7,8 @@
     "variantLabel": "Complete submission",
     "title": "Lumbar Radiculopathy — Complete Initial Bundle",
     "description": "Initial bundle includes radiculopathy diagnosis and complete 8-week physical therapy course.",
-    "expectedBehavior": "Rules meet policy; packet cites initial submission records."
+    "expectedBehavior": "Rules meet policy; packet cites initial submission records.",
+    "clinicalFactsFingerprint": "56afe9ac0a62f6c23159ed5ffcc26fab847fb19edc22aa7d7a92824195bcd90e"
   },
   {
     "scenarioId": "scn-702",
@@ -17,7 +18,8 @@
     "variantLabel": "Scattered evidence",
     "title": "Lumbar Radiculopathy — Scattered Records",
     "description": "Radiculopathy diagnosis in submission; physical therapy course stored at outside physical therapy clinic.",
-    "expectedBehavior": "Submitted-only is deficient; retrieval recovers therapy evidence and matches complete outcome."
+    "expectedBehavior": "Submitted-only is deficient; retrieval recovers therapy evidence and matches complete outcome.",
+    "clinicalFactsFingerprint": "56afe9ac0a62f6c23159ed5ffcc26fab847fb19edc22aa7d7a92824195bcd90e"
   },
   {
     "scenarioId": "scn-703",
@@ -26,8 +28,9 @@
     "variant": "missing",
     "variantLabel": "Truly missing",
     "title": "Lumbar Radiculopathy — Missing Therapy Course",
-    "description": "Patient received no 6-week conservative therapy completion; absent from all sources.",
-    "expectedBehavior": "Search completes; packet identifies documented gap and requests therapy records."
+    "description": "No completion or adherence record is available in the configured sources; a single therapy endpoint remains.",
+    "expectedBehavior": "Search completes; packet identifies documented gap and requests therapy records.",
+    "clinicalFactsFingerprint": "b2f1e3410bc7a1683f94819de79212f57eeae87659e67d45d7db15642fdd6b35"
   },
   {
     "scenarioId": "scn-704",
@@ -37,7 +40,8 @@
     "variantLabel": "Contradictory evidence",
     "title": "Lumbar Radiculopathy — Conflicting Re-evaluation",
     "description": "Initial diagnosis present, but outside specialist encounter note documents absence of radicular symptoms.",
-    "expectedBehavior": "Retrieval includes both records; clinical escalation preserves conflict and questions reviewer."
+    "expectedBehavior": "Retrieval includes both records; clinical escalation preserves conflict and questions reviewer.",
+    "clinicalFactsFingerprint": "c60193c0b72e3a1573e08bc9e2f79561e27ccb800076dc0ac898decda3929206"
   },
   {
     "scenarioId": "scn-705",
@@ -47,7 +51,8 @@
     "variantLabel": "Source unavailable",
     "title": "Lumbar Radiculopathy — Unavailable Outside Source",
     "description": "Scattered therapy records exist at Apex Physical Therapy, but the clinic source is unavailable.",
-    "expectedBehavior": "Search incomplete; clinical escalation; system never claims documentation is absent."
+    "expectedBehavior": "Search incomplete; clinical escalation; system never claims documentation is absent.",
+    "clinicalFactsFingerprint": "56afe9ac0a62f6c23159ed5ffcc26fab847fb19edc22aa7d7a92824195bcd90e"
   },
   {
     "scenarioId": "scn-706",
@@ -57,7 +62,8 @@
     "variantLabel": "Search budget exhausted",
     "title": "Lumbar Radiculopathy — Budget Limit Reached",
     "description": "Scattered therapy records exist, but query budget ceiling prevents completing all reads.",
-    "expectedBehavior": "Search incomplete with explicit stopping reason; clinical review without definitive clearance."
+    "expectedBehavior": "Search incomplete with explicit stopping reason; clinical review without definitive clearance.",
+    "clinicalFactsFingerprint": "56afe9ac0a62f6c23159ed5ffcc26fab847fb19edc22aa7d7a92824195bcd90e"
   },
   {
     "scenarioId": "scn-707",
@@ -67,7 +73,8 @@
     "variantLabel": "Complete submission",
     "title": "Knee Meniscal Derangement — Complete Initial Bundle",
     "description": "Initial bundle includes meniscal tear diagnosis and recent 3-view knee radiograph.",
-    "expectedBehavior": "Rules meet policy; packet cites initial submission records."
+    "expectedBehavior": "Rules meet policy; packet cites initial submission records.",
+    "clinicalFactsFingerprint": "a0d777abd5eb71df9ae7f17fbedacad622ac48bbdff81194805d48650fe92254"
   },
   {
     "scenarioId": "scn-708",
@@ -77,7 +84,8 @@
     "variantLabel": "Scattered evidence",
     "title": "Knee Meniscal Derangement — Scattered Radiograph",
     "description": "Meniscal tear diagnosis in submission; recent radiograph stored at outside imaging center.",
-    "expectedBehavior": "Submitted-only is deficient; retrieval recovers X-ray and matches complete outcome."
+    "expectedBehavior": "Submitted-only is deficient; retrieval recovers X-ray and matches complete outcome.",
+    "clinicalFactsFingerprint": "a0d777abd5eb71df9ae7f17fbedacad622ac48bbdff81194805d48650fe92254"
   },
   {
     "scenarioId": "scn-709",
@@ -87,7 +95,8 @@
     "variantLabel": "Truly missing",
     "title": "Knee Meniscal Derangement — Missing Radiograph",
     "description": "No plain radiograph completed within 90 days across submission or outside imaging source.",
-    "expectedBehavior": "Search completes; packet identifies documented gap and requests radiograph."
+    "expectedBehavior": "Search completes; packet identifies documented gap and requests radiograph.",
+    "clinicalFactsFingerprint": "a42930f663f4d45af8123f659c9e80f861607b20ca2fd40c5735dc19b3efe1d2"
   },
   {
     "scenarioId": "scn-710",
@@ -97,7 +106,8 @@
     "variantLabel": "Contradictory evidence",
     "title": "Knee Meniscal Derangement — Conflicting Orthopedic Note",
     "description": "Initial diagnosis present, but outside note documents patient denies knee instability or locking.",
-    "expectedBehavior": "Retrieval includes both records; clinical escalation preserves conflict for review."
+    "expectedBehavior": "Retrieval includes both records; clinical escalation preserves conflict for review.",
+    "clinicalFactsFingerprint": "6fe61e0fac7e50805f178c7aa3ad02446ea51a89ed9d9b7047389e61644e7243"
   },
   {
     "scenarioId": "scn-711",
@@ -107,7 +117,8 @@
     "variantLabel": "Source unavailable",
     "title": "Knee Meniscal Derangement — Unavailable Imaging Center",
     "description": "Scattered radiograph exists at Valley Advanced Imaging, but the imaging source is offline.",
-    "expectedBehavior": "Search incomplete; clinical escalation; system never claims radiograph is absent."
+    "expectedBehavior": "Search incomplete; clinical escalation; system never claims radiograph is absent.",
+    "clinicalFactsFingerprint": "a0d777abd5eb71df9ae7f17fbedacad622ac48bbdff81194805d48650fe92254"
   },
   {
     "scenarioId": "scn-712",
@@ -117,6 +128,7 @@
     "variantLabel": "Search budget exhausted",
     "title": "Knee Meniscal Derangement — Budget Limit Reached",
     "description": "Scattered radiograph exists, but query read limit halts search before completion.",
-    "expectedBehavior": "Search incomplete with explicit stopping reason; clinical review without definitive clearance."
+    "expectedBehavior": "Search incomplete with explicit stopping reason; clinical review without definitive clearance.",
+    "clinicalFactsFingerprint": "a0d777abd5eb71df9ae7f17fbedacad622ac48bbdff81194805d48650fe92254"
   }
 ]

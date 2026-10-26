@@ -34,7 +34,19 @@
       "expectedGapKindSubmitted": "none",
       "expectedGapKindRetrieval": "none",
       "expectedNextActionTypeSubmitted": "none",
-      "expectedNextActionTypeRetrieval": "none"
+      "expectedNextActionTypeRetrieval": "none",
+      "requiredPacketFacts": [
+        {
+          "resourceId": "Condition/cond-lmb-radic-01",
+          "field": "onsetDateTime",
+          "expectedValue": "2026-05-10",
+          "appliesTo": [
+            "submitted_only",
+            "retrieval",
+            "full_corpus"
+          ]
+        }
+      ]
     },
     "req-conservative-therapy": {
       "expectedStatusSubmitted": "insufficient_evidence",
@@ -44,7 +56,28 @@
       "expectedGapKindSubmitted": "not_found_in_searched_sources",
       "expectedGapKindRetrieval": "source_unavailable",
       "expectedNextActionTypeSubmitted": "request_documentation",
-      "expectedNextActionTypeRetrieval": "restore_source_access"
+      "expectedNextActionTypeRetrieval": "restore_source_access",
+      "requiredPacketFacts": [
+        {
+          "resourceId": "Procedure/proc-lmb-pt-start",
+          "field": "performedPeriod.start",
+          "expectedValue": "2026-05-15",
+          "appliesTo": []
+        },
+        {
+          "resourceId": "Procedure/proc-lmb-pt-end",
+          "field": "performedPeriod.end",
+          "expectedValue": "2026-07-15",
+          "appliesTo": []
+        }
+      ],
+      "allowedCitationResourceIds": [
+        "Procedure/proc-lmb-older-pt"
+      ]
     }
-  }
+  },
+  "requiredButInaccessibleResourceIds": [
+    "Procedure/proc-lmb-pt-start",
+    "Procedure/proc-lmb-pt-end"
+  ]
 }

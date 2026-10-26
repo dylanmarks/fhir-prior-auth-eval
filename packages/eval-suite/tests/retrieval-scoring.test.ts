@@ -81,7 +81,7 @@ describe('Phase 6 Retrieval and Review Handoff Scorer & Baseline', () => {
       arm: 'retrieval',
     });
 
-    expect(resMissing.workflowDisposition).toBe('needs_information');
+    expect(resMissing.workflowDisposition).toBe('requires_clinical_review');
     expect(resMissing.retrieval.completeWithinScope).toBe(true);
     expect(resMissing.retrieval.stoppingReason).toBe('completed');
     expect(resMissing.reviewPacket.criteria[1].gapKind).toBe('not_found_in_searched_sources');
@@ -192,7 +192,7 @@ describe('Phase 6 Retrieval and Review Handoff Scorer & Baseline', () => {
             sourceId: 'initial_submission',
             resourceType: 'Observation',
             resourceId: 'Observation/obs-lmb-bp-01',
-            contentHash: 'somehash',
+            contentHash: res.retrieval.provenance['Observation/obs-lmb-bp-01'][0].contentHash,
           },
         ],
       });

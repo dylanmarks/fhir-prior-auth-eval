@@ -8,9 +8,9 @@ export function canonicalJsonStringify(val: unknown): string {
     return JSON.stringify(val);
   }
   if (Array.isArray(val)) {
-    return '[' + val.map(canonicalJsonStringify).join(',') + ']';
+    return '[' + val.map(value => value === undefined ? 'null' : canonicalJsonStringify(value)).join(',') + ']';
   }
-  const keys = Object.keys(val as Record<string, unknown>).sort();
+  const keys = Object.keys(val as Record<string, unknown>).filter(key => (val as Record<string, unknown>)[key] !== undefined).sort();
   const pairs = keys.map(
     key => JSON.stringify(key) + ':' + canonicalJsonStringify((val as Record<string, unknown>)[key])
   );

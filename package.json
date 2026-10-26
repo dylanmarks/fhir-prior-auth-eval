@@ -16,6 +16,7 @@
     "test:watch": "vitest",
     "benchmark": "tsx packages/eval-suite/src/cli.ts",
     "experiment": "node --env-file-if-exists=.env --import tsx packages/eval-suite/src/experiment-cli.ts",
+    "experiment:retrieval": "node --import tsx packages/eval-suite/src/retrieval/cli.ts",
     "serve": "node --env-file-if-exists=.env --import tsx apps/server/index.ts",
     "typecheck": "npm run typecheck --workspaces --if-present"
   },

@@ -23,4 +23,4 @@ Real PHI integration, clinical validation, and Da Vinci PAS transactions are out
 
 ## Proposed next phase
 
-[Phase 6: evidence retrieval and review handoff](phase-6-retrieval-and-handoff.md) scopes a separate offline experiment for scattered, missing, conflicting, and inaccessible evidence, with a scored review packet. It is an implementation brief, not completed work. The [follow-up video brief](../docs/PHASE_6_VIDEO_BRIEF.md) defines the demonstration and the claims its results could support.
+[Phase 6: evidence retrieval and review handoff](phase-6-retrieval-and-handoff.md) now has an offline runner, three-arm report, and workbench. Its 36 authored fixture/arm checks pass. See [verification and limitations](../docs/PHASE_6_VERIFICATION.md), including the browser fault-injection checks and the fixed lumbar policy's historical-therapy limitation. The [follow-up video brief](../docs/PHASE_6_VIDEO_BRIEF.md) defines the demonstration. [Phase 7](phase-7-evidence-sufficiency-and-routing.md) remains queued behind its dependency audit and Phase 6 acceptance requirements.

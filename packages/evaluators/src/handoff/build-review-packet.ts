@@ -13,6 +13,7 @@ import {
   type FhirBundleIndexer,
   canonicalJsonStringify,
   sha256Hex,
+  ReviewPacketSchema,
 } from '@openpa/core';
 
 export interface BuildReviewPacketInput {
@@ -56,7 +57,8 @@ export function buildReviewPacket(input: BuildReviewPacketInput): ReviewPacket {
     const reqEval = assessment.requirements.find(r => r.requirementId === req.id);
 
     // If requirement was skipped after a prior clinical escalation / safety stop
-    if (!reqEval) {
+    const wasEvaluated = assessment.executionTrace.some(step => step.requirementId === req.id);
+    if (!reqEval || !wasEvaluated) {
       const nextAction: NextAction = {
         type: 'clinical_interpretation',
         description: `Evaluation of ${req.id} was deferred following safety stop; review complete clinical context.`,
@@ -68,6 +70,8 @@ export function buildReviewPacket(input: BuildReviewPacketInput): ReviewPacket {
         requirementId: req.id,
         description: req.description,
         evaluationState: 'not_evaluated',
+        status: reqEval?.status,
+        confidence: reqEval?.confidence,
         gapKind: 'not_evaluated',
         nextAction,
         citations: [],
@@ -84,28 +88,17 @@ export function buildReviewPacket(input: BuildReviewPacketInput): ReviewPacket {
         ? ev.resourceId
         : `${ev.resourceType}/${ev.resourceId}`;
       const indexedRes = indexer.getResourceById(canonicalId);
-      const provenanceRefs = retrieval.provenance[canonicalId] ?? [
-        {
-          sourceId: 'initial_submission',
-          resourceType: ev.resourceType,
-          resourceId: canonicalId,
-          contentHash: '',
-        },
-      ];
+      const provenanceRefs = retrieval.provenance[canonicalId];
+      if (!indexedRes || !provenanceRefs?.length) throw new Error(`Unverified packet citation: ${canonicalId}`);
       const sourceId = provenanceRefs[0]?.sourceId ?? 'initial_submission';
 
       // Distinguish date from indexed resource or citation
       const clinicalDate = ev.date ?? indexedRes?.date ?? indexedRes?.period?.start;
       const textSnippet = ev.textSnippet ?? indexedRes?.textSnippet;
 
-      // Check if this citation is contradictory
-      const isContradiction = Boolean(
-        reqEval.contradictionDetected &&
-          (textSnippet?.toLowerCase().includes('denies') ||
-            textSnippet?.toLowerCase().includes('negative') ||
-            textSnippet?.toLowerCase().includes('resolved') ||
-            textSnippet?.toLowerCase().includes('refutes'))
-      );
+      // A contradiction is a requirement-level finding. Preserve all cited sides
+      // as evidence to reconcile rather than guessing polarity from excerpt words.
+      const isContradiction = Boolean(reqEval.contradictionDetected);
 
       const packetCitation: ReviewPacketCitation = {
         resourceType: ev.resourceType,
@@ -115,7 +108,6 @@ export function buildReviewPacket(input: BuildReviewPacketInput): ReviewPacket {
         excerpt: textSnippet,
         provenance: provenanceRefs,
         contentHash: provenanceRefs[0]?.contentHash,
-        isContradiction,
       };
 
       if (isContradiction) {
@@ -138,6 +130,10 @@ export function buildReviewPacket(input: BuildReviewPacketInput): ReviewPacket {
         targetRequirementId: req.id,
       };
       unresolvedItems.push(`${req.id}: Contradictory clinical documentation detected`);
+    } else if (reqEval.status === 'not_satisfied') {
+      gapKind = 'documented_not_met';
+      nextAction = {type: 'clinical_interpretation', description: `Review documented nonfulfillment of ${req.description}. Are there relevant exceptions?`, proposedRole: 'clinical_reviewer', targetRequirementId: req.id};
+      unresolvedItems.push(`${req.id}: Documented clinical criteria not met`);
     } else if (retrieval.stoppingReason === 'source_unavailable') {
       if (reqEval.status === 'satisfied') {
         gapKind = 'none';
@@ -157,7 +153,7 @@ export function buildReviewPacket(input: BuildReviewPacketInput): ReviewPacket {
         };
         unresolvedItems.push(`${req.id}: Source unavailable during retrieval`);
       }
-    } else if (retrieval.stoppingReason === 'budget_exhausted') {
+    } else if (!retrieval.completeWithinScope) {
       if (reqEval.status === 'satisfied') {
         gapKind = 'none';
         nextAction = {
@@ -170,21 +166,12 @@ export function buildReviewPacket(input: BuildReviewPacketInput): ReviewPacket {
         gapKind = 'search_incomplete';
         nextAction = {
           type: 'continue_search',
-          description: `Search budget exhausted before locating documentation for ${req.id}. Continue search or expand query limits.`,
+          description: `Search stopped (${retrieval.stoppingReason}) before completing review of available records for ${req.description}. Can the remaining search be completed?`,
           proposedRole: 'clinical_reviewer',
           targetRequirementId: req.id,
         };
         unresolvedItems.push(`${req.id}: Search budget exhausted before completion`);
       }
-    } else if (reqEval.status === 'not_satisfied') {
-      gapKind = 'documented_not_met';
-      nextAction = {
-        type: 'clinical_interpretation',
-        description: `Clinical documentation is present but does not satisfy policy criteria for ${req.id}; review for exceptions.`,
-        proposedRole: 'clinical_reviewer',
-        targetRequirementId: req.id,
-      };
-      unresolvedItems.push(`${req.id}: Documented clinical criteria not met`);
     } else if (reqEval.status === 'insufficient_evidence') {
       if (retrieval.scopeKind === 'initial_submission') {
         gapKind = 'not_found_in_searched_sources';
@@ -273,7 +260,7 @@ export function buildReviewPacket(input: BuildReviewPacketInput): ReviewPacket {
 
   const contentFingerprint = sha256Hex(canonicalJsonStringify(fingerprintPayload));
 
-  return {
+  return ReviewPacketSchema.parse({
     schemaVersion: '1.0.0',
     generatedAt,
     contentFingerprint,
@@ -293,5 +280,5 @@ export function buildReviewPacket(input: BuildReviewPacketInput): ReviewPacket {
     criteria,
     unresolvedItems,
     integrityIssues,
-  };
+  });
 }

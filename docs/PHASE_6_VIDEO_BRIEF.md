@@ -2,6 +2,8 @@
 
 Status: recording plan for Phase 6. Record results only after the implementation and verification are complete. Implementation specification: `roadmap/phase-6-retrieval-and-handoff.md`.
 
+Implementation update: the offline report records 12/12 workflow/packet checks in each of three arms (36/36 total). Use `results/retrieval/offline-report.md` and the exact counts in its JSON companion for speaking notes. Read `docs/PHASE_6_VERIFICATION.md` before recording: pending-run cancellation and variant switching were verified using a visibly labeled temporary delayed adapter, and the fixed lumbar policy can aggregate historical therapy into elapsed duration. Show that limitation explicitly or use knee MRI for the primary recovery demonstration; do not present the lumbar elapsed span as continuous treatment.
+
 ## Audience and central point
 
 Audience: healthcare product leaders, interoperability engineers, and people assessing the practical value of AI-assisted prior authorization work.

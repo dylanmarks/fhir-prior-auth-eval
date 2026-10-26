@@ -124,6 +124,8 @@ Zero observed unsafe resolutions among nine resolutions still gives a roughly **
 
 ## Run a paired experiment
 
+The **Retrieval & handoff** workbench tab adds an offline evidence-access experiment across twelve paired lumbar/knee MRI fixtures. Run `npm run experiment:retrieval` to compare submitted records, bounded retrieval, and an independently assembled accessible corpus. The [saved report](results/retrieval/offline-report.md) matches all 36 authored workflow/packet expectations. [Verification notes](docs/PHASE_6_VERIFICATION.md) explain label corrections, browser checks, and the unchanged lumbar policy's historical-therapy limitation. These results do not establish clinical reliability or reviewer time savings.
+
 Offline:
 
 ```bash

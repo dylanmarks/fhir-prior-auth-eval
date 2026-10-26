@@ -34,7 +34,17 @@
       "expectedGapKindSubmitted": "none",
       "expectedGapKindRetrieval": "conflicting_evidence",
       "expectedNextActionTypeSubmitted": "none",
-      "expectedNextActionTypeRetrieval": "reconcile_conflict"
+      "expectedNextActionTypeRetrieval": "reconcile_conflict",
+      "requiredPacketFacts": [
+        {
+          "resourceId": "Condition/cond-kne-tear-01",
+          "field": "onsetDateTime",
+          "expectedValue": "2026-06-01",
+          "appliesTo": [
+            "submitted_only"
+          ]
+        }
+      ]
     },
     "req-plain-radiograph": {
       "expectedStatusSubmitted": "satisfied",
@@ -44,9 +54,20 @@
         "DiagnosticReport/diag-kne-xray-01"
       ],
       "expectedGapKindSubmitted": "none",
-      "expectedGapKindRetrieval": "none",
+      "expectedGapKindRetrieval": "not_evaluated",
       "expectedNextActionTypeSubmitted": "none",
-      "expectedNextActionTypeRetrieval": "none"
+      "expectedNextActionTypeRetrieval": "clinical_interpretation",
+      "requiredPacketFacts": [
+        {
+          "resourceId": "DiagnosticReport/diag-kne-xray-01",
+          "field": "effectiveDateTime",
+          "expectedValue": "2026-06-20",
+          "appliesTo": [
+            "submitted_only"
+          ]
+        }
+      ],
+      "expectedEvaluationStateRetrieval": "not_evaluated"
     }
   }
 }

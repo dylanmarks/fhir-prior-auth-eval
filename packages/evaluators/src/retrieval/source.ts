@@ -22,6 +22,12 @@ export interface EvidenceSource {
   }): Promise<SourceRecord>;
 }
 
+export function resourcePatientId(record: Record<string, unknown>): string | undefined {
+  const ref = (record.subject as {reference?: unknown} | undefined)?.reference ??
+    (record.patient as {reference?: unknown} | undefined)?.reference;
+  return typeof ref === 'string' && /^Patient\/[^/]+$/.test(ref) ? ref.slice(8) : undefined;
+}
+
 export class InMemoryEvidenceSource implements EvidenceSource {
   public readonly descriptor: SourceDescriptor;
   private readonly records: Array<Record<string, unknown>>;
@@ -48,12 +54,13 @@ export class InMemoryEvidenceSource implements EvidenceSource {
 
     // Filter records matching resourceType. Note: wrong-patient records may be stored
     // in the source store to test that the retriever filters them out during read/search.
-    const matching = this.records.filter(r => r.resourceType === input.resourceType);
+    const candidates = this.records.filter(r => r.resourceType === input.resourceType);
+    const matching = candidates.filter(r => resourcePatientId(r) === input.patientId);
 
     // Decode cursor (format: "offset:<number>")
     let offset = 0;
     if (input.cursor) {
-      if (!input.cursor.startsWith('offset:')) {
+      if (!/^offset:\d+$/.test(input.cursor)) {
         throw new Error(`Malformed cursor: ${input.cursor}`);
       }
       offset = parseInt(input.cursor.slice(7), 10);
@@ -82,6 +89,7 @@ export class InMemoryEvidenceSource implements EvidenceSource {
       references,
       nextCursor,
       totalCount: matching.length,
+      rejectedCount: input.cursor ? 0 : candidates.length - matching.length,
     };
   }
 
@@ -109,13 +117,8 @@ export class InMemoryEvidenceSource implements EvidenceSource {
     }
 
     // Extract patient ID from subject or patient reference
-    let patientId = input.patientId;
-    const subjectRef = (record.subject as { reference?: string })?.reference ??
-      (record.patient as { reference?: string })?.reference;
-    if (typeof subjectRef === 'string') {
-      const parts = subjectRef.split('/');
-      patientId = parts[parts.length - 1];
-    }
+    const patientId = resourcePatientId(record);
+    if (patientId !== input.patientId) throw new Error('Record does not belong to requested patient');
 
     return {
       reference: {

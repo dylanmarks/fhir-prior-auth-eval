@@ -1,418 +1,190 @@
 import {
-  type RetrievalInput,
-  type RetrievalResult,
-  type RetrievalTraceEvent,
-  type SourceRecord,
-  type SourceRecordRef,
-  type RetrievalCounts,
-  type RetrievalLimits,
-  type RetrievalStoppingReason,
-  hashCanonicalJson,
+  type RetrievalInput, type RetrievalResult, type SourceRecordRef, type SourceRecord,
+  type RetrievalStoppingReason, type RetrievalTraceEvent, FhirBundleIndexer,
+  hashCanonicalJson, RetrievalInputSchema, RetrievalLimitsSchema, SearchPageSchema, SourceRecordSchema,
 } from '@openpa/core';
-import type { EvidenceSource } from './source.js';
+import { type EvidenceSource, resourcePatientId } from './source.js';
+
+const supportedTypes = new Set(['Condition', 'Procedure', 'Observation', 'DiagnosticReport', 'DocumentReference']);
+
+/** Shared accumulator validates identity and quarantines canonical collisions. */
+export class EvidenceAccumulator {
+  readonly result: RetrievalResult = {
+    scopeKind: 'configured_sources', scopeDescription: 'Configured synthetic sources and advertised types only; not the entire patient chart.',
+    completeWithinScope: true, stoppingReason: 'completed', searchedSources: [], searchedResourceTypes: [],
+    incompleteSources: [], retrievedRecords: [], provenance: {}, trace: [],
+    counts: {queries: 0, pages: 0, reads: 0, uniqueEligibleRecords: 0, duplicateRecords: 0, rejectedRecords: 0, conflictRecords: 0},
+    materializedBundle: {}, integrityIssues: [],
+  };
+  private resources = new Map<string, Record<string, unknown>>();
+  private collisions = new Set<string>();
+  constructor(readonly input: RetrievalInput) {
+    const indexer = new FhirBundleIndexer(input.initialBundle);
+    const initial = indexer.getAllResources();
+    const issues = [...indexer.integrityIssues];
+    if (initial.some(r => !/^[A-Za-z0-9.-]{1,64}$/.test(r.id))) issues.push('Malformed initial resource identity');
+    if (indexer.bundlePatientId !== input.patientId) issues.push('Initial patient identity mismatch');
+    if (initial.some(r => r.resourceType !== 'Patient' && resourcePatientId(r.raw) !== input.patientId)) issues.push('Initial resource patient identity mismatch');
+    if (issues.length) {
+      this.result.integrityIssues.push(...issues);
+      this.stop('integrity_failure');
+      return;
+    }
+    for (const r of initial) this.accept({sourceId: 'initial_submission', resourceType: r.resourceType, resourceId: `${r.resourceType}/${r.id}`, contentHash: hashCanonicalJson(r.raw)}, r.raw);
+  }
+  stop(reason: RetrievalStoppingReason, sourceId?: string) {
+    const rank = {completed: 0, source_unavailable: 1, budget_exhausted: 2, integrity_failure: 3, cancelled: 4};
+    if (rank[reason] > rank[this.result.stoppingReason]) this.result.stoppingReason = reason;
+    this.result.completeWithinScope = false;
+    if (sourceId && !this.result.incompleteSources.includes(sourceId)) this.result.incompleteSources.push(sourceId);
+  }
+  accept(ref: SourceRecordRef, resource: Record<string, unknown>, record?: SourceRecord) {
+    if (typeof resource.resourceType !== 'string' || typeof resource.id !== 'string' || !/^[A-Za-z0-9.-]{1,64}$/.test(resource.id)) throw new Error('Malformed resource identity');
+    const key = `${resource.resourceType}/${resource.id}`;
+    if (key !== ref.resourceId || resource.resourceType !== ref.resourceType || hashCanonicalJson(resource) !== ref.contentHash) throw new Error('Record reference/content mismatch');
+    const refs = this.result.provenance[key] ?? [];
+    if (refs.length && refs[0].contentHash !== ref.contentHash) {
+      this.collisions.add(key);
+      this.resources.delete(key);
+      this.result.retrievedRecords = this.result.retrievedRecords.filter(r => r.reference.resourceId !== key);
+      this.result.counts.conflictRecords++;
+      this.result.integrityIssues.push(`Conflicting canonical resource ID: ${key}`);
+      this.stop('integrity_failure', ref.sourceId);
+    } else if (refs.length) this.result.counts.duplicateRecords++;
+    else if (!this.collisions.has(key)) {
+      this.resources.set(key, resource);
+      if (record) {this.result.retrievedRecords.push(record); this.result.counts.uniqueEligibleRecords++;}
+    }
+    if (!refs.some(r => r.sourceId === ref.sourceId && r.contentHash === ref.contentHash)) refs.push(ref);
+    this.result.provenance[key] = refs;
+  }
+  finish() {
+    this.result.materializedBundle = {resourceType: 'Bundle', type: 'collection', entry: [...this.resources.values()].map(resource => ({resource}))};
+    return this.result;
+  }
+}
 
 export class BoundedEvidenceRetriever {
-  private readonly defaultLimits: RetrievalLimits = {
-    maxSources: 4,
-    maxSearchPages: 16,
-    pageSize: 5,
-    maxReads: 24,
-    timeoutMs: 10000,
-  };
-
-  public async retrieve(
-    input: RetrievalInput,
-    sources: EvidenceSource[],
-    signal?: AbortSignal
-  ): Promise<RetrievalResult> {
-    const startOverall = performance.now();
-    const limits: RetrievalLimits = {
-      ...this.defaultLimits,
-      ...input.limits,
+  async retrieve(rawInput: RetrievalInput, sources: EvidenceSource[], signal?: AbortSignal): Promise<RetrievalResult> {
+    const input = RetrievalInputSchema.parse(rawInput);
+    const limits = RetrievalLimitsSchema.parse(input.limits ?? {});
+    const accumulator = new EvidenceAccumulator(input);
+    const result = accumulator.result;
+    const completedSources = new Set<string>();
+    if (!result.completeWithinScope) return accumulator.finish();
+    const started = performance.now();
+    const controller = new AbortController();
+    const cancel = () => controller.abort();
+    signal?.addEventListener('abort', cancel, {once: true});
+    if (signal?.aborted) controller.abort();
+    const timeout = setTimeout(cancel, limits.timeoutMs);
+    const event = (sourceId: string, operation: 'search' | 'read', resourceType: string, outcome: RetrievalTraceEvent['outcome'], details: Partial<RetrievalTraceEvent> = {}) => {
+      result.trace.push({sequence: result.trace.length + 1, sourceId, operation, resourceType, outcome, elapsedMs: performance.now() - started, ...details});
     };
-
-    const trace: RetrievalTraceEvent[] = [];
-    let sequence = 0;
-
-    const addTrace = (
-      sourceId: string,
-      operation: 'search' | 'read',
-      resourceType: string,
-      outcome: RetrievalTraceEvent['outcome'],
-      details: {
-        cursor?: string;
-        returnedCount?: number;
-        references?: SourceRecordRef[];
-        errorCode?: string;
-        errorMessage?: string;
-      } = {}
-    ) => {
-      sequence++;
-      trace.push({
-        sequence,
-        sourceId,
-        operation,
-        resourceType,
-        outcome,
-        elapsedMs: Math.max(0, performance.now() - startOverall),
-        cursor: details.cursor,
-        returnedCount: details.returnedCount,
-        references: details.references,
-        errorCode: details.errorCode,
-        errorMessage: details.errorMessage,
+    const check = () => {
+      if (signal?.aborted) throw new Error('cancelled');
+      if (controller.signal.aborted || performance.now() - started >= limits.timeoutMs) throw new Error('budget_exhausted');
+    };
+    const invoke = async <T>(call: () => Promise<T>): Promise<T> => {
+      check();
+      // Yield between operations so browser cancellation can interrupt in-process sources.
+      await new Promise(resolve => setTimeout(resolve, 0));
+      check();
+      return new Promise<T>((resolve, reject) => {
+        const abort = () => reject(new Error(signal?.aborted ? 'cancelled' : 'budget_exhausted'));
+        controller.signal.addEventListener('abort', abort, {once: true});
+        Promise.resolve().then(call).then(resolve, reject).finally(() => controller.signal.removeEventListener('abort', abort));
       });
     };
-
-    const counts: RetrievalCounts = {
-      queries: 0,
-      pages: 0,
-      reads: 0,
-      uniqueEligibleRecords: 0,
-      duplicateRecords: 0,
-      rejectedRecords: 0,
-      conflictRecords: 0,
-    };
-
-    const provenance: Record<string, SourceRecordRef[]> = {};
-    const integrityIssues: string[] = [];
-    const searchedSources: string[] = [];
-    const searchedResourceTypes: string[] = [];
-    const incompleteSources: string[] = [];
-    const retrievedRecords: SourceRecord[] = [];
-    const resourceContentHashes = new Map<string, string>();
-
-    // 1. Validate initial submission bundle
-    const initialEntries = Array.isArray(input.initialBundle?.entry) ? input.initialBundle.entry : [];
-    const patientEntries = initialEntries.filter(
-      (e: any) => e?.resource?.resourceType === 'Patient'
-    );
-
-    if (patientEntries.length !== 1) {
-      integrityIssues.push(
-        `Initial bundle must contain exactly one Patient resource; found ${patientEntries.length}`
-      );
-      return {
-        scopeKind: 'configured_sources',
-        scopeDescription: 'Configured synthetic sources and advertised types.',
-        completeWithinScope: false,
-        stoppingReason: 'integrity_failure',
-        searchedSources: [],
-        searchedResourceTypes: [],
-        incompleteSources: [],
-        retrievedRecords: [],
-        provenance: {},
-        trace,
-        counts,
-        materializedBundle: input.initialBundle,
-        integrityIssues,
-      };
-    }
-
-    const patientRes = patientEntries[0].resource;
-    if (patientRes.id !== input.patientId) {
-      integrityIssues.push(
-        `Initial bundle patient ID (${patientRes.id}) does not match input patientId (${input.patientId})`
-      );
-      return {
-        scopeKind: 'configured_sources',
-        scopeDescription: 'Configured synthetic sources and advertised types.',
-        completeWithinScope: false,
-        stoppingReason: 'integrity_failure',
-        searchedSources: [],
-        searchedResourceTypes: [],
-        incompleteSources: [],
-        retrievedRecords: [],
-        provenance: {},
-        trace,
-        counts,
-        materializedBundle: input.initialBundle,
-        integrityIssues,
-      };
-    }
-
-    // Index initial bundle entries for provenance and collision checks
-    for (const entry of initialEntries) {
-      const res = (entry as { resource?: Record<string, unknown> })?.resource;
-      if (res && typeof res.resourceType === 'string' && typeof res.id === 'string') {
-        const canonicalKey = `${res.resourceType}/${res.id}`;
-        const hash = hashCanonicalJson(res);
-        resourceContentHashes.set(canonicalKey, hash);
-        provenance[canonicalKey] = [
-          {
-            sourceId: 'initial_submission',
-            resourceType: res.resourceType,
-            resourceId: canonicalKey,
-            contentHash: hash,
-          },
-        ];
-      }
-    }
-
-    let stoppingReason: RetrievalStoppingReason = 'completed';
-    const activeSources = sources.slice(0, limits.maxSources);
-
-    // 2. Iterate configured sources
-    sourceLoop: for (const source of activeSources) {
-      searchedSources.push(source.descriptor.id);
-
-      // Check injected unavailability
-      const isInjectedUnavailable = input.injectedFailures?.unavailableSourceIds?.includes(
-        source.descriptor.id
-      );
-
-      if (source.descriptor.availability === 'unavailable' || isInjectedUnavailable) {
-        incompleteSources.push(source.descriptor.id);
-        stoppingReason = 'source_unavailable';
-        addTrace(source.descriptor.id, 'search', '*', 'source_unavailable', {
-          errorCode: 'SOURCE_UNAVAILABLE',
-          errorMessage: `Source ${source.descriptor.id} is marked unavailable`,
-        });
-        continue;
-      }
-
-      // Iterate advertised supported resource types
-      typeLoop: for (const resourceType of source.descriptor.supportedResourceTypes) {
-        if (!searchedResourceTypes.includes(resourceType)) {
-          searchedResourceTypes.push(resourceType);
+    try {
+      check();
+      if (new Set(input.sources.map(s => s.id)).size !== input.sources.length) throw new Error('Duplicate source descriptors');
+      if (input.sources.length > limits.maxSources) {accumulator.stop('budget_exhausted'); result.incompleteSources = input.sources.map(s => s.id); return accumulator.finish();}
+      for (const descriptor of [...input.sources].sort((a,b) => a.id.localeCompare(b.id))) {
+        const source = sources.find(s => s.descriptor.id === descriptor.id);
+        result.searchedSources.push(descriptor.id);
+        if (!source || descriptor.availability === 'unavailable' || input.injectedFailures?.unavailableSourceIds?.includes(descriptor.id)) {
+          accumulator.stop('source_unavailable', descriptor.id);
+          event(descriptor.id, 'search', '*', 'source_unavailable');
+          continue;
         }
-
-        let cursor: string | undefined = undefined;
-        const seenCursors = new Set<string>();
-
-        // Pagination loop
-        pageLoop: while (true) {
-          // Check cancellation & timeout
-          if (signal?.aborted) {
-            stoppingReason = 'cancelled';
-            addTrace(source.descriptor.id, 'search', resourceType, 'cancelled', {
-              errorCode: 'OPERATION_ABORTED',
-              errorMessage: 'Retrieval was cancelled by user',
-            });
-            break sourceLoop;
-          }
-
-          if (performance.now() - startOverall > limits.timeoutMs) {
-            stoppingReason = 'budget_exhausted';
-            addTrace(source.descriptor.id, 'search', resourceType, 'budget_exhausted', {
-              errorCode: 'TIMEOUT_EXCEEDED',
-              errorMessage: `Execution time exceeded limit of ${limits.timeoutMs}ms`,
-            });
-            break sourceLoop;
-          }
-
-          if (counts.pages >= limits.maxSearchPages) {
-            stoppingReason = 'budget_exhausted';
-            addTrace(source.descriptor.id, 'search', resourceType, 'budget_exhausted', {
-              errorCode: 'PAGE_LIMIT_REACHED',
-              errorMessage: `Page query limit of ${limits.maxSearchPages} reached`,
-            });
-            break sourceLoop;
-          }
-
-          // Cursor loop check
-          if (cursor) {
-            if (seenCursors.has(cursor)) {
-              stoppingReason = 'integrity_failure';
-              integrityIssues.push(`Duplicate pagination cursor detected: ${cursor}`);
-              addTrace(source.descriptor.id, 'search', resourceType, 'error', {
-                cursor,
-                errorCode: 'CURSOR_LOOP',
-                errorMessage: 'Pagination cycle detected',
-              });
-              break typeLoop;
+        for (const resourceType of [...descriptor.supportedResourceTypes].sort()) {
+          check();
+          if (!supportedTypes.has(resourceType)) throw new Error(`Unsupported advertised resource type: ${resourceType}`);
+          if (!result.searchedResourceTypes.includes(resourceType)) result.searchedResourceTypes.push(resourceType);
+          let cursor: string | undefined;
+          const seen = new Set<string>();
+          do {
+            check();
+            if (result.counts.pages >= limits.maxSearchPages) throw new Error('budget_exhausted');
+            if (cursor && (seen.has(cursor) || input.injectedFailures?.malformedCursorSourceIds?.includes(descriptor.id))) throw new Error('Malformed or repeated pagination cursor');
+            if (cursor) seen.add(cursor);
+            result.counts.queries++; result.counts.pages++;
+            let rawPage;
+            try {rawPage = await invoke(() => source.search({patientId: input.patientId, resourceType, cursor, pageSize: limits.pageSize, signal: controller.signal}));}
+            catch {
+              check(); accumulator.stop('source_unavailable', descriptor.id);
+              event(descriptor.id, 'search', resourceType, 'error', {errorCode: 'SEARCH_FAILED'}); break;
             }
-            seenCursors.add(cursor);
-          }
-
-          // Check injected malformed cursor failure
-          if (
-            cursor &&
-            input.injectedFailures?.malformedCursorSourceIds?.includes(source.descriptor.id)
-          ) {
-            stoppingReason = 'integrity_failure';
-            integrityIssues.push(`Malformed cursor encountered: ${cursor}`);
-            addTrace(source.descriptor.id, 'search', resourceType, 'error', {
-              cursor,
-              errorCode: 'MALFORMED_CURSOR',
-              errorMessage: 'Injected malformed cursor failure',
-            });
-            break typeLoop;
-          }
-
-          counts.queries++;
-          counts.pages++;
-
-          let page;
-          try {
-            page = await source.search({
-              patientId: input.patientId,
-              resourceType,
-              cursor,
-              pageSize: limits.pageSize,
-              signal,
-            });
-          } catch (err) {
-            incompleteSources.push(source.descriptor.id);
-            stoppingReason = 'source_unavailable';
-            addTrace(source.descriptor.id, 'search', resourceType, 'error', {
-              cursor,
-              errorCode: 'SEARCH_FAILED',
-              errorMessage: err instanceof Error ? err.message : String(err),
-            });
-            break typeLoop;
-          }
-
-          addTrace(source.descriptor.id, 'search', resourceType, 'success', {
-            cursor,
-            returnedCount: page.references.length,
-            references: page.references,
-          });
-
-          // Read references
-          for (const ref of page.references) {
-            if (signal?.aborted) {
-              stoppingReason = 'cancelled';
-              break sourceLoop;
+            const page = SearchPageSchema.parse(rawPage);
+            if (page.references.length > limits.pageSize || page.references.some(ref => ref.sourceId !== descriptor.id || ref.resourceType !== resourceType)) throw new Error('Malformed search page references');
+            event(descriptor.id, 'search', resourceType, 'success', {cursor, returnedCount: page.references.length, references: page.references});
+            if (page.rejectedCount) {
+              result.counts.rejectedRecords += page.rejectedCount;
+              event(descriptor.id, 'search', resourceType, 'filtered_wrong_patient', {returnedCount: page.rejectedCount});
             }
-
-            if (counts.reads >= limits.maxReads) {
-              stoppingReason = 'budget_exhausted';
-              addTrace(source.descriptor.id, 'read', ref.resourceType, 'budget_exhausted', {
-                errorCode: 'READ_LIMIT_REACHED',
-                errorMessage: `Read limit of ${limits.maxReads} reached`,
-              });
-              break sourceLoop;
-            }
-
-            if (
-              input.injectedFailures?.failAfterReadCount !== undefined &&
-              counts.reads >= input.injectedFailures.failAfterReadCount
-            ) {
-              stoppingReason = 'budget_exhausted';
-              addTrace(source.descriptor.id, 'read', ref.resourceType, 'budget_exhausted', {
-                errorCode: 'INJECTED_READ_CEILING',
-                errorMessage: 'Injected read limit reached',
-              });
-              break sourceLoop;
-            }
-
-            counts.reads++;
-
-            let sourceRecord: SourceRecord;
-            try {
-              sourceRecord = await source.read({
-                patientId: input.patientId,
-                reference: ref,
-                signal,
-              });
-            } catch (err) {
-              addTrace(source.descriptor.id, 'read', ref.resourceType, 'error', {
-                errorCode: 'READ_FAILED',
-                errorMessage: err instanceof Error ? err.message : String(err),
-              });
-              continue;
-            }
-
-            // Verify patient identity: reject wrong-patient records immediately
-            if (sourceRecord.patientId !== input.patientId) {
-              counts.rejectedRecords++;
-              addTrace(source.descriptor.id, 'read', ref.resourceType, 'filtered_wrong_patient', {
-                errorCode: 'PATIENT_ID_MISMATCH',
-                errorMessage: `Record patient (${sourceRecord.patientId}) did not match expected patient (${input.patientId})`,
-              });
-              continue;
-            }
-
-            // Verify content hash
-            const computedHash = hashCanonicalJson(sourceRecord.resource);
-            if (computedHash !== ref.contentHash) {
-              stoppingReason = 'integrity_failure';
-              integrityIssues.push(
-                `Content hash mismatch for ${ref.resourceId}: reference hash ${ref.contentHash} vs computed ${computedHash}`
-              );
-              addTrace(source.descriptor.id, 'read', ref.resourceType, 'error', {
-                errorCode: 'HASH_MISMATCH',
-                errorMessage: 'Content hash verification failed',
-              });
-              continue;
-            }
-
-            // Deduplication and Collision Handling
-            const canonicalKey = ref.resourceId;
-            const existingHash = resourceContentHashes.get(canonicalKey);
-
-            if (existingHash !== undefined) {
-              if (existingHash === computedHash) {
-                // Byte-equivalent identical duplicate: merge provenance
-                counts.duplicateRecords++;
-                provenance[canonicalKey].push(ref);
-                addTrace(source.descriptor.id, 'read', ref.resourceType, 'success', {
-                  returnedCount: 1,
-                  references: [ref],
-                });
-              } else {
-                // Different content sharing canonical ID: INTEGRITY FAILURE!
-                counts.conflictRecords++;
-                stoppingReason = 'integrity_failure';
-                const conflictMsg = `Integrity failure: Conflicting content detected for canonical ID ${canonicalKey} across sources.`;
-                integrityIssues.push(conflictMsg);
-                if (!provenance[canonicalKey]) provenance[canonicalKey] = [];
-                provenance[canonicalKey].push(ref);
-                addTrace(source.descriptor.id, 'read', ref.resourceType, 'error', {
-                  errorCode: 'CANONICAL_ID_COLLISION',
-                  errorMessage: conflictMsg,
-                });
+            for (const ref of [...page.references].sort((a,b) => a.resourceId.localeCompare(b.resourceId))) {
+              check();
+              if (result.counts.reads >= limits.maxReads || (input.injectedFailures?.failAfterReadCount !== undefined && result.counts.reads >= input.injectedFailures.failAfterReadCount)) throw new Error('budget_exhausted');
+              result.counts.reads++;
+              let rawRecord;
+              try {rawRecord = await invoke(() => source.read({patientId: input.patientId, reference: ref, signal: controller.signal}));}
+              catch {
+                check(); accumulator.stop('source_unavailable', descriptor.id);
+                event(descriptor.id, 'read', resourceType, 'error', {errorCode: 'READ_FAILED'}); continue;
               }
-            } else {
-              // New unique eligible record
-              counts.uniqueEligibleRecords++;
-              resourceContentHashes.set(canonicalKey, computedHash);
-              provenance[canonicalKey] = [ref];
-              retrievedRecords.push(sourceRecord);
-              addTrace(source.descriptor.id, 'read', ref.resourceType, 'success', {
-                returnedCount: 1,
-                references: [ref],
-              });
+              const record = SourceRecordSchema.parse(rawRecord);
+              if (record.patientId !== input.patientId || resourcePatientId(record.resource) !== input.patientId) {
+                result.counts.rejectedRecords++;
+                event(descriptor.id, 'read', resourceType, 'filtered_wrong_patient'); continue;
+              }
+              if (hashCanonicalJson(record.reference) !== hashCanonicalJson(ref)) throw new Error('Returned record reference mismatch');
+              accumulator.accept(ref, record.resource, record);
+              event(descriptor.id, 'read', resourceType, 'success', {references: [ref], returnedCount: 1});
             }
-          }
-
-          if (!page.nextCursor) {
-            break pageLoop;
-          }
-          cursor = page.nextCursor;
+            cursor = page.nextCursor;
+          } while (cursor !== undefined);
         }
+        if (!result.incompleteSources.includes(descriptor.id)) completedSources.add(descriptor.id);
       }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Invalid retrieval response';
+      const reason = message === 'cancelled' || message === 'budget_exhausted' ? message : 'integrity_failure';
+      accumulator.stop(reason);
+      if (reason === 'integrity_failure') result.integrityIssues.push(message);
+      event(result.searchedSources.at(-1) ?? 'initial_submission', 'search', '*', reason === 'integrity_failure' ? 'error' : reason, {errorCode: reason});
+    } finally {
+      clearTimeout(timeout); signal?.removeEventListener('abort', cancel);
     }
-
-    const completeWithinScope =
-      stoppingReason === 'completed' && incompleteSources.length === 0 && integrityIssues.length === 0;
-
-    // 3. Materialize assembled bundle
-    const materializedEntries = [...initialEntries];
-    for (const record of retrievedRecords) {
-      materializedEntries.push({ resource: record.resource });
-    }
-
-    const materializedBundle: Record<string, unknown> = {
-      resourceType: 'Bundle',
-      type: 'collection',
-      entry: materializedEntries,
-    };
-
-    return {
-      scopeKind: 'configured_sources',
-      scopeDescription: 'Configured synthetic sources and advertised types.',
-      completeWithinScope,
-      stoppingReason,
-      searchedSources,
-      searchedResourceTypes,
-      incompleteSources,
-      retrievedRecords,
-      provenance,
-      trace,
-      counts,
-      materializedBundle,
-      integrityIssues,
-    };
+    if (!result.completeWithinScope) for (const source of input.sources) if (!completedSources.has(source.id) && !result.incompleteSources.includes(source.id)) result.incompleteSources.push(source.id);
+    return accumulator.finish();
   }
+}
+
+/** Harness reference bypasses search, pagination and read limits, retaining source availability. */
+export function assembleAccessibleCorpus(input: RetrievalInput, corpus: Record<string, Record<string, unknown>[]>): RetrievalResult {
+  const accumulator = new EvidenceAccumulator(input);
+  if (!accumulator.result.completeWithinScope) return accumulator.finish();
+  for (const source of input.sources) {
+    if (source.availability === 'unavailable' || input.injectedFailures?.unavailableSourceIds?.includes(source.id)) {accumulator.stop('source_unavailable', source.id); continue;}
+    for (const resource of corpus[source.id] ?? []) {
+      if (!source.supportedResourceTypes.includes(String(resource.resourceType))) continue;
+      if (resourcePatientId(resource) !== input.patientId) {accumulator.result.counts.rejectedRecords++; continue;}
+      const reference = {sourceId: source.id, resourceType: String(resource.resourceType), resourceId: `${resource.resourceType}/${resource.id}`, contentHash: hashCanonicalJson(resource)};
+      try {accumulator.accept(reference, resource, {reference, resource, patientId: input.patientId});}
+      catch {accumulator.result.integrityIssues.push('Malformed reference corpus record'); accumulator.stop('integrity_failure', source.id);}
+    }
+  }
+  accumulator.result.scopeDescription = 'Harness assembly of accessible patient-scoped corpus; bypasses search and read limits. Unavailable sources remain excluded.';
+  return accumulator.finish();
 }

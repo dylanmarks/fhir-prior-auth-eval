@@ -1,6 +1,6 @@
 # Phase 6: Evidence retrieval and review handoff
 
-Status: implementation brief; no capabilities or results in this document are implemented claims.
+Status: offline baseline implemented. See [verification outcomes and limitations](../docs/PHASE_6_VERIFICATION.md) and [generated report](../results/retrieval/offline-report.md). The specification below remains the design reference; its measured scope and limitations are recorded separately.
 
 ## Outcome and research question
 

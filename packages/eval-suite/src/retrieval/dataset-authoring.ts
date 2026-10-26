@@ -1,4 +1,5 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
+import { hashCanonicalJson } from '@openpa/core';
 import { join } from 'node:path';
 import type { ScenarioFixture, GoldSidecar, ScenarioManifestEntry } from './types.js';
 
@@ -1153,7 +1154,7 @@ export function generateAllFixtures(): AuthoringOutput {
       variant: 'missing',
       variantLabel: 'Truly missing',
       title: 'Lumbar Radiculopathy — Missing Therapy Course',
-      description: 'Patient received no 6-week conservative therapy completion; absent from all sources.',
+      description: 'No completion or adherence record is available in the configured sources; a single therapy endpoint remains.',
       expectedBehavior: 'Search completes; packet identifies documented gap and requests therapy records.',
     },
     {
@@ -1248,6 +1249,50 @@ export function generateAllFixtures(): AuthoringOutput {
     },
   ];
 
+  // Labels follow the existing fixed orchestrator: partial therapy endpoints without
+  // adherence documentation fall through to clinical review, rather than an accepted gap.
+  const missingLumbar = goldSidecars.find(g => g.scenarioId === 'scn-703')!;
+  missingLumbar.expectedDispositions.retrieval = 'requires_clinical_review';
+  missingLumbar.expectedDispositions.fullCorpus = 'requires_clinical_review';
+  for (const gold of goldSidecars) {
+    if (gold.variant === 'unavailable') gold.requiredButInaccessibleResourceIds = gold.family === 'lumbar_mri' ? ['Procedure/proc-lmb-pt-start', 'Procedure/proc-lmb-pt-end'] : ['DiagnosticReport/diag-kne-xray-01'];
+    const therapy = gold.criteria['req-conservative-therapy'];
+    for (const [requirementId, criterion] of Object.entries(gold.criteria)) {
+      const appliesTo: Array<'submitted_only' | 'retrieval' | 'full_corpus'> = [];
+      if (criterion.expectedStatusSubmitted === 'satisfied') appliesTo.push('submitted_only');
+      if (criterion.expectedStatusRetrieval === 'satisfied') appliesTo.push('retrieval');
+      if (criterion.expectedStatusFullCorpus === 'satisfied') appliesTo.push('full_corpus');
+      const facts = requirementId === 'req-conservative-therapy'
+        ? [{resourceId: 'Procedure/proc-lmb-pt-start', field: 'performedPeriod.start', expectedValue: '2026-05-15'}, {resourceId: 'Procedure/proc-lmb-pt-end', field: 'performedPeriod.end', expectedValue: '2026-07-15'}]
+        : requirementId === 'req-plain-radiograph'
+        ? [{resourceId: 'DiagnosticReport/diag-kne-xray-01', field: 'effectiveDateTime', expectedValue: '2026-06-20'}]
+        : requirementId === 'req-radiculopathy'
+        ? [{resourceId: 'Condition/cond-lmb-radic-01', field: 'onsetDateTime', expectedValue: '2026-05-10'}]
+        : [{resourceId: 'Condition/cond-kne-tear-01', field: 'onsetDateTime', expectedValue: '2026-06-01'}];
+      criterion.requiredPacketFacts = facts.map(fact => ({...fact, appliesTo}));
+    }
+    // The unchanged lumbar policy has no episode/lookback restriction. Historical
+    // matching therapy is an authentic candidate, but never a required evidence set.
+    if (therapy) therapy.allowedCitationResourceIds = ['Procedure/proc-lmb-older-pt'];
+    if (gold.variant === 'contradictory') {
+      const skipped = gold.criteria[gold.family === 'lumbar_mri' ? 'req-conservative-therapy' : 'req-plain-radiograph'];
+      skipped.expectedEvaluationStateRetrieval = 'not_evaluated';
+      skipped.expectedGapKindRetrieval = 'not_evaluated';
+      skipped.expectedNextActionTypeRetrieval = 'clinical_interpretation';
+    }
+    for (const criterion of Object.values(gold.criteria)) {
+      if (gold.variant === 'budget_exhausted' && criterion.expectedStatusFullCorpus === 'satisfied') {
+        criterion.expectedGapKindFullCorpus = 'none';
+        criterion.expectedNextActionTypeFullCorpus = 'none';
+      }
+    }
+  }
+  for (const entry of manifest) {
+    const fixture = fixtures.find(f => f.scenarioId === entry.scenarioId)!;
+    const initial = (fixture.initialBundle.entry as Array<{resource: Record<string, unknown>}>).map(e => e.resource);
+    const resources = [...initial, ...Object.values(fixture.sourceCorpus).flat()];
+    entry.clinicalFactsFingerprint = hashCanonicalJson(resources.sort((a,b) => String(a.id).localeCompare(String(b.id))));
+  }
   return { fixtures, goldSidecars, manifest };
 }
 
