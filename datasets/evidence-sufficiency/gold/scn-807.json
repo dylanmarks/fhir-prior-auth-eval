@@ -1,0 +1,85 @@
+{
+  "labels": {
+    "submitted_only": {
+      "req-radiculopathy": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Condition/cond-lmb-radic-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Condition/cond-lmb-radic-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      },
+      "req-conservative-therapy": {
+        "status": "insufficient_evidence",
+        "adequacy": "insufficient",
+        "acceptableEvidenceSets": [],
+        "conflictIds": [],
+        "allowedCitationIds": [],
+        "gap": "not_found_in_searched_sources",
+        "action": "request_documentation"
+      }
+    },
+    "retrieval": {
+      "req-radiculopathy": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Condition/cond-lmb-radic-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Condition/cond-lmb-radic-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      },
+      "req-conservative-therapy": {
+        "status": "insufficient_evidence",
+        "adequacy": "insufficient",
+        "acceptableEvidenceSets": [],
+        "conflictIds": [],
+        "allowedCitationIds": [],
+        "gap": "not_found_in_searched_sources",
+        "action": "request_documentation"
+      }
+    },
+    "full_corpus": {
+      "req-radiculopathy": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Condition/cond-lmb-radic-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Condition/cond-lmb-radic-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      },
+      "req-conservative-therapy": {
+        "status": "insufficient_evidence",
+        "adequacy": "insufficient",
+        "acceptableEvidenceSets": [],
+        "conflictIds": [],
+        "allowedCitationIds": [],
+        "gap": "not_found_in_searched_sources",
+        "action": "request_documentation"
+      }
+    }
+  },
+  "targetRequirementIds": [
+    "req-conservative-therapy"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "runtime": {
+    "scenarioId": "scn-801",
+    "patientId": "patient-801",
+    "initialBundle": {
+      "resourceType": "Bundle",
+      "type": "collection",
+      "entry": [
+        {
+          "resource": {
+            "resourceType": "Patient",
+            "id": "patient-801"
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "DocumentReference",
+            "id": "note-801",
+            "status": "current",
+            "subject": {
+              "reference": "Patient/patient-801"
+            },
+            "date": "2026-07-01",
+            "text": {
+              "status": "generated",
+              "div": "<div>Re-evaluation: walking distance increased from 80 to 160 meters. Goal is 250 meters without a rest; continue the current program.</div>"
+            }
+          }
+        }
+      ]
+    },
+    "requestedService": {
+      "codeSystem": "http://www.ama-assn.org/go/cpt",
+      "code": "97110",
+      "description": "PT extension documentation assessment",
+      "diagnosisCodes": []
+    },
+    "requestedAt": "2026-07-04",
+    "policyId": "policy-narrative-pt-v1",
+    "sources": [
+      {
+        "id": "source-80",
+        "name": "Submitting Practice",
+        "supportedResourceTypes": [
+          "DocumentReference"
+        ],
+        "availability": "available"
+      },
+      {
+        "id": "source-81",
+        "name": "Community Rehabilitation",
+        "supportedResourceTypes": [
+          "DocumentReference"
+        ],
+        "availability": "available"
+      }
+    ],
+    "sourceCorpus": {
+      "source-81": []
+    }
+  },
+  "policy": {
+    "id": "policy-narrative-pt-v1",
+    "title": "Synthetic PT Progress Narrative Assessment",
+    "version": "1.0",
+    "source": "Research fixture, not a payer coverage policy",
+    "narrative": "Additional PT documentation is sufficient when a recent re-evaluation explicitly records measurable improvement toward a functional goal and an ongoing unmet goal. A procedure code, attendance, or a recommendation alone is insufficient. Conflicting or ambiguous accounts require review.",
+    "serviceCodes": [
+      "97110"
+    ],
+    "requirements": [
+      {
+        "id": "req-narrative-progress",
+        "description": "Recent re-evaluation explicitly documents measurable improvement toward a functional goal and an ongoing unmet goal. Attendance, a procedure code, and a recommendation alone do not demonstrate progress. Conflicting or ambiguous accounts require clinical review.",
+        "required": true,
+        "timeWindowDays": 60,
+        "category": "other"
+      }
+    ]
+  }
+}

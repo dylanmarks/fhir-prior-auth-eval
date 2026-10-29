@@ -1,0 +1,177 @@
+{
+  "labels": {
+    "submitted_only": {
+      "req-knee-condition": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Condition/cond-kne-tear-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Condition/cond-kne-tear-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      },
+      "req-plain-radiograph": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "DiagnosticReport/diag-kne-xray-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "DiagnosticReport/diag-kne-xray-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      }
+    },
+    "retrieval": {
+      "req-knee-condition": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Condition/cond-kne-tear-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Condition/cond-kne-tear-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      },
+      "req-plain-radiograph": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "DiagnosticReport/diag-kne-xray-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "DiagnosticReport/diag-kne-xray-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      }
+    },
+    "full_corpus": {
+      "req-knee-condition": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Condition/cond-kne-tear-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Condition/cond-kne-tear-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      },
+      "req-plain-radiograph": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "DiagnosticReport/diag-kne-xray-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "DiagnosticReport/diag-kne-xray-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      }
+    }
+  },
+  "targetRequirementIds": [
+    "req-knee-condition",
+    "req-plain-radiograph"
+  ],
+  "phase6Gold": {
+    "scenarioId": "scn-707",
+    "family": "knee_mri",
+    "variant": "complete",
+    "derivationSource": "case-knee-001-meets",
+    "syntheticProvenance": "openpa-phase6-v1:authored",
+    "goldReviewStatus": "author_only",
+    "expectedDispositions": {
+      "submittedOnly": "meets_policy",
+      "retrieval": "meets_policy",
+      "fullCorpus": "meets_policy"
+    },
+    "expectedSearchCompleteness": {
+      "submittedOnly": true,
+      "retrieval": true,
+      "fullCorpus": true
+    },
+    "expectedStoppingReason": {
+      "submittedOnly": "completed",
+      "retrieval": "completed",
+      "fullCorpus": "completed"
+    },
+    "criteria": {
+      "req-knee-condition": {
+        "expectedStatusSubmitted": "satisfied",
+        "expectedStatusRetrieval": "satisfied",
+        "expectedStatusFullCorpus": "satisfied",
+        "relevantResourceIds": [
+          "Condition/cond-kne-tear-01"
+        ],
+        "expectedGapKindSubmitted": "none",
+        "expectedGapKindRetrieval": "none",
+        "expectedNextActionTypeSubmitted": "none",
+        "expectedNextActionTypeRetrieval": "none",
+        "requiredPacketFacts": [
+          {
+            "field": "onsetDateTime",
+            "expectedValue": "2026-06-01",
+            "resourceId": "Condition/cond-kne-tear-01",
+            "appliesTo": [
+              "submitted_only",
+              "retrieval",
+              "full_corpus"
+            ]
+          }
+        ]
+      },
+      "req-plain-radiograph": {
+        "expectedStatusSubmitted": "satisfied",
+        "expectedStatusRetrieval": "satisfied",
+        "expectedStatusFullCorpus": "satisfied",
+        "relevantResourceIds": [
+          "DiagnosticReport/diag-kne-xray-01"
+        ],
+        "expectedGapKindSubmitted": "none",
+        "expectedGapKindRetrieval": "none",
+        "expectedNextActionTypeSubmitted": "none",
+        "expectedNextActionTypeRetrieval": "none",
+        "requiredPacketFacts": [
+          {
+            "field": "effectiveDateTime",
+            "expectedValue": "2026-06-20",
+            "resourceId": "DiagnosticReport/diag-kne-xray-01",
+            "appliesTo": [
+              "submitted_only",
+              "retrieval",
+              "full_corpus"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "schemaVersion": "1.0.0",
+  "phase6Revision": "383ab99",
+  "phase6InputsHash": "3705b75d71d839b0135157946efb0384cf01bf18fa73d9445b72c0e77b3cbebe",
+  "phase6GoldHash": "ed7cda15f15b30faf31dc0e404fb093c558c7fc78116c38da41ae12bcb003d1b",
+  "fixtures": [
+    {
+      "id": "scn-701",
+      "family": "lumbar_mri",
+      "variant": "complete",
+      "cohort": "regression",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-701.json",
+      "goldPath": "gold/scn-701.json",
+      "publicHash": "e9aaf0f2cbf571bb7302c63f974b7354da4d57ed9997c844957007e8dfc30592",
+      "goldHash": "1189347741e7cb979e4e1b1ef3d52948a0a2828baaa83b1da4f430acd41e3254"
+    },
+    {
+      "id": "scn-702",
+      "family": "lumbar_mri",
+      "variant": "scattered",
+      "cohort": "regression",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-702.json",
+      "goldPath": "gold/scn-702.json",
+      "publicHash": "693eb34d0478c908f1381f022fb58ffade65edf1de8a25381706a4796c7eba7d",
+      "goldHash": "437e82d606eb37cc8d66d8e904dec6b158c97b5f0fa19b468285df64e61e014f"
+    },
+    {
+      "id": "scn-703",
+      "family": "lumbar_mri",
+      "variant": "missing",
+      "cohort": "regression",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-703.json",
+      "goldPath": "gold/scn-703.json",
+      "publicHash": "04b09f85c55c9c5ef9d52e8a2b7949c1e3033b017b4f285a81436d3dffdedad3",
+      "goldHash": "ad2b91e55daa35e9dfa880116fec7544e012ebf03b2faeaaa6b1cccafe57ba11"
+    },
+    {
+      "id": "scn-704",
+      "family": "lumbar_mri",
+      "variant": "contradictory",
+      "cohort": "regression",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-704.json",
+      "goldPath": "gold/scn-704.json",
+      "publicHash": "40f879a17af5e81cc3b8a5cabd9d710889973dece0a37a451119392e003dfd06",
+      "goldHash": "a1bc46773a0ac2dc1926276923149b9b4c843dd8fcf3c0b7264017fb3b34ab2e"
+    },
+    {
+      "id": "scn-705",
+      "family": "lumbar_mri",
+      "variant": "unavailable",
+      "cohort": "regression",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-705.json",
+      "goldPath": "gold/scn-705.json",
+      "publicHash": "a17be87fe6f96b10f6c5c817a709c6dd04bbf3158b2f2f6462c56d66f9097662",
+      "goldHash": "1409418bfc0ca741d1b7d4549d0acd5d94a8330aad5dca04bd12d73744f924ec"
+    },
+    {
+      "id": "scn-706",
+      "family": "lumbar_mri",
+      "variant": "budget_exhausted",
+      "cohort": "regression",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-706.json",
+      "goldPath": "gold/scn-706.json",
+      "publicHash": "9223e0a8a1afe83aa4404da76e2975345ae7fef2b5dd19609c615dc740c210c5",
+      "goldHash": "80494af8044dc7f357a86a418debe6beba2ce8c9659bc77c98b2b16eee8d113c"
+    },
+    {
+      "id": "scn-707",
+      "family": "knee_mri",
+      "variant": "complete",
+      "cohort": "regression",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-707.json",
+      "goldPath": "gold/scn-707.json",
+      "publicHash": "0bb49336fb5d6ee90d87948f9e78f029a3cbd9d2903b0cf0bbb35f3a2e355782",
+      "goldHash": "bbd40441e4e4bfa17cc494b40c2fa19b2001fbc02eaa75f4d73e64cca812a765"
+    },
+    {
+      "id": "scn-708",
+      "family": "knee_mri",
+      "variant": "scattered",
+      "cohort": "regression",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-708.json",
+      "goldPath": "gold/scn-708.json",
+      "publicHash": "a5c06a7ebb00f8ace0384a6bd25f27c77d828a90194e9e8a70e65f521dd0b225",
+      "goldHash": "05311a03bb8b0ee1326f2744a7cb1413499273434ef58d93cc9147f03c8c1105"
+    },
+    {
+      "id": "scn-709",
+      "family": "knee_mri",
+      "variant": "missing",
+      "cohort": "regression",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-709.json",
+      "goldPath": "gold/scn-709.json",
+      "publicHash": "c446abaa2d69ec9a77f112546f4faa1449bc3db7ca3470c66950d2d6dfbe8751",
+      "goldHash": "c5aa5a3c1a2f917d214d2a7e117dda1a9dc5a2c3313d1677e2a71bdeaf4158b3"
+    },
+    {
+      "id": "scn-710",
+      "family": "knee_mri",
+      "variant": "contradictory",
+      "cohort": "regression",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-710.json",
+      "goldPath": "gold/scn-710.json",
+      "publicHash": "4752c313ae498701726bcd30f2cba5ad0a2ba2a171d700855e7e72b98c794886",
+      "goldHash": "c435e36c302326c0eaeb0a24bd694fe4e2b8a847d2c118a508177b5ae467ee21"
+    },
+    {
+      "id": "scn-711",
+      "family": "knee_mri",
+      "variant": "unavailable",
+      "cohort": "regression",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-711.json",
+      "goldPath": "gold/scn-711.json",
+      "publicHash": "2d0e4632b55834fb23c39c5c6c3b7096ab331c9d1b4251d92baa84e382a9846f",
+      "goldHash": "b44a51c3707a0d1137775de45a50a1f668273b89d0bdc6045bee84a86ce573eb"
+    },
+    {
+      "id": "scn-712",
+      "family": "knee_mri",
+      "variant": "budget_exhausted",
+      "cohort": "regression",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-712.json",
+      "goldPath": "gold/scn-712.json",
+      "publicHash": "ea018503966c317e261e92e745b136c81d7f64e4a75f11dcd95cc3283da1a9e1",
+      "goldHash": "2a8833f80c6e3b614ef6baaffe5d1f295b6434fdf95c8b252fa57fa5a8c6845a"
+    },
+    {
+      "id": "scn-801",
+      "family": "pt_progress",
+      "variant": "complete",
+      "cohort": "development",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-801.json",
+      "goldPath": "gold/scn-801.json",
+      "publicHash": "de4f29f273b854fd3326351e1545a940a6b778ee6217eb81009c9c8fb693bf40",
+      "goldHash": "caae6c4e2a4b2a8a1115ae5fb83d28e895124810ca8af7a6a22685bf3314b9f1"
+    },
+    {
+      "id": "scn-802",
+      "family": "pt_progress",
+      "variant": "scattered",
+      "cohort": "development",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-802.json",
+      "goldPath": "gold/scn-802.json",
+      "publicHash": "0cc3bbc9991fefbd85c08858f76c612ed3db5f8b1ae483d199646cc551529403",
+      "goldHash": "501d6e71efb3521fb23d2d292ac820726c90582bbd8dce53fbd318d6bcd90ac8"
+    },
+    {
+      "id": "scn-803",
+      "family": "pt_progress",
+      "variant": "missing",
+      "cohort": "development",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-803.json",
+      "goldPath": "gold/scn-803.json",
+      "publicHash": "dfbdfbd17b62b08801cb9bee22ed3b2a41ca46f9e54abb209f2f8498674bd002",
+      "goldHash": "24b8b0dfac43c9d9d53173049b01b49a1aa7c55f4f813bde4c34b882998d91fb"
+    },
+    {
+      "id": "scn-804",
+      "family": "pt_progress",
+      "variant": "contradictory",
+      "cohort": "development",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-804.json",
+      "goldPath": "gold/scn-804.json",
+      "publicHash": "b55b555d253e4f49ab363402283a1aca5eabc40e1288c8733ff2311150e6acca",
+      "goldHash": "7de99af339fd1f7299e7ca6708c0c60e2cc6bf1ce9d760e77d1d6ce2eed03013"
+    },
+    {
+      "id": "scn-805",
+      "family": "lumbar_therapy",
+      "variant": "complete",
+      "cohort": "challenge",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-805.json",
+      "goldPath": "gold/scn-805.json",
+      "publicHash": "22899ea765a33a9a99cc6e0900aadbac55035013aabc53f68d82b8d60ecea93f",
+      "goldHash": "300388be7eae5893ed42eab7668a606f325c0ba2e54d96e4ea239ddd9279cd2b"
+    },
+    {
+      "id": "scn-806",
+      "family": "lumbar_therapy",
+      "variant": "scattered",
+      "cohort": "challenge",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-806.json",
+      "goldPath": "gold/scn-806.json",
+      "publicHash": "5cc8bb51eeb2e9f9d6eda1564501182a3f384d811c838b191f200c454415620a",
+      "goldHash": "bf16e89d63df9917f8ba870c1e507f356fad7e409c7769bc5800ab6731b6b51b"
+    },
+    {
+      "id": "scn-807",
+      "family": "lumbar_therapy",
+      "variant": "missing",
+      "cohort": "challenge",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-807.json",
+      "goldPath": "gold/scn-807.json",
+      "publicHash": "70031926c120d0d53c30a061161e343fef9041ad771c59e1b3f77cd1fc618d00",
+      "goldHash": "fb76b8be9089d900c67f97e668f3ca506f4e7c9f1b820a37df25d3a83a144197"
+    },
+    {
+      "id": "scn-808",
+      "family": "lumbar_therapy",
+      "variant": "contradictory",
+      "cohort": "challenge",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-808.json",
+      "goldPath": "gold/scn-808.json",
+      "publicHash": "4e88ce859c2c2f036b52e08d725ced998c1fba835143e1be67d2a58c4069936e",
+      "goldHash": "7cada9e551f178bdd059aa63180e34ba982053f8186c921086e98950d93b16de"
+    },
+    {
+      "id": "scn-899",
+      "family": "numeric_control",
+      "variant": "below_threshold",
+      "cohort": "negative_control",
+      "goldReviewStatus": "author_only",
+      "publicPath": "inputs/scn-899.json",
+      "goldPath": "gold/scn-899.json",
+      "publicHash": "e6e6231e0202ce0dd6ff356096b3cbfe86ebcd511df683fdaadade3dbd3492eb",
+      "goldHash": "0a3c992a686396bab0376598a9d6565c318faeb996de78753eb7b96e6c957bf8"
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "runtime": {
+    "scenarioId": "scn-703",
+    "patientId": "pat-lmb-01",
+    "initialBundle": {
+      "resourceType": "Bundle",
+      "type": "collection",
+      "entry": [
+        {
+          "resource": {
+            "resourceType": "Patient",
+            "id": "pat-lmb-01",
+            "gender": "female",
+            "birthDate": "1980-04-12"
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "Condition",
+            "id": "cond-lmb-radic-01",
+            "subject": {
+              "reference": "Patient/pat-lmb-01"
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "M54.41",
+                  "display": "Lumbago with sciatica, right side"
+                }
+              ]
+            },
+            "onsetDateTime": "2026-05-10",
+            "text": {
+              "status": "generated",
+              "div": "<div>Patient diagnosed with right-sided lumbago with sciatica.</div>"
+            },
+            "clinicalStatus": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                  "code": "active"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "requestedService": {
+      "codeSystem": "http://www.ama-assn.org/go/cpt",
+      "code": "72148",
+      "description": "MRI lumbar spine without contrast",
+      "diagnosisCodes": [
+        "M54.41"
+      ],
+      "bodySite": "Lumbar spine"
+    },
+    "requestedAt": "2026-07-20",
+    "policyId": "policy-lumbar-mri-v1",
+    "sources": [
+      {
+        "id": "src-lmb-primary",
+        "name": "Metro Health Primary Care",
+        "supportedResourceTypes": [
+          "Condition",
+          "Procedure",
+          "Observation"
+        ],
+        "availability": "available"
+      },
+      {
+        "id": "src-lmb-therapy",
+        "name": "Apex Physical Therapy & Rehab",
+        "supportedResourceTypes": [
+          "Procedure",
+          "Observation",
+          "DocumentReference"
+        ],
+        "availability": "available"
+      }
+    ],
+    "sourceCorpus": {
+      "src-lmb-therapy": [
+        {
+          "resourceType": "Procedure",
+          "id": "proc-lmb-pt-start",
+          "subject": {
+            "reference": "Patient/pat-lmb-01"
+          },
+          "status": "completed",
+          "code": {
+            "coding": [
+              {
+                "system": "http://www.ama-assn.org/go/cpt",
+                "code": "97110",
+                "display": "Therapeutic exercises"
+              }
+            ]
+          },
+          "performedPeriod": {
+            "start": "2026-05-15",
+            "end": "2026-05-15"
+          },
+          "note": [
+            {
+              "text": "Initial physical therapy evaluation and lumbar stabilization exercise."
+            }
+          ]
+        },
+        {
+          "resourceType": "Procedure",
+          "id": "proc-lmb-older-pt",
+          "subject": {
+            "reference": "Patient/pat-lmb-01"
+          },
+          "status": "completed",
+          "code": {
+            "coding": [
+              {
+                "system": "http://www.ama-assn.org/go/cpt",
+                "code": "97110",
+                "display": "Therapeutic exercises"
+              }
+            ]
+          },
+          "performedPeriod": {
+            "start": "2023-01-10",
+            "end": "2023-01-10"
+          },
+          "note": [
+            {
+              "text": "Historical physical therapy session 3 years prior."
+            }
+          ]
+        },
+        {
+          "resourceType": "Procedure",
+          "id": "proc-lmb-wrong-pt",
+          "subject": {
+            "reference": "Patient/pat-wrong-999"
+          },
+          "status": "completed",
+          "code": {
+            "coding": [
+              {
+                "system": "http://www.ama-assn.org/go/cpt",
+                "code": "97110",
+                "display": "Therapeutic exercises"
+              }
+            ]
+          },
+          "performedPeriod": {
+            "start": "2026-06-15",
+            "end": "2026-06-15"
+          },
+          "note": [
+            {
+              "text": "Therapeutic exercises for unrelated patient."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "policy": {
+    "id": "policy-lumbar-mri-v1",
+    "title": "Lumbar Spine MRI Coverage Policy",
+    "version": "1.0",
+    "source": "Synthetic research fixture; not an authoritative payer policy",
+    "narrative": "Magnetic Resonance Imaging (MRI) of the lumbar spine is medically indicated when radicular symptoms are present and conservative management has failed for a minimum of 6 continuous weeks.",
+    "serviceCodes": [
+      "72148"
+    ],
+    "requirements": [
+      {
+        "id": "req-radiculopathy",
+        "description": "Documented lumbar radiculopathy or sciatica symptoms",
+        "rationale": "Imaging is indicated only when radicular pain patterns suggest nerve root impingement.",
+        "required": true,
+        "acceptableCodeSystems": [
+          "http://hl7.org/fhir/sid/icd-10-cm"
+        ],
+        "acceptableCodes": [
+          "M54.4",
+          "M54.40",
+          "M54.41",
+          "M54.42",
+          "M54.16"
+        ],
+        "category": "diagnosis",
+        "narrativeConcepts": [
+          "radiculopathy",
+          "sciatica",
+          "radicular symptoms",
+          "radicular pain"
+        ]
+      },
+      {
+        "id": "req-conservative-therapy",
+        "description": "At least 6 weeks of conservative management (e.g. physical therapy)",
+        "rationale": "Most uncomplicated back pain resolves within 6 weeks without advanced imaging.",
+        "required": true,
+        "minimumDurationDays": 42,
+        "requiresDocumentedAdherence": true,
+        "requiresPersistentSymptoms": true,
+        "acceptableCodeSystems": [
+          "http://www.ama-assn.org/go/cpt"
+        ],
+        "acceptableCodes": [
+          "97110",
+          "97140",
+          "97161"
+        ],
+        "category": "conservative_therapy"
+      }
+    ]
+  }
+}

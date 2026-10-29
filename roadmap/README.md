@@ -21,6 +21,10 @@ The current implementation and measured scope are documented in the [README](../
 
 Real PHI integration, clinical validation, and Da Vinci PAS transactions are outside the current implementation.
 
+## Evidence sufficiency experiment
+
+[Phase 7](phase-7-evidence-sufficiency-and-routing.md) now materializes fixed evidence snapshots across the existing model ladder, with raw tier probes, recording/replay, separate spend accounting, and a saved-report comparison view. The offline matrix emits all 720 primary cells; 180 rules cells are measured and model cells remain unacquired. The report retains twelve narrative conflict-packet flags. [Verification](../docs/PHASE_7_VERIFICATION.md) records passing automated checks and the interactive browser blocker. Live model measurement still requires a separately authorized cap.
+
 ## Proposed next phase
 
 [Phase 6: evidence retrieval and review handoff](phase-6-retrieval-and-handoff.md) now has an offline runner, three-arm report, and workbench. Its 36 authored fixture/arm checks pass. See [verification and limitations](../docs/PHASE_6_VERIFICATION.md), including the browser fault-injection checks and the fixed lumbar policy's historical-therapy limitation. The [follow-up video brief](../docs/PHASE_6_VIDEO_BRIEF.md) defines the demonstration. [Phase 7](phase-7-evidence-sufficiency-and-routing.md) remains queued behind its dependency audit and Phase 6 acceptance requirements.

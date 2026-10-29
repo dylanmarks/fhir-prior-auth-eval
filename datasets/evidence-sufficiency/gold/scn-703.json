@@ -1,0 +1,168 @@
+{
+  "labels": {
+    "submitted_only": {
+      "req-radiculopathy": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Condition/cond-lmb-radic-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Condition/cond-lmb-radic-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      },
+      "req-conservative-therapy": {
+        "status": "insufficient_evidence",
+        "adequacy": "insufficient",
+        "acceptableEvidenceSets": [],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Procedure/proc-lmb-older-pt"
+        ],
+        "gap": "not_found_in_searched_sources",
+        "action": "request_documentation"
+      }
+    },
+    "retrieval": {
+      "req-radiculopathy": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Condition/cond-lmb-radic-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Condition/cond-lmb-radic-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      },
+      "req-conservative-therapy": {
+        "status": "insufficient_evidence",
+        "adequacy": "insufficient",
+        "acceptableEvidenceSets": [],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Procedure/proc-lmb-older-pt"
+        ],
+        "gap": "not_found_in_searched_sources",
+        "action": "request_documentation"
+      }
+    },
+    "full_corpus": {
+      "req-radiculopathy": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Condition/cond-lmb-radic-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Condition/cond-lmb-radic-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      },
+      "req-conservative-therapy": {
+        "status": "insufficient_evidence",
+        "adequacy": "insufficient",
+        "acceptableEvidenceSets": [],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Procedure/proc-lmb-older-pt"
+        ],
+        "gap": "not_found_in_searched_sources",
+        "action": "request_documentation"
+      }
+    }
+  },
+  "targetRequirementIds": [
+    "req-radiculopathy",
+    "req-conservative-therapy"
+  ],
+  "phase6Gold": {
+    "scenarioId": "scn-703",
+    "family": "lumbar_mri",
+    "variant": "missing",
+    "derivationSource": "case-lumbar-001-meets",
+    "syntheticProvenance": "openpa-phase6-v1:authored",
+    "goldReviewStatus": "author_only",
+    "expectedDispositions": {
+      "submittedOnly": "needs_information",
+      "retrieval": "requires_clinical_review",
+      "fullCorpus": "requires_clinical_review"
+    },
+    "expectedSearchCompleteness": {
+      "submittedOnly": true,
+      "retrieval": true,
+      "fullCorpus": true
+    },
+    "expectedStoppingReason": {
+      "submittedOnly": "completed",
+      "retrieval": "completed",
+      "fullCorpus": "completed"
+    },
+    "criteria": {
+      "req-radiculopathy": {
+        "expectedStatusSubmitted": "satisfied",
+        "expectedStatusRetrieval": "satisfied",
+        "expectedStatusFullCorpus": "satisfied",
+        "relevantResourceIds": [
+          "Condition/cond-lmb-radic-01"
+        ],
+        "expectedGapKindSubmitted": "none",
+        "expectedGapKindRetrieval": "none",
+        "expectedNextActionTypeSubmitted": "none",
+        "expectedNextActionTypeRetrieval": "none",
+        "requiredPacketFacts": [
+          {
+            "field": "onsetDateTime",
+            "expectedValue": "2026-05-10",
+            "resourceId": "Condition/cond-lmb-radic-01",
+            "appliesTo": [
+              "submitted_only",
+              "retrieval",
+              "full_corpus"
+            ]
+          }
+        ]
+      },
+      "req-conservative-therapy": {
+        "expectedStatusSubmitted": "insufficient_evidence",
+        "expectedStatusRetrieval": "insufficient_evidence",
+        "expectedStatusFullCorpus": "insufficient_evidence",
+        "relevantResourceIds": [],
+        "allowedCitationResourceIds": [
+          "Procedure/proc-lmb-older-pt"
+        ],
+        "expectedGapKindSubmitted": "not_found_in_searched_sources",
+        "expectedGapKindRetrieval": "not_found_in_searched_sources",
+        "expectedNextActionTypeSubmitted": "request_documentation",
+        "expectedNextActionTypeRetrieval": "request_documentation",
+        "requiredPacketFacts": [
+          {
+            "field": "performedPeriod.start",
+            "expectedValue": "2026-05-15",
+            "resourceId": "Procedure/proc-lmb-pt-start",
+            "appliesTo": []
+          },
+          {
+            "field": "performedPeriod.end",
+            "expectedValue": "2026-07-15",
+            "resourceId": "Procedure/proc-lmb-pt-end",
+            "appliesTo": []
+          }
+        ]
+      }
+    }
+  }
+}

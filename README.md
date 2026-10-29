@@ -126,6 +126,8 @@ Zero observed unsafe resolutions among nine resolutions still gives a roughly **
 
 The **Retrieval & handoff** workbench tab adds an offline evidence-access experiment across twelve paired lumbar/knee MRI fixtures. Run `npm run experiment:retrieval` to compare submitted records, bounded retrieval, and an independently assembled accessible corpus. The [saved report](results/retrieval/offline-report.md) matches all 36 authored workflow/packet expectations. [Verification notes](docs/PHASE_6_VERIFICATION.md) explain label corrections, browser checks, and the unchanged lumbar policy's historical-therapy limitation. These results do not establish clinical reliability or reviewer time savings.
 
+The **Evidence sufficiency** tab compares the existing four assessment strategies against fixed evidence snapshots, with raw tier probes separated from guard decisions and the final packet. Run `npm run experiment:sufficiency` for the [offline report](results/evidence-sufficiency/offline-report.md): 720 primary cells are emitted, with only the rules cells measured. Model results remain unavailable offline. The report preserves narrative conflict-packet failures. See the [protocol](docs/PHASE_7_PROTOCOL.md) and [verification notes](docs/PHASE_7_VERIFICATION.md), including pending interactive browser checks. Live runs require an explicit spend cap before provider setup.
+
 Offline:
 
 ```bash

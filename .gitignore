@@ -10,4 +10,5 @@ coverage/
 *.tsbuildinfo
 results/*
 !results/retrieval/
+!results/evidence-sufficiency/
 .chatgpt/

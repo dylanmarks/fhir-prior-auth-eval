@@ -1,0 +1,211 @@
+{
+  "runtime": {
+    "scenarioId": "scn-808",
+    "patientId": "pat-lmb-01",
+    "initialBundle": {
+      "resourceType": "Bundle",
+      "type": "collection",
+      "entry": [
+        {
+          "resource": {
+            "resourceType": "Patient",
+            "id": "pat-lmb-01",
+            "gender": "female",
+            "birthDate": "1980-04-12"
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "Condition",
+            "id": "cond-lmb-radic-01",
+            "subject": {
+              "reference": "Patient/pat-lmb-01"
+            },
+            "code": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "M54.41",
+                  "display": "Lumbago with sciatica, right side"
+                }
+              ]
+            },
+            "onsetDateTime": "2026-05-10",
+            "text": {
+              "status": "generated",
+              "div": "<div>Patient diagnosed with right-sided lumbago with sciatica.</div>"
+            },
+            "clinicalStatus": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+                  "code": "active"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "Procedure",
+            "id": "proc-lmb-pt-start",
+            "subject": {
+              "reference": "Patient/pat-lmb-01"
+            },
+            "status": "completed",
+            "code": {
+              "coding": [
+                {
+                  "system": "http://www.ama-assn.org/go/cpt",
+                  "code": "97110",
+                  "display": "Therapeutic exercises"
+                }
+              ]
+            },
+            "performedPeriod": {
+              "start": "2026-05-15",
+              "end": "2026-05-15"
+            }
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "Procedure",
+            "id": "proc-lmb-pt-end",
+            "subject": {
+              "reference": "Patient/pat-lmb-01"
+            },
+            "status": "completed",
+            "code": {
+              "coding": [
+                {
+                  "system": "http://www.ama-assn.org/go/cpt",
+                  "code": "97110",
+                  "display": "Therapeutic exercises"
+                }
+              ]
+            },
+            "performedPeriod": {
+              "start": "2026-07-15",
+              "end": "2026-07-15"
+            }
+          }
+        },
+        {
+          "resource": {
+            "resourceType": "DocumentReference",
+            "id": "note-805",
+            "status": "current",
+            "subject": {
+              "reference": "Patient/pat-lmb-01"
+            },
+            "date": "2026-07-15",
+            "text": {
+              "status": "generated",
+              "div": "<div>Discharge review: she attended every scheduled weekly appointment from May 15 through July 15, completed the prescribed exercises at home every day, and still has pain shooting down the right leg despite completing this course. The end-of-course evaluation is dated July 15.</div>"
+            }
+          }
+        }
+      ]
+    },
+    "requestedService": {
+      "codeSystem": "http://www.ama-assn.org/go/cpt",
+      "code": "72148",
+      "description": "MRI lumbar spine without contrast",
+      "diagnosisCodes": [
+        "M54.41"
+      ],
+      "bodySite": "Lumbar spine"
+    },
+    "requestedAt": "2026-07-20",
+    "policyId": "policy-lumbar-mri-v1",
+    "sources": [
+      {
+        "id": "source-80",
+        "name": "Submitting Practice",
+        "supportedResourceTypes": [
+          "DocumentReference"
+        ],
+        "availability": "available"
+      },
+      {
+        "id": "source-81",
+        "name": "Outside Therapy Practice",
+        "supportedResourceTypes": [
+          "DocumentReference"
+        ],
+        "availability": "available"
+      }
+    ],
+    "sourceCorpus": {
+      "source-81": [
+        {
+          "resourceType": "DocumentReference",
+          "id": "note-805-b",
+          "status": "current",
+          "subject": {
+            "reference": "Patient/pat-lmb-01"
+          },
+          "date": "2026-07-15",
+          "text": {
+            "status": "generated",
+            "div": "<div>Same-episode attendance reconciliation: the patient missed every appointment after May 15, did not do the home exercises, and completed no therapy course. This conflicts with the discharge review; no reconciliation is documented.</div>"
+          }
+        }
+      ]
+    }
+  },
+  "policy": {
+    "id": "policy-lumbar-mri-v1",
+    "title": "Lumbar Spine MRI Coverage Policy",
+    "version": "1.0",
+    "source": "Synthetic research fixture; not an authoritative payer policy",
+    "narrative": "Magnetic Resonance Imaging (MRI) of the lumbar spine is medically indicated when radicular symptoms are present and conservative management has failed for a minimum of 6 continuous weeks.",
+    "serviceCodes": [
+      "72148"
+    ],
+    "requirements": [
+      {
+        "id": "req-radiculopathy",
+        "description": "Documented lumbar radiculopathy or sciatica symptoms",
+        "rationale": "Imaging is indicated only when radicular pain patterns suggest nerve root impingement.",
+        "required": true,
+        "acceptableCodeSystems": [
+          "http://hl7.org/fhir/sid/icd-10-cm"
+        ],
+        "acceptableCodes": [
+          "M54.4",
+          "M54.40",
+          "M54.41",
+          "M54.42",
+          "M54.16"
+        ],
+        "category": "diagnosis",
+        "narrativeConcepts": [
+          "radiculopathy",
+          "sciatica",
+          "radicular symptoms",
+          "radicular pain"
+        ]
+      },
+      {
+        "id": "req-conservative-therapy",
+        "description": "At least 6 weeks of conservative management (e.g. physical therapy)",
+        "rationale": "Most uncomplicated back pain resolves within 6 weeks without advanced imaging.",
+        "required": true,
+        "minimumDurationDays": 42,
+        "requiresDocumentedAdherence": true,
+        "requiresPersistentSymptoms": true,
+        "acceptableCodeSystems": [
+          "http://www.ama-assn.org/go/cpt"
+        ],
+        "acceptableCodes": [
+          "97110",
+          "97140",
+          "97161"
+        ],
+        "category": "conservative_therapy"
+      }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 # Phase 7: Evidence sufficiency across the model ladder
 
-Status: queued implementation brief, dependent on completed Phase 6. This document specifies proposed work; it reports no measured model results.
+Status: offline experiment infrastructure implemented after the Phase 6 dependency audit. See [protocol](../docs/PHASE_7_PROTOCOL.md), [verification and pending browser checks](../docs/PHASE_7_VERIFICATION.md), and [offline report](../results/evidence-sufficiency/offline-report.md). No provider model results have been acquired. The design below remains the scope reference; browser acceptance and live measurement remain outstanding.
 
 ## Outcome and research question
 

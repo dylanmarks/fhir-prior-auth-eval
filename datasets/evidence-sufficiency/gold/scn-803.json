@@ -1,0 +1,40 @@
+{
+  "labels": {
+    "submitted_only": {
+      "req-narrative-progress": {
+        "status": "insufficient_evidence",
+        "adequacy": "insufficient",
+        "acceptableEvidenceSets": [],
+        "conflictIds": [],
+        "allowedCitationIds": [],
+        "gap": "not_found_in_searched_sources",
+        "action": "request_documentation"
+      }
+    },
+    "retrieval": {
+      "req-narrative-progress": {
+        "status": "insufficient_evidence",
+        "adequacy": "insufficient",
+        "acceptableEvidenceSets": [],
+        "conflictIds": [],
+        "allowedCitationIds": [],
+        "gap": "not_found_in_searched_sources",
+        "action": "request_documentation"
+      }
+    },
+    "full_corpus": {
+      "req-narrative-progress": {
+        "status": "insufficient_evidence",
+        "adequacy": "insufficient",
+        "acceptableEvidenceSets": [],
+        "conflictIds": [],
+        "allowedCitationIds": [],
+        "gap": "not_found_in_searched_sources",
+        "action": "request_documentation"
+      }
+    }
+  },
+  "targetRequirementIds": [
+    "req-narrative-progress"
+  ]
+}

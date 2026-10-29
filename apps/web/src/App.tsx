@@ -1,4 +1,4 @@
-import { useState, useRef, useMemo, useEffect } from 'react';
+import { useState, useRef, useMemo, useEffect, lazy, Suspense } from 'react';
 import {
   Activity,
   AlertCircle,
@@ -38,6 +38,7 @@ import { BUNDLED_CASES, BUNDLED_POLICIES, MEASURED_BENCHMARK_REPORT } from './da
 import { ResearchPanel } from './ResearchPanel';
 import { ProviderPanel } from './ProviderPanel';
 import { RetrievalWorkbench } from './RetrievalWorkbench';
+const SufficiencyPanel = lazy(() => import('./SufficiencyPanel').then(module => ({default:module.SufficiencyPanel})));
 
 const MUTATION_OPTIONS: Array<{ type: MutationType; label: string; desc: string }> = [
   {
@@ -68,7 +69,7 @@ const MUTATION_OPTIONS: Array<{ type: MutationType; label: string; desc: string 
 ];
 
 export function App() {
-  const [activeTab, setActiveTab] = useState<'research' | 'workbench' | 'benchmark' | 'retrieval'>('research');
+  const [activeTab, setActiveTab] = useState<'research' | 'workbench' | 'benchmark' | 'retrieval' | 'sufficiency'>('research');
   const [executionMode, setExecutionMode] = useState<'offline' | 'server'>('server');
   const [providerStatus, setProviderStatus] = useState('Connecting to local evaluator...');
   const [selectedCaseId, setSelectedCaseId] = useState<string>(BUNDLED_CASES[0].id);
@@ -266,6 +267,7 @@ export function App() {
         <div className="flex items-center gap-2">
           {/* View Mode Tabs */}
           <nav aria-label="Workbench tabs" className="flex items-center bg-slate-850 p-1 rounded-lg border border-slate-700/80 mr-2">
+            <button type="button" aria-pressed={activeTab === 'sufficiency'} onClick={() => setActiveTab('sufficiency')} className={`px-3 py-2 rounded-md text-sm ${activeTab === 'sufficiency' ? 'bg-indigo-600 text-white' : 'text-slate-300'}`}>Evidence sufficiency</button>
             <button type="button" aria-pressed={activeTab === 'retrieval'} onClick={() => setActiveTab('retrieval')} className={`px-3 py-2 rounded-md text-sm ${activeTab === 'retrieval' ? 'bg-indigo-600 text-white' : 'text-slate-300'}`}>Retrieval &amp; handoff</button>
             <button type="button" aria-pressed={activeTab === 'research'} onClick={() => setActiveTab('research')} className={`px-3 py-2 rounded-md text-sm ${activeTab === 'research' ? 'bg-indigo-600 text-white' : 'text-slate-300'}`}>Model comparison</button>
             <button
@@ -305,8 +307,8 @@ export function App() {
         </div>
       </header>
 
-      {activeTab !== 'retrieval' && <ProviderPanel />}
-      {activeTab === 'retrieval' ? <RetrievalWorkbench /> : activeTab === 'research' ? <ResearchPanel /> : activeTab === 'benchmark' ? (
+      {!['retrieval','sufficiency'].includes(activeTab) && <ProviderPanel />}
+      {activeTab === 'sufficiency' ? <Suspense fallback={<p role="status" className="p-6">Loading saved sufficiency report…</p>}><SufficiencyPanel /></Suspense> : activeTab === 'retrieval' ? <RetrievalWorkbench /> : activeTab === 'research' ? <ResearchPanel /> : activeTab === 'benchmark' ? (
         /* Benchmark Results View */
         <main className="flex-1 p-6 flex flex-col gap-6 max-w-7xl mx-auto w-full overflow-y-auto">
           <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">

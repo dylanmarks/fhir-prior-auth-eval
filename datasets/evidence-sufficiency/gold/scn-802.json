@@ -1,0 +1,52 @@
+{
+  "labels": {
+    "submitted_only": {
+      "req-narrative-progress": {
+        "status": "insufficient_evidence",
+        "adequacy": "insufficient",
+        "acceptableEvidenceSets": [],
+        "conflictIds": [],
+        "allowedCitationIds": [],
+        "gap": "not_found_in_searched_sources",
+        "action": "request_documentation"
+      }
+    },
+    "retrieval": {
+      "req-narrative-progress": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "DocumentReference/note-801"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "DocumentReference/note-801"
+        ],
+        "gap": "none",
+        "action": "none"
+      }
+    },
+    "full_corpus": {
+      "req-narrative-progress": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "DocumentReference/note-801"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "DocumentReference/note-801"
+        ],
+        "gap": "none",
+        "action": "none"
+      }
+    }
+  },
+  "targetRequirementIds": [
+    "req-narrative-progress"
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "labels": {
+    "submitted_only": {
+      "req-radiculopathy": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Condition/cond-lmb-radic-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Condition/cond-lmb-radic-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      },
+      "req-conservative-therapy": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Procedure/proc-lmb-pt-start",
+            "Procedure/proc-lmb-pt-end"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Procedure/proc-lmb-pt-start",
+          "Procedure/proc-lmb-pt-end",
+          "Procedure/proc-lmb-older-pt"
+        ],
+        "gap": "none",
+        "action": "none"
+      }
+    },
+    "retrieval": {
+      "req-radiculopathy": {
+        "status": "insufficient_evidence",
+        "adequacy": "unresolved_conflict",
+        "acceptableEvidenceSets": [
+          [
+            "Condition/cond-lmb-radic-01"
+          ]
+        ],
+        "conflictIds": [
+          "DocumentReference/doc-lmb-contradict-01"
+        ],
+        "allowedCitationIds": [
+          "Condition/cond-lmb-radic-01"
+        ],
+        "gap": "conflicting_evidence",
+        "action": "reconcile_conflict"
+      },
+      "req-conservative-therapy": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Procedure/proc-lmb-pt-start",
+            "Procedure/proc-lmb-pt-end"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Procedure/proc-lmb-pt-start",
+          "Procedure/proc-lmb-pt-end",
+          "Procedure/proc-lmb-older-pt"
+        ],
+        "gap": "none",
+        "action": "none"
+      }
+    },
+    "full_corpus": {
+      "req-radiculopathy": {
+        "status": "insufficient_evidence",
+        "adequacy": "unresolved_conflict",
+        "acceptableEvidenceSets": [
+          [
+            "Condition/cond-lmb-radic-01"
+          ]
+        ],
+        "conflictIds": [
+          "DocumentReference/doc-lmb-contradict-01"
+        ],
+        "allowedCitationIds": [
+          "Condition/cond-lmb-radic-01"
+        ],
+        "gap": "conflicting_evidence",
+        "action": "reconcile_conflict"
+      },
+      "req-conservative-therapy": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Procedure/proc-lmb-pt-start",
+            "Procedure/proc-lmb-pt-end"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Procedure/proc-lmb-pt-start",
+          "Procedure/proc-lmb-pt-end",
+          "Procedure/proc-lmb-older-pt"
+        ],
+        "gap": "none",
+        "action": "none"
+      }
+    }
+  },
+  "targetRequirementIds": [
+    "req-radiculopathy",
+    "req-conservative-therapy"
+  ],
+  "phase6Gold": {
+    "scenarioId": "scn-704",
+    "family": "lumbar_mri",
+    "variant": "contradictory",
+    "derivationSource": "case-lumbar-003-conflicting",
+    "syntheticProvenance": "openpa-phase6-v1:authored",
+    "goldReviewStatus": "author_only",
+    "expectedDispositions": {
+      "submittedOnly": "meets_policy",
+      "retrieval": "requires_clinical_review",
+      "fullCorpus": "requires_clinical_review"
+    },
+    "expectedSearchCompleteness": {
+      "submittedOnly": true,
+      "retrieval": true,
+      "fullCorpus": true
+    },
+    "expectedStoppingReason": {
+      "submittedOnly": "completed",
+      "retrieval": "completed",
+      "fullCorpus": "completed"
+    },
+    "criteria": {
+      "req-radiculopathy": {
+        "expectedStatusSubmitted": "satisfied",
+        "expectedStatusRetrieval": "insufficient_evidence",
+        "expectedStatusFullCorpus": "insufficient_evidence",
+        "relevantResourceIds": [
+          "Condition/cond-lmb-radic-01"
+        ],
+        "mandatoryConflictResourceIds": [
+          "DocumentReference/doc-lmb-contradict-01"
+        ],
+        "expectedGapKindSubmitted": "none",
+        "expectedGapKindRetrieval": "conflicting_evidence",
+        "expectedNextActionTypeSubmitted": "none",
+        "expectedNextActionTypeRetrieval": "reconcile_conflict",
+        "requiredPacketFacts": [
+          {
+            "field": "onsetDateTime",
+            "expectedValue": "2026-05-10",
+            "resourceId": "Condition/cond-lmb-radic-01",
+            "appliesTo": [
+              "submitted_only"
+            ]
+          }
+        ]
+      },
+      "req-conservative-therapy": {
+        "expectedStatusSubmitted": "satisfied",
+        "expectedStatusRetrieval": "insufficient_evidence",
+        "expectedStatusFullCorpus": "insufficient_evidence",
+        "relevantResourceIds": [
+          "Procedure/proc-lmb-pt-start",
+          "Procedure/proc-lmb-pt-end"
+        ],
+        "allowedCitationResourceIds": [
+          "Procedure/proc-lmb-older-pt"
+        ],
+        "expectedEvaluationStateRetrieval": "not_evaluated",
+        "expectedGapKindSubmitted": "none",
+        "expectedGapKindRetrieval": "not_evaluated",
+        "expectedNextActionTypeSubmitted": "none",
+        "expectedNextActionTypeRetrieval": "clinical_interpretation",
+        "requiredPacketFacts": [
+          {
+            "field": "performedPeriod.start",
+            "expectedValue": "2026-05-15",
+            "resourceId": "Procedure/proc-lmb-pt-start",
+            "appliesTo": [
+              "submitted_only"
+            ]
+          },
+          {
+            "field": "performedPeriod.end",
+            "expectedValue": "2026-07-15",
+            "resourceId": "Procedure/proc-lmb-pt-end",
+            "appliesTo": [
+              "submitted_only"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

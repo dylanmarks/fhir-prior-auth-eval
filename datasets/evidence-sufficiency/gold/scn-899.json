@@ -1,0 +1,85 @@
+{
+  "labels": {
+    "submitted_only": {
+      "req-suspected-osa": {
+        "status": "insufficient_evidence",
+        "adequacy": "insufficient",
+        "acceptableEvidenceSets": [],
+        "conflictIds": [],
+        "allowedCitationIds": [],
+        "gap": "not_found_in_searched_sources",
+        "action": "request_documentation"
+      },
+      "req-epworth-score": {
+        "status": "not_satisfied",
+        "adequacy": "documented_nonfulfillment",
+        "acceptableEvidenceSets": [
+          [
+            "Observation/score-899"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Observation/score-899"
+        ],
+        "gap": "documented_not_met",
+        "action": "clinical_interpretation"
+      }
+    },
+    "retrieval": {
+      "req-suspected-osa": {
+        "status": "insufficient_evidence",
+        "adequacy": "insufficient",
+        "acceptableEvidenceSets": [],
+        "conflictIds": [],
+        "allowedCitationIds": [],
+        "gap": "not_found_in_searched_sources",
+        "action": "request_documentation"
+      },
+      "req-epworth-score": {
+        "status": "not_satisfied",
+        "adequacy": "documented_nonfulfillment",
+        "acceptableEvidenceSets": [
+          [
+            "Observation/score-899"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Observation/score-899"
+        ],
+        "gap": "documented_not_met",
+        "action": "clinical_interpretation"
+      }
+    },
+    "full_corpus": {
+      "req-suspected-osa": {
+        "status": "insufficient_evidence",
+        "adequacy": "insufficient",
+        "acceptableEvidenceSets": [],
+        "conflictIds": [],
+        "allowedCitationIds": [],
+        "gap": "not_found_in_searched_sources",
+        "action": "request_documentation"
+      },
+      "req-epworth-score": {
+        "status": "not_satisfied",
+        "adequacy": "documented_nonfulfillment",
+        "acceptableEvidenceSets": [
+          [
+            "Observation/score-899"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Observation/score-899"
+        ],
+        "gap": "documented_not_met",
+        "action": "clinical_interpretation"
+      }
+    }
+  },
+  "targetRequirementIds": [
+    "req-epworth-score"
+  ]
+}

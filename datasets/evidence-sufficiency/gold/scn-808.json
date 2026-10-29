@@ -1,0 +1,119 @@
+{
+  "labels": {
+    "submitted_only": {
+      "req-radiculopathy": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Condition/cond-lmb-radic-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Condition/cond-lmb-radic-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      },
+      "req-conservative-therapy": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "DocumentReference/note-805",
+            "Procedure/proc-lmb-pt-start",
+            "Procedure/proc-lmb-pt-end"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "DocumentReference/note-805",
+          "Procedure/proc-lmb-pt-start",
+          "Procedure/proc-lmb-pt-end"
+        ],
+        "gap": "none",
+        "action": "none"
+      }
+    },
+    "retrieval": {
+      "req-radiculopathy": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Condition/cond-lmb-radic-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Condition/cond-lmb-radic-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      },
+      "req-conservative-therapy": {
+        "status": "insufficient_evidence",
+        "adequacy": "unresolved_conflict",
+        "acceptableEvidenceSets": [
+          [
+            "DocumentReference/note-805",
+            "Procedure/proc-lmb-pt-start",
+            "Procedure/proc-lmb-pt-end"
+          ]
+        ],
+        "conflictIds": [
+          "DocumentReference/note-805-b"
+        ],
+        "allowedCitationIds": [
+          "DocumentReference/note-805",
+          "Procedure/proc-lmb-pt-start",
+          "Procedure/proc-lmb-pt-end"
+        ],
+        "gap": "conflicting_evidence",
+        "action": "reconcile_conflict"
+      }
+    },
+    "full_corpus": {
+      "req-radiculopathy": {
+        "status": "satisfied",
+        "adequacy": "sufficient_support",
+        "acceptableEvidenceSets": [
+          [
+            "Condition/cond-lmb-radic-01"
+          ]
+        ],
+        "conflictIds": [],
+        "allowedCitationIds": [
+          "Condition/cond-lmb-radic-01"
+        ],
+        "gap": "none",
+        "action": "none"
+      },
+      "req-conservative-therapy": {
+        "status": "insufficient_evidence",
+        "adequacy": "unresolved_conflict",
+        "acceptableEvidenceSets": [
+          [
+            "DocumentReference/note-805",
+            "Procedure/proc-lmb-pt-start",
+            "Procedure/proc-lmb-pt-end"
+          ]
+        ],
+        "conflictIds": [
+          "DocumentReference/note-805-b"
+        ],
+        "allowedCitationIds": [
+          "DocumentReference/note-805",
+          "Procedure/proc-lmb-pt-start",
+          "Procedure/proc-lmb-pt-end"
+        ],
+        "gap": "conflicting_evidence",
+        "action": "reconcile_conflict"
+      }
+    }
+  },
+  "targetRequirementIds": [
+    "req-conservative-therapy"
+  ]
+}
